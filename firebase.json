@@ -1,0 +1,21 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "piku-and-friends",
+          "appId": "1:000000000000:android:pikurabbitplaceholder",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "piku-and-friends",
+          "configurations": {
+            "android": "1:000000000000:android:pikurabbitplaceholder"
+          }
+        }
+      }
+    }
+  }
+}

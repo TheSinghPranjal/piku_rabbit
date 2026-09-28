@@ -1,0 +1,136 @@
+import 'package:flutter/material.dart';
+
+/// Tiny Think – Piku & Friends design tokens.
+/// Warm, soft, Pixar-inspired pastels. No harsh reds for errors.
+abstract final class TTColors {
+  // Brand
+  static const cream = Color(0xFFFFF8F0);
+  static const creamWhite = Color(0xFFFFFBF5);
+  static const warmWhite = Color(0xFFFFF5EB);
+  static const peachWall = Color(0xFFF5D5C0);
+  static const peachSoft = Color(0xFFF8E4D4);
+  static const peachDeep = Color(0xFFE8B89A);
+
+  static const skyBlue = Color(0xFF7EC8E8);
+  static const skySoft = Color(0xFFB8E0F0);
+  static const skyDeep = Color(0xFF5AADD4);
+
+  static const golden = Color(0xFFF5C542);
+  static const goldenBright = Color(0xFFFFD56A);
+  static const goldenGlow = Color(0xFFFFE8A0);
+  static const goldenOutline = Color(0xFFE8B820);
+
+  static const bamboo = Color(0xFF7CB342);
+  static const bambooLight = Color(0xFFAED581);
+  static const bambooDeep = Color(0xFF558B2F);
+
+  static const darkBrown = Color(0xFF5C3D2E);
+  static const warmBrown = Color(0xFF8B6914);
+  static const softBrown = Color(0xFFA67C52);
+
+  // Character card backings
+  static const baoBlue = Color(0xFF8ECBE8);
+  static const pikuPink = Color(0xFFF5B8C8);
+  static const poYellow = Color(0xFFF5D76E);
+  static const kokoLavender = Color(0xFFC8B8E8);
+  static const momoCoral = Color(0xFFF5A88A);
+  static const dodoMint = Color(0xFFA8E0C8);
+
+  // UI
+  static const ribbonOrange = Color(0xFFE87850);
+  static const lockGold = Color(0xFFD4A017);
+  static const softShadow = Color(0x33000000);
+  static const frosted = Color(0x99FFFFFF);
+  static const parkGreen = Color(0xFF8FBF6A);
+  static const parkGreenDeep = Color(0xFF6A9A4A);
+  static const parkSkyTop = Color(0xFF7EC8E8);
+  static const parkSkyBottom = Color(0xFFF5D0B0);
+  static const waterBlue = Color(0xFF6EC6E8);
+  static const waterDrop = Color(0xFF4DB8E8);
+  static const milkCream = Color(0xFFFFF4E0);
+  static const milkSoft = Color(0xFFFFE8C8);
+  static const milkWarm = Color(0xFFE8C89A);
+  static const appleCream = Color(0xFFFFF0EB);
+  static const appleSoft = Color(0xFFFFD0C4);
+  static const appleWarm = Color(0xFFE57373);
+  static const appleDeep = Color(0xFFC62828);
+  static const bananaCream = Color(0xFFFFFDE7);
+  static const bananaSoft = Color(0xFFFFF176);
+  static const bananaWarm = Color(0xFFFFD54F);
+  static const bananaDeep = Color(0xFFF9A825);
+  static const veggiesCream = Color(0xFFF1F8E9);
+  static const veggiesSoft = Color(0xFFC5E1A5);
+  static const veggiesWarm = Color(0xFF81C784);
+  static const veggiesDeep = Color(0xFF388E3C);
+  static const sandwichCream = Color(0xFFFFF8E1);
+  static const sandwichSoft = Color(0xFFE6C89A);
+  static const sandwichWarm = Color(0xFFD4A574);
+  static const sandwichDeep = Color(0xFF8D6E63);
+  static const bedCream = Color(0xFFF3E5F5);
+  static const bedSoft = Color(0xFFD1C4E9);
+  static const bedWarm = Color(0xFFB39DDB);
+  static const bedDeep = Color(0xFF7E57C2);
+  static const teethCream = Color(0xFFE0F7FA);
+  static const teethSoft = Color(0xFFB2EBF2);
+  static const teethWarm = Color(0xFF80DEEA);
+  static const teethDeep = Color(0xFF00ACC1);
+  static const washCream = Color(0xFFE3F2FD);
+  static const washSoft = Color(0xFFBBDEFB);
+  static const washWarm = Color(0xFF90CAF9);
+  static const washDeep = Color(0xFF1E88E5);
+  static const bathCream = Color(0xFFE0F7FA);
+  static const bathSoft = Color(0xFFB2EBF2);
+  static const bathWarm = Color(0xFF4DD0E1);
+  static const bathDeep = Color(0xFF00838F);
+  static const dressCream = Color(0xFFFCE4EC);
+  static const dressSoft = Color(0xFFF8BBD0);
+  static const dressWarm = Color(0xFFF48FB1);
+  static const dressDeep = Color(0xFFC2185B);
+  static const shoeCream = Color(0xFFE8F5E9);
+  static const shoeSoft = Color(0xFFC8E6C9);
+  static const shoeWarm = Color(0xFFA5D6A7);
+  static const shoeDeep = Color(0xFF388E3C);
+  static const combCream = Color(0xFFFFF8E1);
+  static const combSoft = Color(0xFFFFE0B2);
+  static const combWarm = Color(0xFFFFCC80);
+  static const combDeep = Color(0xFFEF6C00);
+
+  // Status / needs (always positive)
+  static const ready = Color(0xFF7CB342);
+  static const interested = Color(0xFFF5C542);
+  static const waiting = Color(0xFF7EC8E8);
+  static const letsPlay = Color(0xFFE87850);
+
+  // Lead character (locked proportions)
+  static const baoFurWhite = Color(0xFFF5F5F5);
+  static const baoFurBlack = Color(0xFF2A2A2A);
+  static const baoCollar = Color(0xFF4A90D9);
+  static const baoEyeWhite = Color(0xFFFFFFFF);
+  static const baoIris = Color(0xFF1A1A1A);
+}
+
+abstract final class TTShadows {
+  static List<BoxShadow> soft = [
+    BoxShadow(
+      color: TTColors.softShadow,
+      blurRadius: 16,
+      offset: const Offset(0, 6),
+    ),
+  ];
+
+  static List<BoxShadow> lift = [
+    BoxShadow(
+      color: TTColors.softShadow,
+      blurRadius: 24,
+      offset: const Offset(0, 10),
+    ),
+  ];
+
+  static List<BoxShadow> glow(Color color) => [
+    BoxShadow(
+      color: color.withValues(alpha: 0.45),
+      blurRadius: 20,
+      spreadRadius: 2,
+    ),
+  ];
+}
