@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.the_lazy_bear_club" "\0"
-            VALUE "FileDescription", "piku_rabbit" "\0"
+            VALUE "CompanyName", "com.lazybearclub" "\0"
+            VALUE "FileDescription", "Piku & Friends" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "piku_rabbit" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2026 com.the_lazy_bear_club. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2026 com.lazybearclub. All rights reserved." "\0"
             VALUE "OriginalFilename", "piku_rabbit.exe" "\0"
-            VALUE "ProductName", "piku_rabbit" "\0"
+            VALUE "ProductName", "Piku & Friends" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

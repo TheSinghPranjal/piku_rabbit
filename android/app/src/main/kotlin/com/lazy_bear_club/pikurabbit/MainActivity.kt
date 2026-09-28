@@ -1,4 +1,4 @@
-package com.the_lazy_bear_club.piku_rabbit
+package com.lazy_bear_club.pikurabbit
 
 import io.flutter.embedding.android.FlutterActivity
 
