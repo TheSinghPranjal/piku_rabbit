@@ -157,16 +157,86 @@ abstract final class AlphabetVideos {
   ];
 }
 
-/// Numbers segment videos (1–20 in order).
+/// One Piku counting clip. Earlier clips loop until Next. The last clip
+/// plays through once, then the lesson rewards.
+class NumberSegment {
+  const NumberSegment({
+    required this.asset,
+    required this.poster,
+    required this.label,
+  });
+
+  final String asset;
+  final String poster;
+  final String label;
+}
+
+/// Piku counting lesson (1–20). Filenames stay stable so a later
+/// regeneration of clips 12–16 and 16–20 can replace the files in place.
 abstract final class NumberVideos {
   static const folder = 'assets/videos/learn/numbers';
+  static const posterFolder = 'assets/images/learn/numbers';
 
-  static const segments = <String>[
-    '$folder/numbers_from_1to5.mp4',
-    '$folder/numbers_from_6to10.mp4',
-    '$folder/numbers_from_11to15.mp4',
-    '$folder/numbers_from_16to20.mp4',
+  static const segments = <NumberSegment>[
+    NumberSegment(
+      asset: '$folder/piku-numbers-01-04.mp4',
+      poster: '$posterFolder/piku-school-number-01.png',
+      label: '1 – 4',
+    ),
+    NumberSegment(
+      asset: '$folder/piku-numbers-04-08.mp4',
+      poster: '$posterFolder/piku-school-number-04.png',
+      label: '4 – 8',
+    ),
+    NumberSegment(
+      asset: '$folder/piku-numbers-08-12.mp4',
+      poster: '$posterFolder/piku-school-number-08.png',
+      label: '8 – 12',
+    ),
+    NumberSegment(
+      asset: '$folder/piku-numbers-12-16.mp4',
+      poster: '$posterFolder/piku-school-number-12.png',
+      label: '12 – 16',
+    ),
+    NumberSegment(
+      asset: '$folder/piku-numbers-16-20.mp4',
+      poster: '$posterFolder/piku-school-number-16.png',
+      label: '16 – 20',
+    ),
   ];
 
-  static const labels = <String>['1 – 5', '6 – 10', '11 – 15', '16 – 20'];
+  /// Last frame of 16–20, shown once that clip has finished.
+  static const finalePoster = '$posterFolder/piku-school-number-20.png';
+}
+
+/// Next / reward decisions for the counting lesson, independent of the player.
+class CountingLessonProgress {
+  const CountingLessonProgress({this.index = 0, this.finaleCompleted = false});
+
+  final int index;
+  final bool finaleCompleted;
+
+  bool get isFinale => index >= NumberVideos.segments.length - 1;
+
+  /// Earlier clips offer Next. The last clip rewards on its own after one play.
+  bool get showsNext => !isFinale;
+
+  bool get shouldReward => isFinale && finaleCompleted;
+
+  NumberSegment get segment => NumberVideos.segments[index];
+
+  /// Poster while the clip loads, or the closing still after 16–20 finishes.
+  String get poster =>
+      shouldReward ? NumberVideos.finalePoster : segment.poster;
+
+  CountingLessonProgress advance() {
+    if (!showsNext) return this;
+    return CountingLessonProgress(index: index + 1);
+  }
+
+  /// A clip reached its end. Only the finale counts; earlier clips loop.
+  CountingLessonProgress onClipFinished() {
+    if (!isFinale || finaleCompleted) return this;
+    return CountingLessonProgress(index: index, finaleCompleted: true);
+  }
 }

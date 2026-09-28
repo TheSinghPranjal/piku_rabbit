@@ -168,10 +168,6 @@ abstract final class CharacterMedia {
     'assets/videos/learn/alphabets/Bao_speaking_alphabet_QtoT.mp4',
     'assets/videos/learn/alphabets/Bao_speaking_alphabet_UtoX.mp4',
     'assets/videos/learn/alphabets/Bao_speaking_alphabet_YtoZ.mp4',
-    'assets/videos/learn/numbers/numbers_from_1to5.mp4',
-    'assets/videos/learn/numbers/numbers_from_6to10.mp4',
-    'assets/videos/learn/numbers/numbers_from_11to15.mp4',
-    'assets/videos/learn/numbers/numbers_from_16to20.mp4',
   ];
 
   /// Active character from `?character=`, defaulting to the unlocked lead.

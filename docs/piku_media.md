@@ -47,5 +47,19 @@ These slots have no Piku clip. They keep Bao's file.
 - Banana and sandwich, idle and action
 - Yoga idle and action
 - Chores: make bed, brush teeth, wash face, bath, comb hair, get dressed (including tie beats), wear shoes (including the bag beat)
-- Learn: alphabet and number lessons
+- Learn: alphabet lessons (A–Z). The numbers lesson is Piku's counting set below.
 - Splash background: `assets/videos/splash_screen_bg_video.mp4`
+
+## Numbers lesson
+
+School → Numbers plays five voiced clips in order. Each file is 720×1280, H.264 + AAC, and plays with sound. Clips 12–16 and 16–20 may be replaced later under the same filenames.
+
+| Order | Video | Poster while it loads | Behaviour |
+| --- | --- | --- | --- |
+| 1 | `assets/videos/learn/numbers/piku-numbers-01-04.mp4` | `assets/images/learn/numbers/piku-school-number-01.png` | Loops until Next |
+| 2 | `assets/videos/learn/numbers/piku-numbers-04-08.mp4` | `assets/images/learn/numbers/piku-school-number-04.png` | Loops until Next |
+| 3 | `assets/videos/learn/numbers/piku-numbers-08-12.mp4` | `assets/images/learn/numbers/piku-school-number-08.png` | Loops until Next |
+| 4 | `assets/videos/learn/numbers/piku-numbers-12-16.mp4` | `assets/images/learn/numbers/piku-school-number-12.png` | Loops until Next |
+| 5 | `assets/videos/learn/numbers/piku-numbers-16-20.mp4` | `assets/images/learn/numbers/piku-school-number-16.png` | Plays through once, then the usual reward card |
+
+`assets/images/learn/numbers/piku-school-number-20.png` is the last frame of clip 5 and shows after that play finishes, under the reward. Back leaves the lesson without a reward, same as Alphabet. Bao's old `numbers_from_*.mp4` clips are not used on this screen.
