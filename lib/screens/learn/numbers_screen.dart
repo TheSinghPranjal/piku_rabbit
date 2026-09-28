@@ -16,8 +16,11 @@ import '../../widgets/bounce_button.dart';
 import '../../widgets/status_bar.dart';
 import '../drink/drink_water_screen.dart' show RewardPopup;
 
-/// Numbers lesson — plays 1–20 segment videos in order.
-/// Tap Next (or wait for auto-advance) through each segment, then reward.
+/// Counting lesson — Piku's 1–20 clips, with her voice.
+///
+/// Clips before the last one loop until Next. The last clip (16–20) plays
+/// through once, then the usual reward card. Back leaves without a reward,
+/// same as the alphabet lesson.
 class NumbersScreen extends StatefulWidget {
   const NumbersScreen({super.key});
 
@@ -28,7 +31,7 @@ class NumbersScreen extends StatefulWidget {
 class _NumbersScreenState extends State<NumbersScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _float;
-  int _index = 0;
+  CountingLessonProgress _progress = const CountingLessonProgress();
   bool _celebrating = false;
   bool _advancing = false;
   bool _disposed = false;
@@ -64,32 +67,36 @@ class _NumbersScreenState extends State<NumbersScreen>
     _listener = null;
 
     // Detach previous controller from the tree before disposing it.
+    final isFinale = index >= NumberVideos.segments.length - 1;
     if (mounted && !_disposed) {
       setState(() {
         _ready = false;
         _video = null;
-        _index = index;
+        _progress = CountingLessonProgress(index: index);
         _advancing = false;
       });
     } else {
       _ready = false;
       _video = null;
-      _index = index;
+      _progress = CountingLessonProgress(index: index);
       _advancing = false;
     }
 
     await _disposeController(prev);
     if (_disposed || !mounted) return;
 
-    final next = VideoPlayerController.asset(NumberVideos.segments[index]);
+    final next = VideoPlayerController.asset(
+      NumberVideos.segments[index].asset,
+    );
     try {
       await next.initialize();
       if (!mounted || _disposed) {
         await _disposeController(next);
         return;
       }
-      await next.setLooping(false);
-      await next.setVolume(0);
+      // Earlier clips loop until Next. The finale plays once, with voice.
+      await next.setLooping(!isFinale);
+      await next.setVolume(1);
       if (!mounted || _disposed) {
         await _disposeController(next);
         return;
@@ -107,7 +114,8 @@ class _NumbersScreenState extends State<NumbersScreen>
             _celebrating ||
             _advancing ||
             _disposed ||
-            !v.value.isInitialized) {
+            !v.value.isInitialized ||
+            !isFinale) {
           return;
         }
         final duration = v.value.duration;
@@ -115,7 +123,10 @@ class _NumbersScreenState extends State<NumbersScreen>
         final nearEnd =
             v.value.position >= duration - const Duration(milliseconds: 120);
         if (nearEnd && !v.value.isPlaying) {
-          unawaited(_advance());
+          final done = _progress.onClipFinished();
+          if (!done.shouldReward) return;
+          _progress = done;
+          unawaited(_finish());
         }
       };
       next.addListener(_listener!);
@@ -130,19 +141,17 @@ class _NumbersScreenState extends State<NumbersScreen>
   }
 
   Future<void> _advance() async {
-    if (_celebrating || _advancing || _disposed) return;
-    _advancing = true;
-
-    if (_index >= NumberVideos.segments.length - 1) {
-      await _finish();
+    if (_celebrating || _advancing || _disposed || !_progress.showsNext) {
       return;
     }
-    await _loadSegment(_index + 1);
+    _advancing = true;
+    await _loadSegment(_progress.advance().index);
   }
 
   Future<void> _finish() async {
     if (_celebrating || _disposed) return;
-    setState(() => _celebrating = true);
+    _celebrating = true;
+    if (mounted) setState(() {});
 
     final reward = LearnNumbersRules.rewardForComplete();
     await StarsStore.add(reward.stars);
@@ -201,7 +210,7 @@ class _NumbersScreenState extends State<NumbersScreen>
 
   @override
   Widget build(BuildContext context) {
-    final isLast = _index >= NumberVideos.segments.length - 1;
+    final segment = _progress.segment;
 
     return Scaffold(
       backgroundColor: const Color(0xFFFFF3E0),
@@ -221,7 +230,11 @@ class _NumbersScreenState extends State<NumbersScreen>
               ),
             ),
           ),
-          _NumbersVideoLayer(controller: _video, ready: _ready),
+          _NumbersVideoLayer(
+            controller: _video,
+            ready: _ready,
+            poster: _progress.poster,
+          ),
           IgnorePointer(
             child: DecoratedBox(
               decoration: BoxDecoration(
@@ -251,10 +264,15 @@ class _NumbersScreenState extends State<NumbersScreen>
                   color: TTColors.darkBrown,
                 ).copyWith(fontWeight: FontWeight.w900, fontSize: 30),
               ),
+              Text(
+                segment.label,
+                style: TTTypography.body(color: TTColors.darkBrown),
+              ),
               Expanded(
                 child: AnimatedBuilder(
                   animation: _float,
                   builder: (context, _) {
+                    if (!_progress.showsNext) return const SizedBox.expand();
                     final bob = math.sin(_float.value * math.pi * 2) * 10;
                     return Align(
                       alignment: Alignment.bottomCenter,
@@ -265,9 +283,9 @@ class _NumbersScreenState extends State<NumbersScreen>
                               ? null
                               : () => unawaited(_advance()),
                           enabled: !_celebrating && !_advancing,
-                          semanticLabel: isLast ? 'Finish' : 'Next numbers',
+                          semanticLabel: 'Next numbers',
                           child: _NumbersNextBubble(
-                            label: isLast ? 'Done' : 'Next',
+                            label: 'Next',
                             playing: _advancing,
                           ),
                         ),
@@ -285,28 +303,44 @@ class _NumbersScreenState extends State<NumbersScreen>
 }
 
 class _NumbersVideoLayer extends StatelessWidget {
-  const _NumbersVideoLayer({required this.controller, required this.ready});
+  const _NumbersVideoLayer({
+    required this.controller,
+    required this.ready,
+    required this.poster,
+  });
 
   final VideoPlayerController? controller;
   final bool ready;
+  final String poster;
 
   @override
   Widget build(BuildContext context) {
-    if (!ready || controller == null || !controller!.value.isInitialized) {
-      return const SizedBox.expand();
-    }
-
-    final size = controller!.value.size;
-    return SizedBox.expand(
-      child: FittedBox(
-        fit: BoxFit.cover,
-        clipBehavior: Clip.hardEdge,
-        child: SizedBox(
-          width: size.width > 0 ? size.width : 393,
-          height: size.height > 0 ? size.height : 852,
-          child: VideoPlayer(key: ValueKey(controller), controller!),
+    final showVideo =
+        ready && controller != null && controller!.value.isInitialized;
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Image.asset(
+          poster,
+          fit: BoxFit.cover,
+          gaplessPlayback: true,
+          errorBuilder: (_, _, _) => const SizedBox.expand(),
         ),
-      ),
+        if (showVideo)
+          FittedBox(
+            fit: BoxFit.cover,
+            clipBehavior: Clip.hardEdge,
+            child: SizedBox(
+              width: controller!.value.size.width > 0
+                  ? controller!.value.size.width
+                  : 720,
+              height: controller!.value.size.height > 0
+                  ? controller!.value.size.height
+                  : 1280,
+              child: VideoPlayer(key: ValueKey(controller), controller!),
+            ),
+          ),
+      ],
     );
   }
 }
