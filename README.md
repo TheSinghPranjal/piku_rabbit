@@ -4,7 +4,7 @@
 
 The Flutter tree matches Bao: models, go_router, screens, stores, theme, and the activity video state machines (idle loop, floating bubble tap, one-shot action, next idle, reward). Piku is the unlocked lead. She is a cheerful, curious, kind little rabbit (she/her) who loves to learn, explore, and play. The family order is Bao, Piku, Po, Koko, Momo, Dodo. Bao and the rest are coming soon. The carousel opens on Piku.
 
-Videos and images are still Bao's placeholders. Filenames for the Piku set (the same slots and folders as Poko, with `piku_` instead of `poko_`) are listed in [docs/piku_media.md](docs/piku_media.md).
+Where a Piku clip exists, her screens play it (`lib/models/character_media.dart`). Bao's files stay registered and still play for Bao. Slots with no Piku clip, including the reward celebration, keep Bao's media. The slot map is in [docs/piku_media.md](docs/piku_media.md).
 
 ## Run locally
 

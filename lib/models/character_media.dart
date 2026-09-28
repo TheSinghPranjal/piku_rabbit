@@ -6,14 +6,13 @@ import 'character_bg_videos.dart';
 
 /// Picks the clip a screen should play.
 ///
-/// Bao's asset paths stay the source of truth and are what the app plays
-/// today. Piku's filenames mirror Poko's set with a `piku_` prefix (see
-/// `docs/piku_media.md`). Those files are not bundled yet, so [clip] keeps
-/// the Bao placeholder until [pikuClipsBundled] is turned on.
+/// Bao's asset paths stay the source of truth. Piku substitutes a piku_* file
+/// when one is bundled for that slot and otherwise keeps the Bao file. Every
+/// other character uses Bao's media unchanged. See `docs/piku_media.md`.
 abstract final class CharacterMedia {
-  /// Flip to true after the files in [plannedPikuAssets] are on disk and
-  /// listed under `flutter: assets:` in pubspec.yaml.
-  static const pikuClipsBundled = false;
+  /// Piku's idle, bedroom, play, and eating loops are in the asset bundle.
+  /// The reward celebration clip is not, so that slot stays on Bao's still.
+  static const pikuClipsBundled = true;
 
   static const _bg = 'assets/videos/piku_character_screen_bg_video_list';
 
@@ -60,7 +59,8 @@ abstract final class CharacterMedia {
   static const skippingAction =
       'assets/videos/play/skipping/piku_doing_skipping_video.mp4';
 
-  /// Reward loop. Bao's slot is the still `bao_reward_celebrate.png`.
+  /// Future reward loop. Not bundled yet; Bao's slot stays the still
+  /// `bao_reward_celebrate.png`.
   static const celebration = 'assets/videos/reward/piku_celebration_loop.mp4';
 
   /// Bao path → Piku file. Used only when [pikuClipsBundled] is true.
@@ -77,6 +77,7 @@ abstract final class CharacterMedia {
     'assets/videos/feed/apple/bao_eating_apple.mp4': appleAction,
     'assets/videos/feed/veggies/bao_not_eating_veggies.mp4': veggiesIdle,
     'assets/videos/feed/veggies/bao_eating_veggies.mp4': veggiesAction,
+    // Soup is the closest bowl meal; salad fills the veggies action.
     'assets/videos/feed/rice/bao_not_eating_rice.mp4': riceIdle,
     'assets/videos/feed/rice/bao_eating_rice.mp4': riceAction,
     'assets/videos/play/play_screen_video.mp4': playHub,
@@ -84,8 +85,11 @@ abstract final class CharacterMedia {
         footballIdle,
     'assets/videos/play/football/bao_playing_football_video.mp4':
         footballAction,
+    // No tennis activity exists. The tennis swing fills Cricket's action
+    // slot; the tray label stays Cricket until a real cricket clip exists.
     'assets/videos/play/cricket/bao_not_playing_cricket_video.mp4': cricketIdle,
     'assets/videos/play/cricket/bao_playing_cricket_video.mp4': cricketAction,
+    // Clap is the closest rhythmic action; the hop is the closest skip.
     'assets/videos/play/dance/bao_not_doing_dance_video.mp4': danceIdle,
     'assets/videos/play/dance/bao_doing_dance_video.mp4': danceAction,
     'assets/videos/play/skipping/bao_not_doing_skipping_video.mp4':
@@ -120,7 +124,6 @@ abstract final class CharacterMedia {
     danceAction,
     skippingIdle,
     skippingAction,
-    celebration,
   ];
 
   /// Bao clips that stay even after Piku's set lands (no Piku match yet).
@@ -204,8 +207,10 @@ abstract final class CharacterMedia {
     return plannedOverrides[baoAsset] ?? baoAsset;
   }
 
-  /// Looping reward video for Piku, once [celebration] is bundled.
-  /// Bao keeps his celebrate still.
-  static String? celebrationVideo(CharacterId id) =>
-      id == CharacterId.piku && pikuClipsBundled ? celebration : null;
+  /// No Piku celebration clip yet, so every character keeps Bao's still.
+  /// The future file is [celebration].
+  static String? celebrationVideo(CharacterId id) {
+    if (id == CharacterId.piku) return null;
+    return null;
+  }
 }

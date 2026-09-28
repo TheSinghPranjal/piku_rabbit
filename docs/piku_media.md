@@ -1,70 +1,51 @@
-# Piku media drop-in
+# Piku media
 
-Piku's screens still play Bao's videos and images. Drop the clips below into the same folders Poko uses, with `piku_` in place of `poko_`. Then:
+Piku's screens play her loops where a clip exists, using the same slot map as Poko. Files use the `piku_` prefix in Poko's folders. Several slots share one source loop, the same way Poko copied one file into several paths.
 
-1. Add each path under `flutter: assets:` in `pubspec.yaml`.
-2. Set `CharacterMedia.pikuClipsBundled` to `true` in `lib/models/character_media.dart`.
+`CharacterMedia.pikuClipsBundled` is true. There is no celebration clip yet, so the reward card still uses Bao's still `assets/images/bao_reward_celebrate.png`. The future path is `assets/videos/reward/piku_celebration_loop.mp4`.
 
-Until that flag is on, the app ignores these paths and keeps the Bao file for that slot.
+The character card portrait is still Bao's image at `assets/images/characters/piku.png`.
 
-The character card portrait is Bao's image copied to `assets/images/characters/piku.png`. Replace that file when Piku art is ready (cream fur, pink inner ears, yellow t-shirt, blue denim overalls with a carrot patch).
+## Slot map
 
-## Idle
+| Source loop | Repo path | Slot |
+| --- | --- | --- |
+| `piku-idle-loop` | `assets/videos/piku_character_screen_bg_video_list/piku_character_screen_bg_video.mp4` | Generic idle, Learn hub, Chores hub, Dance idle, Skipping idle |
+| `piku-wave-loop` | `assets/videos/piku_character_screen_bg_video_list/piku_character_screen_morning_bg_video.mp4` | Home morning (6am–noon) |
+| `piku-playroom-sunny-loop` | `assets/videos/piku_character_screen_bg_video_list/piku_character_screen_noon_bg_video.mp4` | Home noon (noon–5pm) |
+| `piku-match-loop` | `assets/videos/piku_character_screen_bg_video_list/piku_character_screen_evening_bg_video.mp4` | Home evening (5pm–10pm) |
+| `piku-bedroom-night-loop` | `assets/videos/piku_character_screen_bg_video_list/piku_character_screen_night_yawning_bg_video.mp4` | Home night yawning (10pm–midnight) |
+| `piku-bedroom-night-loop` | `assets/videos/wake/piku_sleeping_video.mp4` | Sleeping loop and Wake Up |
+| `piku-eating-idle-loop` | `assets/videos/piku_not_feeding.mp4` | Feed hub idle |
+| `piku-eating-idle-loop` | `assets/videos/feed/apple/piku_not_eating_apple.mp4` | Apple idle |
+| `piku-eating-apple-loop` | `assets/videos/feed/apple/piku_eating_apple.mp4` | Apple action |
+| `piku-eating-apple-loop` | `assets/videos/piku_character_screen_bg_video_list/piku_character_screen_bg_eating_apple_video.mp4` | Home apple special (12:30–1:00pm) |
+| `piku-eating-idle-loop` | `assets/videos/feed/veggies/piku_not_eating_veggies.mp4` | Veggies idle |
+| `piku-eating-salad-loop` | `assets/videos/feed/veggies/piku_eating_veggies.mp4` | Veggies action |
+| `piku-eating-idle-loop` | `assets/videos/feed/rice/piku_not_eating_rice.mp4` | Rice idle |
+| `piku-eating-soup-loop` | `assets/videos/feed/rice/piku_eating_rice.mp4` | Rice action (closest bowl meal) |
+| `piku-sports-idle-loop` | `assets/videos/play/piku_play_screen_video.mp4` | Play hub |
+| `piku-sports-idle-loop` | `assets/videos/play/football/piku_not_playing_football_video.mp4` | Football idle |
+| `piku-sports-football-loop` | `assets/videos/play/football/piku_playing_football_video.mp4` | Football action |
+| `piku-sports-idle-loop` | `assets/videos/play/cricket/piku_not_playing_cricket_video.mp4` | Cricket idle |
+| `piku-sports-tennis-loop` | `assets/videos/play/cricket/piku_playing_cricket_video.mp4` | Cricket action (no tennis tray item) |
+| `piku-sports-idle-loop` | `assets/videos/play/badminton/piku_not_playing_badminton_video.mp4` | Badminton idle |
+| `piku-sports-badminton-loop` | `assets/videos/play/badminton/piku_playing_badminton_video.mp4` | Badminton action |
+| `piku-idle-loop` | `assets/videos/play/dance/piku_not_doing_dance_video.mp4` | Dance idle |
+| `piku-clap-loop` | `assets/videos/play/dance/piku_doing_dance_video.mp4` | Dance action |
+| `piku-idle-loop` | `assets/videos/play/skipping/piku_not_doing_skipping_video.mp4` | Skipping idle |
+| `piku-jump-loop` | `assets/videos/play/skipping/piku_doing_skipping_video.mp4` | Skipping action |
 
-| Slot | Path |
-| --- | --- |
-| Generic idle | `assets/videos/piku_character_screen_bg_video_list/piku_character_screen_bg_video.mp4` |
-| Morning | `assets/videos/piku_character_screen_bg_video_list/piku_character_screen_morning_bg_video.mp4` |
-| Noon | `assets/videos/piku_character_screen_bg_video_list/piku_character_screen_noon_bg_video.mp4` |
-| Evening | `assets/videos/piku_character_screen_bg_video_list/piku_character_screen_evening_bg_video.mp4` |
-| Feed hub idle | `assets/videos/piku_not_feeding.mp4` |
+## Still Bao
 
-## Bedroom night
+These slots have no Piku clip. They keep Bao's file.
 
-| Slot | Path |
-| --- | --- |
-| Night yawning | `assets/videos/piku_character_screen_bg_video_list/piku_character_screen_night_yawning_bg_video.mp4` |
-| Sleeping | `assets/videos/wake/piku_sleeping_video.mp4` |
-
-## Playroom
-
-| Slot | Path |
-| --- | --- |
-| Play hub | `assets/videos/play/piku_play_screen_video.mp4` |
-
-## Sports
-
-| Slot | Path |
-| --- | --- |
-| Football idle | `assets/videos/play/football/piku_not_playing_football_video.mp4` |
-| Football action | `assets/videos/play/football/piku_playing_football_video.mp4` |
-| Cricket idle | `assets/videos/play/cricket/piku_not_playing_cricket_video.mp4` |
-| Cricket action | `assets/videos/play/cricket/piku_playing_cricket_video.mp4` |
-| Badminton idle | `assets/videos/play/badminton/piku_not_playing_badminton_video.mp4` |
-| Badminton action | `assets/videos/play/badminton/piku_playing_badminton_video.mp4` |
-| Dance idle | `assets/videos/play/dance/piku_not_doing_dance_video.mp4` |
-| Dance action | `assets/videos/play/dance/piku_doing_dance_video.mp4` |
-| Skipping idle | `assets/videos/play/skipping/piku_not_doing_skipping_video.mp4` |
-| Skipping action | `assets/videos/play/skipping/piku_doing_skipping_video.mp4` |
-
-## Eating
-
-| Slot | Path |
-| --- | --- |
-| Apple idle | `assets/videos/feed/apple/piku_not_eating_apple.mp4` |
-| Apple action | `assets/videos/feed/apple/piku_eating_apple.mp4` |
-| Veggies idle | `assets/videos/feed/veggies/piku_not_eating_veggies.mp4` |
-| Veggies action | `assets/videos/feed/veggies/piku_eating_veggies.mp4` |
-| Rice idle | `assets/videos/feed/rice/piku_not_eating_rice.mp4` |
-| Rice action | `assets/videos/feed/rice/piku_eating_rice.mp4` |
-| Eating apple (home special) | `assets/videos/piku_character_screen_bg_video_list/piku_character_screen_bg_eating_apple_video.mp4` |
-
-## Celebration
-
-| Slot | Path |
-| --- | --- |
-| Reward loop | `assets/videos/reward/piku_celebration_loop.mp4` |
-
-## Still Bao after this set
-
-These slots have no Piku file in Poko's set either. They keep playing Bao's clip (chores, drinks, banana, sandwich, yoga, alphabet, numbers, night-sleeping bedroom, cleaning, pancakes, and the wake-up transition).
+- Celebration still: `assets/images/bao_reward_celebrate.png`
+- Night sleeping background (midnight–6am), cleaning floor, cleaning shelf, making pancakes
+- Wake-up sit-up: `assets/videos/wake/bao_waking_up_video.mp4`
+- Water and milk, idle and action
+- Banana and sandwich, idle and action
+- Yoga idle and action
+- Chores: make bed, brush teeth, wash face, bath, comb hair, get dressed (including tie beats), wear shoes (including the bag beat)
+- Learn: alphabet and number lessons
+- Splash background: `assets/videos/splash_screen_bg_video.mp4`
