@@ -149,6 +149,31 @@ flutter:
     - assets/videos/play/skipping/bao_not_doing_skipping_video.mp4
     - assets/videos/play/skipping/bao_doing_skipping_video.mp4
     - assets/videos/bao_not_feeding.mp4
+    - assets/videos/piku_character_screen_bg_video_list/piku_character_screen_bg_video.mp4
+    - assets/videos/piku_character_screen_bg_video_list/piku_character_screen_night_yawning_bg_video.mp4
+    - assets/videos/piku_character_screen_bg_video_list/piku_character_screen_morning_bg_video.mp4
+    - assets/videos/piku_character_screen_bg_video_list/piku_character_screen_noon_bg_video.mp4
+    - assets/videos/piku_character_screen_bg_video_list/piku_character_screen_evening_bg_video.mp4
+    - assets/videos/piku_character_screen_bg_video_list/piku_character_screen_bg_eating_apple_video.mp4
+    - assets/videos/wake/piku_sleeping_video.mp4
+    - assets/videos/piku_not_feeding.mp4
+    - assets/videos/feed/apple/piku_not_eating_apple.mp4
+    - assets/videos/feed/apple/piku_eating_apple.mp4
+    - assets/videos/feed/veggies/piku_not_eating_veggies.mp4
+    - assets/videos/feed/veggies/piku_eating_veggies.mp4
+    - assets/videos/feed/rice/piku_not_eating_rice.mp4
+    - assets/videos/feed/rice/piku_eating_rice.mp4
+    - assets/videos/play/piku_play_screen_video.mp4
+    - assets/videos/play/football/piku_not_playing_football_video.mp4
+    - assets/videos/play/football/piku_playing_football_video.mp4
+    - assets/videos/play/cricket/piku_not_playing_cricket_video.mp4
+    - assets/videos/play/cricket/piku_playing_cricket_video.mp4
+    - assets/videos/play/badminton/piku_not_playing_badminton_video.mp4
+    - assets/videos/play/badminton/piku_playing_badminton_video.mp4
+    - assets/videos/play/dance/piku_not_doing_dance_video.mp4
+    - assets/videos/play/dance/piku_doing_dance_video.mp4
+    - assets/videos/play/skipping/piku_not_doing_skipping_video.mp4
+    - assets/videos/play/skipping/piku_doing_skipping_video.mp4
     - assets/images/logo_splash_screen.png
     - assets/images/character_select_bg.png
     - assets/images/bao_reward_celebrate.png
