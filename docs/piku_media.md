@@ -47,8 +47,13 @@ These slots have no Piku clip. They keep Bao's file.
 - Banana and sandwich, idle and action
 - Yoga idle and action
 - Chores: make bed, brush teeth, wash face, bath, comb hair, get dressed (including tie beats), wear shoes (including the bag beat)
-- Learn: alphabet lessons (A–Z). The numbers lesson is Piku's counting set below.
 - Splash background: `assets/videos/splash_screen_bg_video.mp4`
+
+## Alphabet lesson
+
+School → Alphabet plays 25 voiced clips in order, in `assets/videos/learn/alphabets/` next to the numbers clips. Each file is 720×1280, H.264 + AAC, and plays with sound. Names are `piku-alphabet-X-Y.mp4` for each overlapping pair from A–B through Y–Z.
+
+Clips before Y–Z loop until Next. `piku-alphabet-Y-Z.mp4` plays through once, then the usual reward card (the same star store and reward popup as Numbers). Back leaves without a reward. Bao's old `Bao_speaking_alphabet_*.mp4` clips are not used on this screen.
 
 ## Numbers lesson
 

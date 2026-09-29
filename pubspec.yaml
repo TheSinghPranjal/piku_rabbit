@@ -138,13 +138,31 @@ flutter:
     - assets/videos/chore/wear_shoe/bao_taking_bag_after_wearing_shoe.mp4
     - assets/videos/chore/comb_hair/bao_not_coming_hair.mp4
     - assets/videos/chore/comb_hair/bao_combing_hair.mp4
-    - assets/videos/learn/alphabets/Bao_speaking_alphabet_AtoD.mp4
-    - assets/videos/learn/alphabets/Bao_speaking_alphabet_EtoH.mp4
-    - assets/videos/learn/alphabets/Bao_speaking_alphabet_ItoL.mp4
-    - assets/videos/learn/alphabets/Bao_speaking_alphabet_MtoP.mp4
-    - assets/videos/learn/alphabets/Bao_speaking_alphabet_QtoT.mp4
-    - assets/videos/learn/alphabets/Bao_speaking_alphabet_UtoX.mp4
-    - assets/videos/learn/alphabets/Bao_speaking_alphabet_YtoZ.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-A-B.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-B-C.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-C-D.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-D-E.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-E-F.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-F-G.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-G-H.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-H-I.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-I-J.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-J-K.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-K-L.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-L-M.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-M-N.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-N-O.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-O-P.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-P-Q.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-Q-R.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-R-S.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-S-T.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-T-U.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-U-V.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-V-W.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-W-X.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-X-Y.mp4
+    - assets/videos/learn/alphabets/piku-alphabet-Y-Z.mp4
     - assets/videos/learn/numbers/piku-numbers-01-04.mp4
     - assets/videos/learn/numbers/piku-numbers-04-08.mp4
     - assets/videos/learn/numbers/piku-numbers-08-12.mp4

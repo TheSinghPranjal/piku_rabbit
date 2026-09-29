@@ -16,8 +16,10 @@ import '../../widgets/bounce_button.dart';
 import '../../widgets/status_bar.dart';
 import '../drink/drink_water_screen.dart' show RewardPopup;
 
-/// Alphabet lesson — plays A–Z segment videos in order.
-/// Tap Next (or wait for auto-advance) through each segment, then reward.
+/// Alphabet lesson — Piku's A–Z pair clips, with her voice.
+///
+/// Clips before the last one loop until Next. Y–Z plays through once, then
+/// the usual reward card. Back leaves without a reward, same as Numbers.
 class AlphabetScreen extends StatefulWidget {
   const AlphabetScreen({super.key});
 
@@ -28,7 +30,7 @@ class AlphabetScreen extends StatefulWidget {
 class _AlphabetScreenState extends State<AlphabetScreen>
     with SingleTickerProviderStateMixin {
   late final AnimationController _float;
-  int _index = 0;
+  AlphabetLessonProgress _progress = const AlphabetLessonProgress();
   bool _celebrating = false;
   bool _advancing = false;
   bool _disposed = false;
@@ -64,32 +66,36 @@ class _AlphabetScreenState extends State<AlphabetScreen>
     _listener = null;
 
     // Detach previous controller from the tree before disposing it.
+    final isFinale = index >= AlphabetVideos.segments.length - 1;
     if (mounted && !_disposed) {
       setState(() {
         _ready = false;
         _video = null;
-        _index = index;
+        _progress = AlphabetLessonProgress(index: index);
         _advancing = false;
       });
     } else {
       _ready = false;
       _video = null;
-      _index = index;
+      _progress = AlphabetLessonProgress(index: index);
       _advancing = false;
     }
 
     await _disposeController(prev);
     if (_disposed || !mounted) return;
 
-    final next = VideoPlayerController.asset(AlphabetVideos.segments[index]);
+    final next = VideoPlayerController.asset(
+      AlphabetVideos.segments[index].asset,
+    );
     try {
       await next.initialize();
       if (!mounted || _disposed) {
         await _disposeController(next);
         return;
       }
-      await next.setLooping(false);
-      await next.setVolume(0);
+      // Earlier clips loop until Next. Y–Z plays once, with voice.
+      await next.setLooping(!isFinale);
+      await next.setVolume(1);
       if (!mounted || _disposed) {
         await _disposeController(next);
         return;
@@ -107,7 +113,8 @@ class _AlphabetScreenState extends State<AlphabetScreen>
             _celebrating ||
             _advancing ||
             _disposed ||
-            !v.value.isInitialized) {
+            !v.value.isInitialized ||
+            !isFinale) {
           return;
         }
         final duration = v.value.duration;
@@ -115,7 +122,10 @@ class _AlphabetScreenState extends State<AlphabetScreen>
         final nearEnd =
             v.value.position >= duration - const Duration(milliseconds: 120);
         if (nearEnd && !v.value.isPlaying) {
-          unawaited(_advance());
+          final done = _progress.onClipFinished();
+          if (!done.shouldReward) return;
+          _progress = done;
+          unawaited(_finish());
         }
       };
       next.addListener(_listener!);
@@ -130,19 +140,17 @@ class _AlphabetScreenState extends State<AlphabetScreen>
   }
 
   Future<void> _advance() async {
-    if (_celebrating || _advancing || _disposed) return;
-    _advancing = true;
-
-    if (_index >= AlphabetVideos.segments.length - 1) {
-      await _finish();
+    if (_celebrating || _advancing || _disposed || !_progress.showsNext) {
       return;
     }
-    await _loadSegment(_index + 1);
+    _advancing = true;
+    await _loadSegment(_progress.advance().index);
   }
 
   Future<void> _finish() async {
     if (_celebrating || _disposed) return;
-    setState(() => _celebrating = true);
+    _celebrating = true;
+    if (mounted) setState(() {});
 
     final reward = LearnAlphabetRules.rewardForComplete();
     await StarsStore.add(reward.stars);
@@ -201,7 +209,7 @@ class _AlphabetScreenState extends State<AlphabetScreen>
 
   @override
   Widget build(BuildContext context) {
-    final isLast = _index >= AlphabetVideos.segments.length - 1;
+    final segment = _progress.segment;
 
     return Scaffold(
       backgroundColor: const Color(0xFFE3F2FD),
@@ -251,10 +259,15 @@ class _AlphabetScreenState extends State<AlphabetScreen>
                   color: TTColors.darkBrown,
                 ).copyWith(fontWeight: FontWeight.w900, fontSize: 30),
               ),
+              Text(
+                segment.label,
+                style: TTTypography.body(color: TTColors.darkBrown),
+              ),
               Expanded(
                 child: AnimatedBuilder(
                   animation: _float,
                   builder: (context, _) {
+                    if (!_progress.showsNext) return const SizedBox.expand();
                     final bob = math.sin(_float.value * math.pi * 2) * 10;
                     return Align(
                       alignment: Alignment.bottomCenter,
@@ -265,9 +278,9 @@ class _AlphabetScreenState extends State<AlphabetScreen>
                               ? null
                               : () => unawaited(_advance()),
                           enabled: !_celebrating && !_advancing,
-                          semanticLabel: isLast ? 'Finish' : 'Next letters',
+                          semanticLabel: 'Next letters',
                           child: _AlphabetNextBubble(
-                            label: isLast ? 'Done' : 'Next',
+                            label: 'Next',
                             playing: _advancing,
                           ),
                         ),
@@ -302,8 +315,8 @@ class _AlphabetVideoLayer extends StatelessWidget {
         fit: BoxFit.cover,
         clipBehavior: Clip.hardEdge,
         child: SizedBox(
-          width: size.width > 0 ? size.width : 393,
-          height: size.height > 0 ? size.height : 852,
+          width: size.width > 0 ? size.width : 720,
+          height: size.height > 0 ? size.height : 1280,
           child: VideoPlayer(key: ValueKey(controller), controller!),
         ),
       ),

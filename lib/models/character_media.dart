@@ -161,13 +161,6 @@ abstract final class CharacterMedia {
     'assets/videos/chore/comb_hair/bao_combing_hair.mp4',
     'assets/videos/play/yoga/bao_not_doing_yoga_video.mp4',
     'assets/videos/play/yoga/bao_doing_yoga_video.mp4',
-    'assets/videos/learn/alphabets/Bao_speaking_alphabet_AtoD.mp4',
-    'assets/videos/learn/alphabets/Bao_speaking_alphabet_EtoH.mp4',
-    'assets/videos/learn/alphabets/Bao_speaking_alphabet_ItoL.mp4',
-    'assets/videos/learn/alphabets/Bao_speaking_alphabet_MtoP.mp4',
-    'assets/videos/learn/alphabets/Bao_speaking_alphabet_QtoT.mp4',
-    'assets/videos/learn/alphabets/Bao_speaking_alphabet_UtoX.mp4',
-    'assets/videos/learn/alphabets/Bao_speaking_alphabet_YtoZ.mp4',
   ];
 
   /// Active character from `?character=`, defaulting to the unlocked lead.
