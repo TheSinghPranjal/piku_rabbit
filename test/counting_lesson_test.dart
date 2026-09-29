@@ -91,12 +91,6 @@ void main() {
         );
         expect(pubspec.contains(gone), isFalse, reason: gone);
       }
-
-      expect(AlphabetVideos.segments, hasLength(7));
-      expect(
-        AlphabetVideos.segments.first,
-        contains('Bao_speaking_alphabet_AtoD'),
-      );
     },
   );
 

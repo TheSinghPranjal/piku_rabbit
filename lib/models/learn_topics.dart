@@ -132,29 +132,74 @@ abstract final class LearnTopics {
   }
 }
 
-/// Alphabet segment videos (A–Z in order).
+/// One Piku alphabet clip. Earlier clips loop until Next. The last clip
+/// plays through once, then the lesson rewards.
+class AlphabetSegment {
+  const AlphabetSegment({required this.asset, required this.label});
+
+  final String asset;
+  final String label;
+}
+
+/// Piku alphabet lesson (A–Z), one overlapping pair per clip.
 abstract final class AlphabetVideos {
   static const folder = 'assets/videos/learn/alphabets';
 
-  static const segments = <String>[
-    '$folder/Bao_speaking_alphabet_AtoD.mp4',
-    '$folder/Bao_speaking_alphabet_EtoH.mp4',
-    '$folder/Bao_speaking_alphabet_ItoL.mp4',
-    '$folder/Bao_speaking_alphabet_MtoP.mp4',
-    '$folder/Bao_speaking_alphabet_QtoT.mp4',
-    '$folder/Bao_speaking_alphabet_UtoX.mp4',
-    '$folder/Bao_speaking_alphabet_YtoZ.mp4',
+  static const segments = <AlphabetSegment>[
+    AlphabetSegment(asset: '$folder/piku-alphabet-A-B.mp4', label: 'A – B'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-B-C.mp4', label: 'B – C'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-C-D.mp4', label: 'C – D'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-D-E.mp4', label: 'D – E'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-E-F.mp4', label: 'E – F'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-F-G.mp4', label: 'F – G'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-G-H.mp4', label: 'G – H'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-H-I.mp4', label: 'H – I'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-I-J.mp4', label: 'I – J'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-J-K.mp4', label: 'J – K'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-K-L.mp4', label: 'K – L'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-L-M.mp4', label: 'L – M'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-M-N.mp4', label: 'M – N'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-N-O.mp4', label: 'N – O'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-O-P.mp4', label: 'O – P'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-P-Q.mp4', label: 'P – Q'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-Q-R.mp4', label: 'Q – R'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-R-S.mp4', label: 'R – S'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-S-T.mp4', label: 'S – T'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-T-U.mp4', label: 'T – U'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-U-V.mp4', label: 'U – V'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-V-W.mp4', label: 'V – W'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-W-X.mp4', label: 'W – X'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-X-Y.mp4', label: 'X – Y'),
+    AlphabetSegment(asset: '$folder/piku-alphabet-Y-Z.mp4', label: 'Y – Z'),
   ];
+}
 
-  static const labels = <String>[
-    'A – D',
-    'E – H',
-    'I – L',
-    'M – P',
-    'Q – T',
-    'U – X',
-    'Y – Z',
-  ];
+/// Next / reward decisions for the alphabet lesson, independent of the player.
+class AlphabetLessonProgress {
+  const AlphabetLessonProgress({this.index = 0, this.finaleCompleted = false});
+
+  final int index;
+  final bool finaleCompleted;
+
+  bool get isFinale => index >= AlphabetVideos.segments.length - 1;
+
+  /// Earlier clips offer Next. Y–Z rewards on its own after one play.
+  bool get showsNext => !isFinale;
+
+  bool get shouldReward => isFinale && finaleCompleted;
+
+  AlphabetSegment get segment => AlphabetVideos.segments[index];
+
+  AlphabetLessonProgress advance() {
+    if (!showsNext) return this;
+    return AlphabetLessonProgress(index: index + 1);
+  }
+
+  /// A clip reached its end. Only the finale counts; earlier clips loop.
+  AlphabetLessonProgress onClipFinished() {
+    if (!isFinale || finaleCompleted) return this;
+    return AlphabetLessonProgress(index: index, finaleCompleted: true);
+  }
 }
 
 /// One Piku counting clip. Earlier clips loop until Next. The last clip
