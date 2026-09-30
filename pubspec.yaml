@@ -198,6 +198,16 @@ flutter:
     - assets/images/routine/piku-routine-10-towel-after.jpg
     - assets/images/routine/piku-routine-11-dressed-before.jpg
     - assets/images/routine/piku-routine-12-hairdry-after.jpg
+    - assets/images/school-routine/piku-school-01-dress-before.jpg
+    - assets/images/school-routine/piku-school-01-dress-after.jpg
+    - assets/images/school-routine/piku-school-02-tie-before.jpg
+    - assets/images/school-routine/piku-school-02-tie-after.jpg
+    - assets/images/school-routine/piku-school-03-shoes-before.jpg
+    - assets/images/school-routine/piku-school-03-shoes-after.jpg
+    - assets/images/school-routine/piku-school-04-bag-before.jpg
+    - assets/images/school-routine/piku-school-04-bag-after.jpg
+    - assets/images/school-routine/piku-school-05-leave-before.jpg
+    - assets/images/school-routine/piku-school-05-leave-after.jpg
     - assets/videos/play/play_screen_video.mp4
     - assets/videos/play/football/bao_not_playing_football_video.mp4
     - assets/videos/play/football/bao_playing_football_video.mp4

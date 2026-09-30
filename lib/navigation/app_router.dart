@@ -15,6 +15,7 @@ import '../screens/drink/drink_water_screen.dart';
 import '../screens/feed/eat_food_screen.dart';
 import '../screens/feed/feed_screen.dart';
 import '../screens/learn/alphabet_screen.dart';
+import '../screens/learn/go_to_school_screen.dart';
 import '../screens/learn/learn_screen.dart';
 import '../screens/learn/morning_routine_screen.dart';
 import '../screens/learn/numbers_screen.dart';
@@ -58,6 +59,10 @@ GoRouter createAppRouter({bool skipSplash = false}) {
       GoRoute(
         path: '/learn/morning-routine',
         builder: (context, state) => const MorningRoutineScreen(),
+      ),
+      GoRoute(
+        path: '/learn/go-to-school',
+        builder: (context, state) => const GoToSchoolScreen(),
       ),
       GoRoute(path: '/feed', builder: (context, state) => const FeedScreen()),
       GoRoute(

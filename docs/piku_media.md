@@ -90,3 +90,23 @@ Nine placeholders (no mp4 yet):
 | 12 Hair dry | action | `piku-routine-12-hairdry-after.jpg` | `piku-routine-12-hairdry-action.mp4` |
 
 A missing action still stays on screen for 2.5 seconds, then the reward card. The other 15 clips are real mp4s.
+
+## Go to School
+
+School → Go to School plays 5 steps after the morning routine: school dress, tie, school shoes, school bag, then leave for school. The screen matches Morning Routine: idle, one action button, action once, the same reward card, Next, Replay, then a finale after the last reward.
+
+Stills are 720×1280 JPEGs in `assets/images/school-routine/`. Finished clips belong in `assets/videos/school-routine/`. Flip a row in `GoToSchool.steps` from image to video when the mp4 is added.
+
+Until those clips land, every row is a still. These seven are the ones to replace:
+
+| Step | Clip | Stand-in now | Drop-in filename |
+| --- | --- | --- | --- |
+| 1 School dress | idle | `piku-school-01-dress-before.jpg` | `school-01-dress-idle.mp4` |
+| 1 School dress | action | `piku-school-01-dress-after.jpg` | `school-01-dress-action.mp4` |
+| 2 Tie | idle | `piku-school-02-tie-before.jpg` | `school-02-tie-idle.mp4` |
+| 2 Tie | action | `piku-school-02-tie-after.jpg` | `school-02-tie-action.mp4` |
+| 3 School shoes | action | `piku-school-03-shoes-after.jpg` | `school-03-shoes-action.mp4` |
+| 4 School bag | idle | `piku-school-04-bag-before.jpg` | `school-04-bag-idle.mp4` |
+| 5 Leave for school | idle | `piku-school-05-leave-before.jpg` | `school-05-leave-idle.mp4` |
+
+These three stay stills: shoes idle (`piku-school-03-shoes-before.jpg`), bag action (`piku-school-04-bag-after.jpg`, 2.5 seconds), leave action (`piku-school-05-leave-after.jpg`, 2.5 seconds).
