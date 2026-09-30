@@ -22,12 +22,42 @@ void main() {
     expect(GoToSchool.actionStillDuration, MorningRoutine.actionStillDuration);
     expect(GoToSchool.steps, hasLength(5));
 
-    for (final step in GoToSchool.steps) {
-      expect(step.idle.isVideo, isFalse, reason: step.id);
-      expect(step.action.isVideo, isFalse, reason: step.id);
-      expect(step.idle.asset, contains('-before.jpg'));
-      expect(step.action.asset, contains('-after.jpg'));
-    }
+    expect(GoToSchool.steps[0].idle.isVideo, isTrue);
+    expect(GoToSchool.steps[0].action.isVideo, isTrue);
+    expect(GoToSchool.steps[1].idle.isVideo, isTrue);
+    expect(GoToSchool.steps[1].action.isVideo, isTrue);
+    expect(GoToSchool.steps[2].idle.isVideo, isFalse);
+    expect(
+      GoToSchool.steps[2].idle.asset,
+      endsWith('piku-school-03-shoes-before.jpg'),
+    );
+    expect(
+      GoToSchool.steps[2].action.asset,
+      endsWith('school-03-shoes-action.mp4'),
+    );
+    expect(GoToSchool.steps[3].idle.asset, endsWith('school-04-bag-idle.mp4'));
+    expect(GoToSchool.steps[3].action.isVideo, isFalse);
+    expect(
+      GoToSchool.steps[3].action.asset,
+      endsWith('piku-school-04-bag-after.jpg'),
+    );
+    expect(
+      GoToSchool.steps[4].idle.asset,
+      endsWith('school-05-leave-idle.mp4'),
+    );
+    expect(GoToSchool.steps[4].action.isVideo, isFalse);
+    expect(
+      GoToSchool.steps[4].action.asset,
+      endsWith('piku-school-05-leave-after.jpg'),
+    );
+
+    final placeholders = [
+      for (final step in GoToSchool.steps) ...[
+        if (!step.idle.isVideo) step.idle.asset,
+        if (!step.action.isVideo) step.action.asset,
+      ],
+    ];
+    expect(placeholders, hasLength(3));
   });
 
   test('Next, Replay, and the finale match the morning routine', () {
