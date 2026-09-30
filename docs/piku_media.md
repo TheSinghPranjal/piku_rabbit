@@ -68,3 +68,25 @@ School → Numbers plays five voiced clips in order. Each file is 720×1280, H.2
 | 5 | `assets/videos/learn/numbers/piku-numbers-16-20.mp4` | `assets/images/learn/numbers/piku-school-number-16.png` | Plays through once, then the usual reward card |
 
 `assets/images/learn/numbers/piku-school-number-20.png` is the last frame of clip 5 and shows after that play finishes, under the reward. Back leaves the lesson without a reward, same as Alphabet. Bao's old `numbers_from_*.mp4` clips are not used on this screen.
+
+## Morning routine
+
+School → Morning Routine plays 12 steps. Each step shows an idle loop (or a still, when the clip is not ready) and one action button. The action plays once, then the same reward card as Numbers (3 stars and 1 magic bean). Next moves on. Replay returns to that step's idle. After step 12's reward, a full-screen celebration uses that same reward again. Back leaves without marking the lesson done.
+
+Videos live in `assets/videos/routine/`. Placeholder stills live in `assets/images/routine/`. To swap a still for a finished clip, add the mp4 and flip that row's kind and path in `MorningRoutine.steps`.
+
+Nine placeholders (no mp4 yet):
+
+| Step | Missing clip | Stand-in shown now | Drop-in filename |
+| --- | --- | --- | --- |
+| 2 Brushing | action | `piku-routine-02-brushing-after.jpg` | `piku-routine-02-brushing-action.mp4` |
+| 3 Flossing | action | `piku-routine-03-flossing-after.jpg` | `piku-routine-03-flossing-action.mp4` |
+| 4 Cleaning hands | idle | `piku-routine-04-hands-before.jpg` | `piku-routine-04-hands-idle.mp4` |
+| 4 Cleaning hands | action | `piku-routine-04-hands-after.jpg` | `piku-routine-04-hands-action.mp4` |
+| 8 Apply soap | action | `piku-routine-08-soap-after.jpg` | `piku-routine-08-soap-action.mp4` |
+| 9 Bathing | action | `piku-routine-09-bathing-after.jpg` | `piku-routine-09-bathing-action.mp4` |
+| 10 Drying with towel | action | `piku-routine-10-towel-after.jpg` | `piku-routine-10-towel-action.mp4` |
+| 11 Getting dressed | idle | `piku-routine-11-dressed-before.jpg` | `piku-routine-11-dressed-idle.mp4` |
+| 12 Hair dry | action | `piku-routine-12-hairdry-after.jpg` | `piku-routine-12-hairdry-action.mp4` |
+
+A missing action still stays on screen for 2.5 seconds, then the reward card. The other 15 clips are real mp4s.

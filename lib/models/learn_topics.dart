@@ -38,6 +38,13 @@ abstract final class LearnTopics {
       accent: Color(0xFFFFB74D),
       route: '/learn/numbers',
     ),
+    LearnTopicSpec(
+      id: 'morning_routine',
+      label: 'Morning Routine',
+      icon: Icons.wb_sunny_rounded,
+      accent: Color(0xFFFFD54F),
+      route: '/learn/morning-routine',
+    ),
     // LearnTopicSpec(
     //   id: 'words',
     //   label: 'Words',

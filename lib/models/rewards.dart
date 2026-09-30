@@ -447,6 +447,25 @@ abstract final class LearnNumbersRules {
   }
 }
 
+/// Morning routine rewards. Each step and the finale use the same star
+/// card as [LearnNumbersRules]: 3 stars and 1 magic bean.
+abstract final class MorningRoutineRules {
+  static const stars = 3;
+  static const magicBeans = 1;
+
+  static RewardResult rewardForStep(String message) {
+    return RewardResult(stars: stars, magicBeans: magicBeans, message: message);
+  }
+
+  static RewardResult rewardForComplete() {
+    return const RewardResult(
+      stars: stars,
+      magicBeans: magicBeans,
+      message: 'Amazing! Piku finished the morning routine!',
+    );
+  }
+}
+
 /// Brush Teeth reward math (same loop as Make Bed; reached from Chores).
 abstract final class BrushTeethRules {
   static const int maxSteps = 4;
