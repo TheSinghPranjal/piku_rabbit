@@ -174,6 +174,30 @@ flutter:
     - assets/images/learn/numbers/piku-school-number-12.png
     - assets/images/learn/numbers/piku-school-number-16.png
     - assets/images/learn/numbers/piku-school-number-20.png
+    - assets/videos/routine/piku-routine-01-waking-idle.mp4
+    - assets/videos/routine/piku-routine-01-waking-action.mp4
+    - assets/videos/routine/piku-routine-02-brushing-idle.mp4
+    - assets/videos/routine/piku-routine-03-flossing-idle.mp4
+    - assets/videos/routine/piku-routine-05-face-idle.mp4
+    - assets/videos/routine/piku-routine-05-face-action.mp4
+    - assets/videos/routine/piku-routine-06-hairwash-idle.mp4
+    - assets/videos/routine/piku-routine-06-hairwash-action.mp4
+    - assets/videos/routine/piku-routine-07-scrub-idle.mp4
+    - assets/videos/routine/piku-routine-07-scrub-action.mp4
+    - assets/videos/routine/piku-routine-08-soap-idle.mp4
+    - assets/videos/routine/piku-routine-09-bathing-idle.mp4
+    - assets/videos/routine/piku-routine-10-towel-idle.mp4
+    - assets/videos/routine/piku-routine-11-dressed-action.mp4
+    - assets/videos/routine/piku-routine-12-hairdry-idle.mp4
+    - assets/images/routine/piku-routine-02-brushing-after.jpg
+    - assets/images/routine/piku-routine-03-flossing-after.jpg
+    - assets/images/routine/piku-routine-04-hands-before.jpg
+    - assets/images/routine/piku-routine-04-hands-after.jpg
+    - assets/images/routine/piku-routine-08-soap-after.jpg
+    - assets/images/routine/piku-routine-09-bathing-after.jpg
+    - assets/images/routine/piku-routine-10-towel-after.jpg
+    - assets/images/routine/piku-routine-11-dressed-before.jpg
+    - assets/images/routine/piku-routine-12-hairdry-after.jpg
     - assets/videos/play/play_screen_video.mp4
     - assets/videos/play/football/bao_not_playing_football_video.mp4
     - assets/videos/play/football/bao_playing_football_video.mp4

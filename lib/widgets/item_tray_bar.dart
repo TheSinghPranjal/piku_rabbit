@@ -335,7 +335,7 @@ class _TrayIcon extends StatelessWidget {
             const SizedBox(height: 4),
             Text(
               item.label,
-              maxLines: 1,
+              maxLines: 2,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
               style: TTTypography.caption(color: TTColors.darkBrown).copyWith(
