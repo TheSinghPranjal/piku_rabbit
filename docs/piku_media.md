@@ -91,9 +91,9 @@ Nine placeholders (no mp4 yet):
 
 A missing action still stays on screen for 2.5 seconds, then the reward card. The other 15 clips are real mp4s.
 
-## Bed, toys, lunch, and pet
+## Bed, toys, lunch, pet, and flower
 
-These four School lessons use the same player as Morning Routine. Videos live in `assets/videos/<lesson>-routine/` and use the school-routine names (`lesson-NN-step-idle.mp4`, `lesson-NN-step-action.mp4`). The nine idle mp4s are seamless loops of about 10.3 seconds (forward, then reversed, so the first frame matches the last). The player loops an idle video until the action button, the same way Morning Routine does. An action video plays once. A still action stays up for 2.5 seconds, then the reward card. The other rows stay JPEG placeholders in `assets/images/<lesson>-routine/`.
+These five School lessons use the same player as Morning Routine. Videos live in `assets/videos/<lesson>-routine/` and use the school-routine names (`lesson-NN-step-idle.mp4`, `lesson-NN-step-action.mp4`). The idle mp4s are seamless loops of about 10.3 seconds (forward, then reversed, so the first frame matches the last). The player loops an idle video until the action button, the same way Morning Routine does. An action video plays once. A still action stays up for 2.5 seconds, then the reward card. The other rows stay JPEG placeholders in `assets/images/<lesson>-routine/`.
 
 ### Get Ready for Bed
 
@@ -144,9 +144,23 @@ Still placeholders: lunchbox and water and close pack (idle and action), plus sa
 | Step | Idle | Action |
 | --- | --- | --- |
 | 1 Bowl | `pet-01-bowl-idle.mp4` | `piku-pet-01-bowl-after.jpg` |
-| 2 Scoop | `piku-pet-02-scoop-before.jpg` | `piku-pet-02-scoop-after.jpg` |
-| 3 Place | `piku-pet-03-place-before.jpg` | `piku-pet-03-place-after.jpg` |
-| 4 Water | `piku-pet-04-water-before.jpg` | `piku-pet-04-water-after.jpg` |
+| 2 Scoop | `pet-02-scoop-idle.mp4` | `piku-pet-02-scoop-after.jpg` |
+| 3 Place | `pet-03-place-idle.mp4` | `piku-pet-03-place-after.jpg` |
+| 4 Water | `pet-04-water-idle.mp4` | `piku-pet-04-water-after.jpg` |
 | 5 Clean up | `piku-pet-05-clean-up-before.jpg` | `piku-pet-05-clean-up-after.jpg` |
 
-Still placeholders: bowl action, and scoop, place, water, and clean up (idle and action).
+Still placeholders: every action, and the clean-up idle.
+
+### Plant a Flower
+
+`/learn/plant-a-flower`.
+
+| Step | Idle | Action |
+| --- | --- | --- |
+| 1 Pot | `flower-01-pot-idle.mp4` | `piku-flower-01-pot-after.jpg` |
+| 2 Soil | `flower-02-soil-idle.mp4` | `piku-flower-02-soil-after.jpg` |
+| 3 Seed | `piku-flower-03-seed-before.jpg` | `piku-flower-03-seed-after.jpg` |
+| 4 Water | `flower-04-water-idle.mp4` | `piku-flower-04-water-after.jpg` |
+| 5 Sunlight | `flower-05-sunlight-idle.mp4` | `piku-flower-05-sunlight-after.jpg` |
+
+Still placeholders: seed idle, and every action (pot, soil, seed, water, sunlight). The pot, soil, water, and sunlight before stills are also in `assets/images/flower-routine/` for a later swap.

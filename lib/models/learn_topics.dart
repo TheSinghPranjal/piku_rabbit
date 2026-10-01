@@ -73,6 +73,13 @@ abstract final class LearnTopics {
       accent: Color(0xFFFFAB91),
       route: '/learn/feed-a-pet',
     ),
+    LearnTopicSpec(
+      id: 'plant_a_flower',
+      label: 'Plant a Flower',
+      icon: Icons.local_florist_rounded,
+      accent: Color(0xFFF48FB1),
+      route: '/learn/plant-a-flower',
+    ),
     // LearnTopicSpec(
     //   id: 'words',
     //   label: 'Words',

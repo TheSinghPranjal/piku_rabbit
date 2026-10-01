@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'morning_routine.dart';
 import 'rewards.dart';
 
-/// Shared star card for the bed, toys, lunch, and pet lessons.
+/// Shared star card for the bed, toys, lunch, pet, and flower lessons.
 abstract final class ChoreLessonRules {
   static RewardResult rewardForStep(String message) {
     return MorningRoutineRules.rewardForStep(message);
@@ -220,7 +220,8 @@ abstract final class LunchLesson {
   ];
 }
 
-/// Feed a Pet. Bowl idle is a video. The other rows stay stills.
+/// Feed a Pet. Bowl, scoop, place, and water idles are videos.
+/// Clean-up idle and every action stay stills.
 abstract final class PetLesson {
   static const videoFolder = 'assets/videos/pet-routine';
   static const imageFolder = 'assets/images/pet-routine';
@@ -248,7 +249,7 @@ abstract final class PetLesson {
       actionLabel: 'Scoop',
       icon: Icons.restaurant_rounded,
       praise: 'Nice scoop!',
-      idle: RoutineClip.image('$imageFolder/piku-pet-02-scoop-before.jpg'),
+      idle: RoutineClip.video('$videoFolder/pet-02-scoop-idle.mp4'),
       action: RoutineClip.image('$imageFolder/piku-pet-02-scoop-after.jpg'),
     ),
     RoutineStep(
@@ -257,7 +258,7 @@ abstract final class PetLesson {
       actionLabel: 'Place',
       icon: Icons.room_service_rounded,
       praise: 'Food is in the bowl!',
-      idle: RoutineClip.image('$imageFolder/piku-pet-03-place-before.jpg'),
+      idle: RoutineClip.video('$videoFolder/pet-03-place-idle.mp4'),
       action: RoutineClip.image('$imageFolder/piku-pet-03-place-after.jpg'),
     ),
     RoutineStep(
@@ -266,7 +267,7 @@ abstract final class PetLesson {
       actionLabel: 'Water',
       icon: Icons.water_drop_rounded,
       praise: 'Fresh water!',
-      idle: RoutineClip.image('$imageFolder/piku-pet-04-water-before.jpg'),
+      idle: RoutineClip.video('$videoFolder/pet-04-water-idle.mp4'),
       action: RoutineClip.image('$imageFolder/piku-pet-04-water-after.jpg'),
     ),
     RoutineStep(
@@ -277,6 +278,70 @@ abstract final class PetLesson {
       praise: 'All cleaned up!',
       idle: RoutineClip.image('$imageFolder/piku-pet-05-clean-up-before.jpg'),
       action: RoutineClip.image('$imageFolder/piku-pet-05-clean-up-after.jpg'),
+    ),
+  ];
+}
+
+/// Plant a Flower. Pot, soil, water, and sunlight idles are videos.
+/// Seed idle and every action stay stills.
+abstract final class FlowerLesson {
+  static const videoFolder = 'assets/videos/flower-routine';
+  static const imageFolder = 'assets/images/flower-routine';
+  static const actionStillDuration = MorningRoutine.actionStillDuration;
+
+  static RewardResult rewardForStep(String message) =>
+      ChoreLessonRules.rewardForStep(message);
+
+  static RewardResult rewardForComplete() =>
+      ChoreLessonRules.rewardForComplete('Amazing! Piku planted a flower!');
+
+  static const steps = <RoutineStep>[
+    RoutineStep(
+      id: 'pot',
+      title: 'Pot',
+      actionLabel: 'Pot',
+      icon: Icons.yard_rounded,
+      praise: 'Pot is ready!',
+      idle: RoutineClip.video('$videoFolder/flower-01-pot-idle.mp4'),
+      action: RoutineClip.image('$imageFolder/piku-flower-01-pot-after.jpg'),
+    ),
+    RoutineStep(
+      id: 'soil',
+      title: 'Soil',
+      actionLabel: 'Soil',
+      icon: Icons.grass_rounded,
+      praise: 'Soil is in the pot!',
+      idle: RoutineClip.video('$videoFolder/flower-02-soil-idle.mp4'),
+      action: RoutineClip.image('$imageFolder/piku-flower-02-soil-after.jpg'),
+    ),
+    RoutineStep(
+      id: 'seed',
+      title: 'Seed',
+      actionLabel: 'Seed',
+      icon: Icons.spa_rounded,
+      praise: 'Seed is planted!',
+      idle: RoutineClip.image('$imageFolder/piku-flower-03-seed-before.jpg'),
+      action: RoutineClip.image('$imageFolder/piku-flower-03-seed-after.jpg'),
+    ),
+    RoutineStep(
+      id: 'water',
+      title: 'Water',
+      actionLabel: 'Water',
+      icon: Icons.water_drop_rounded,
+      praise: 'A little drink!',
+      idle: RoutineClip.video('$videoFolder/flower-04-water-idle.mp4'),
+      action: RoutineClip.image('$imageFolder/piku-flower-04-water-after.jpg'),
+    ),
+    RoutineStep(
+      id: 'sunlight',
+      title: 'Sunlight',
+      actionLabel: 'Sunlight',
+      icon: Icons.wb_sunny_rounded,
+      praise: 'Hello, sunshine!',
+      idle: RoutineClip.video('$videoFolder/flower-05-sunlight-idle.mp4'),
+      action: RoutineClip.image(
+        '$imageFolder/piku-flower-05-sunlight-after.jpg',
+      ),
     ),
   ];
 }

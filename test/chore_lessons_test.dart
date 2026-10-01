@@ -154,9 +154,67 @@ void main() {
           if (step.idle.isVideo || step.action.isVideo)
             (step.id, step.idle.isVideo, step.action.isVideo, path(step.idle)),
       ],
-      [('bowl', true, false, 'assets/videos/pet-routine/pet-01-bowl-idle.mp4')],
+      [
+        ('bowl', true, false, 'assets/videos/pet-routine/pet-01-bowl-idle.mp4'),
+        (
+          'scoop',
+          true,
+          false,
+          'assets/videos/pet-routine/pet-02-scoop-idle.mp4',
+        ),
+        (
+          'place',
+          true,
+          false,
+          'assets/videos/pet-routine/pet-03-place-idle.mp4',
+        ),
+        (
+          'water',
+          true,
+          false,
+          'assets/videos/pet-routine/pet-04-water-idle.mp4',
+        ),
+      ],
     );
-    for (final step in [...LunchLesson.steps, ...PetLesson.steps]) {
+    expect(
+      [
+        for (final step in FlowerLesson.steps)
+          if (step.idle.isVideo || step.action.isVideo)
+            (step.id, step.idle.isVideo, step.action.isVideo, path(step.idle)),
+      ],
+      [
+        (
+          'pot',
+          true,
+          false,
+          'assets/videos/flower-routine/flower-01-pot-idle.mp4',
+        ),
+        (
+          'soil',
+          true,
+          false,
+          'assets/videos/flower-routine/flower-02-soil-idle.mp4',
+        ),
+        (
+          'water',
+          true,
+          false,
+          'assets/videos/flower-routine/flower-04-water-idle.mp4',
+        ),
+        (
+          'sunlight',
+          true,
+          false,
+          'assets/videos/flower-routine/flower-05-sunlight-idle.mp4',
+        ),
+      ],
+    );
+    expect(FlowerLesson.steps[2].idle.isVideo, isFalse);
+    for (final step in [
+      ...LunchLesson.steps,
+      ...PetLesson.steps,
+      ...FlowerLesson.steps,
+    ]) {
       expect(step.action.isVideo, isFalse, reason: step.id);
     }
 
@@ -237,6 +295,27 @@ void main() {
     expect(PetLesson.rewardForComplete().message, 'Amazing! Piku fed the pet!');
   });
 
+  test('Plant a Flower walks pot through sunlight', () {
+    expectLesson(
+      steps: FlowerLesson.steps,
+      ids: ['pot', 'soil', 'seed', 'water', 'sunlight'],
+      firstLabel: 'Pot',
+      lastId: 'sunlight',
+      lastLabel: 'Sunlight',
+      finale: FlowerLesson.rewardForComplete().message,
+      topicId: 'plant_a_flower',
+      route: '/learn/plant-a-flower',
+    );
+    expect(
+      FlowerLesson.rewardForComplete().message,
+      'Amazing! Piku planted a flower!',
+    );
+    expect(
+      FlowerLesson.actionStillDuration,
+      MorningRoutine.actionStillDuration,
+    );
+  });
+
   testWidgets('each lesson opens on its first action', (tester) async {
     SharedPreferences.setMockInitialValues({});
     final cases = <(Widget, String, String)>[
@@ -244,6 +323,7 @@ void main() {
       (const CleanUpToysScreen(), 'Clean Up Toys!', 'Pick up'),
       (const PackLunchScreen(), 'Pack Lunch!', 'Lunchbox'),
       (const FeedAPetScreen(), 'Feed a Pet!', 'Bowl'),
+      (const PlantAFlowerScreen(), 'Plant a Flower!', 'Pot'),
     ];
     for (final entry in cases) {
       await tester.pumpWidget(MaterialApp(home: entry.$1));
@@ -255,7 +335,7 @@ void main() {
     }
   });
 
-  testWidgets('School tray lists the four chore lessons', (tester) async {
+  testWidgets('School tray lists the chore lessons', (tester) async {
     SharedPreferences.setMockInitialValues({});
     await tester.pumpWidget(const MaterialApp(home: LearnScreen()));
     await tester.pump();
@@ -271,6 +351,7 @@ void main() {
 
     expect(find.text('Pack Lunch'), findsOneWidget);
     expect(find.text('Feed a Pet'), findsOneWidget);
+    expect(find.text('Plant a Flower'), findsOneWidget);
 
     await tester.pumpWidget(const SizedBox.shrink());
     await tester.pump();

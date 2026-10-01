@@ -51,6 +51,22 @@ class PackLunchScreen extends StatelessWidget {
   }
 }
 
+/// Plant a Flower — same player as Morning Routine.
+class PlantAFlowerScreen extends StatelessWidget {
+  const PlantAFlowerScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return RoutineLessonScreen(
+      title: 'Plant a Flower!',
+      steps: FlowerLesson.steps,
+      stillDuration: FlowerLesson.actionStillDuration,
+      rewardForStep: FlowerLesson.rewardForStep,
+      rewardForComplete: FlowerLesson.rewardForComplete,
+    );
+  }
+}
+
 /// Feed a Pet — same player as Morning Routine.
 class FeedAPetScreen extends StatelessWidget {
   const FeedAPetScreen({super.key});
