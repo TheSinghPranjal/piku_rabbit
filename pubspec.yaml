@@ -208,6 +208,60 @@ flutter:
     - assets/images/school-routine/piku-school-03-shoes-before.jpg
     - assets/images/school-routine/piku-school-04-bag-after.jpg
     - assets/images/school-routine/piku-school-05-leave-after.jpg
+    - assets/images/bed-routine/piku-bed-01-pajamas-before.jpg
+    - assets/images/bed-routine/piku-bed-01-pajamas-after.jpg
+    - assets/images/bed-routine/piku-bed-02-brush-teeth-before.jpg
+    - assets/images/bed-routine/piku-bed-02-brush-teeth-after.jpg
+    - assets/images/bed-routine/piku-bed-03-wash-face-before.jpg
+    - assets/images/bed-routine/piku-bed-03-wash-face-after.jpg
+    - assets/videos/bed-routine/bed-04-get-in-bed-idle.mp4
+    - assets/videos/bed-routine/bed-04-get-in-bed-action.mp4
+    - assets/images/bed-routine/piku-bed-05-lights-off-before.jpg
+    - assets/images/bed-routine/piku-bed-05-lights-off-after.jpg
+    - assets/videos/toys-routine/toys-01-pick-up-idle.mp4
+    - assets/images/toys-routine/piku-toys-01-pick-up-after.jpg
+    - assets/videos/toys-routine/toys-02-sort-idle.mp4
+    - assets/images/toys-routine/piku-toys-02-sort-after.jpg
+    - assets/videos/toys-routine/toys-03-put-in-boxes-idle.mp4
+    - assets/images/toys-routine/piku-toys-03-put-in-boxes-after.jpg
+    - assets/videos/toys-routine/toys-04-shelf-idle.mp4
+    - assets/images/toys-routine/piku-toys-04-shelf-after.jpg
+    - assets/videos/toys-routine/toys-05-tidy-room-idle.mp4
+    - assets/images/toys-routine/piku-toys-05-tidy-room-after.jpg
+    - assets/images/lunch-routine/piku-lunch-01-lunchbox-before.jpg
+    - assets/images/lunch-routine/piku-lunch-01-lunchbox-after.jpg
+    - assets/videos/lunch-routine/lunch-02-sandwich-idle.mp4
+    - assets/images/lunch-routine/piku-lunch-02-sandwich-after.jpg
+    - assets/videos/lunch-routine/lunch-03-fruit-idle.mp4
+    - assets/images/lunch-routine/piku-lunch-03-fruit-after.jpg
+    - assets/images/lunch-routine/piku-lunch-04-water-before.jpg
+    - assets/images/lunch-routine/piku-lunch-04-water-after.jpg
+    - assets/images/lunch-routine/piku-lunch-05-close-pack-before.jpg
+    - assets/images/lunch-routine/piku-lunch-05-close-pack-after.jpg
+    - assets/videos/pet-routine/pet-01-bowl-idle.mp4
+    - assets/images/pet-routine/piku-pet-01-bowl-after.jpg
+    - assets/videos/pet-routine/pet-02-scoop-idle.mp4
+    - assets/images/pet-routine/piku-pet-02-scoop-after.jpg
+    - assets/videos/pet-routine/pet-03-place-idle.mp4
+    - assets/images/pet-routine/piku-pet-03-place-after.jpg
+    - assets/videos/pet-routine/pet-04-water-idle.mp4
+    - assets/images/pet-routine/piku-pet-04-water-after.jpg
+    - assets/images/pet-routine/piku-pet-05-clean-up-before.jpg
+    - assets/images/pet-routine/piku-pet-05-clean-up-after.jpg
+    - assets/videos/flower-routine/flower-01-pot-idle.mp4
+    - assets/images/flower-routine/piku-flower-01-pot-before.jpg
+    - assets/images/flower-routine/piku-flower-01-pot-after.jpg
+    - assets/videos/flower-routine/flower-02-soil-idle.mp4
+    - assets/images/flower-routine/piku-flower-02-soil-before.jpg
+    - assets/images/flower-routine/piku-flower-02-soil-after.jpg
+    - assets/images/flower-routine/piku-flower-03-seed-before.jpg
+    - assets/images/flower-routine/piku-flower-03-seed-after.jpg
+    - assets/videos/flower-routine/flower-04-water-idle.mp4
+    - assets/images/flower-routine/piku-flower-04-water-before.jpg
+    - assets/images/flower-routine/piku-flower-04-water-after.jpg
+    - assets/videos/flower-routine/flower-05-sunlight-idle.mp4
+    - assets/images/flower-routine/piku-flower-05-sunlight-before.jpg
+    - assets/images/flower-routine/piku-flower-05-sunlight-after.jpg
     - assets/videos/play/play_screen_video.mp4
     - assets/videos/play/football/bao_not_playing_football_video.mp4
     - assets/videos/play/football/bao_playing_football_video.mp4

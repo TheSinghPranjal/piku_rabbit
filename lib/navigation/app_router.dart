@@ -15,6 +15,7 @@ import '../screens/drink/drink_water_screen.dart';
 import '../screens/feed/eat_food_screen.dart';
 import '../screens/feed/feed_screen.dart';
 import '../screens/learn/alphabet_screen.dart';
+import '../screens/learn/chore_lesson_screens.dart';
 import '../screens/learn/go_to_school_screen.dart';
 import '../screens/learn/learn_screen.dart';
 import '../screens/learn/morning_routine_screen.dart';
@@ -63,6 +64,26 @@ GoRouter createAppRouter({bool skipSplash = false}) {
       GoRoute(
         path: '/learn/go-to-school',
         builder: (context, state) => const GoToSchoolScreen(),
+      ),
+      GoRoute(
+        path: '/learn/get-ready-for-bed',
+        builder: (context, state) => const GetReadyForBedScreen(),
+      ),
+      GoRoute(
+        path: '/learn/clean-up-toys',
+        builder: (context, state) => const CleanUpToysScreen(),
+      ),
+      GoRoute(
+        path: '/learn/pack-lunch',
+        builder: (context, state) => const PackLunchScreen(),
+      ),
+      GoRoute(
+        path: '/learn/feed-a-pet',
+        builder: (context, state) => const FeedAPetScreen(),
+      ),
+      GoRoute(
+        path: '/learn/plant-a-flower',
+        builder: (context, state) => const PlantAFlowerScreen(),
       ),
       GoRoute(path: '/feed', builder: (context, state) => const FeedScreen()),
       GoRoute(
