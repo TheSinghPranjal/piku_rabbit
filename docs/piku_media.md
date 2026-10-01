@@ -93,7 +93,7 @@ A missing action still stays on screen for 2.5 seconds, then the reward card. Th
 
 ## Bed, toys, lunch, and pet
 
-These four School lessons use the same player as Morning Routine. Videos live in `assets/videos/<lesson>-routine/` and use the school-routine names (`lesson-NN-step-idle.mp4`, `lesson-NN-step-action.mp4`). A still action stays up for 2.5 seconds, then the reward card. The other rows stay JPEG placeholders in `assets/images/<lesson>-routine/`.
+These four School lessons use the same player as Morning Routine. Videos live in `assets/videos/<lesson>-routine/` and use the school-routine names (`lesson-NN-step-idle.mp4`, `lesson-NN-step-action.mp4`). The nine idle mp4s are seamless loops of about 10.3 seconds (forward, then reversed, so the first frame matches the last). The player loops an idle video until the action button, the same way Morning Routine does. An action video plays once. A still action stays up for 2.5 seconds, then the reward card. The other rows stay JPEG placeholders in `assets/images/<lesson>-routine/`.
 
 ### Get Ready for Bed
 

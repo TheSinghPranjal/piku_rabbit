@@ -159,6 +159,12 @@ void main() {
     for (final step in [...LunchLesson.steps, ...PetLesson.steps]) {
       expect(step.action.isVideo, isFalse, reason: step.id);
     }
+
+    final player = File(
+      'lib/screens/learn/morning_routine_screen.dart',
+    ).readAsStringSync();
+    expect(player, contains('final loop = phase == RoutinePhase.idle;'));
+    expect(player, contains('await next.setLooping(loop);'));
   });
 
   test('Get Ready for Bed walks pajamas through lights off', () {
