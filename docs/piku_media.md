@@ -163,4 +163,4 @@ Still placeholders: every action, and the clean-up idle.
 | 4 Water | `flower-04-water-idle.mp4` | `piku-flower-04-water-after.jpg` |
 | 5 Sunlight | `flower-05-sunlight-idle.mp4` | `piku-flower-05-sunlight-after.jpg` |
 
-Still placeholders: seed idle, and every action (pot, soil, seed, water, sunlight). The pot, soil, water, and sunlight before stills are also in `assets/images/flower-routine/` for a later swap.
+Still placeholders: seed idle, and every action (pot, soil, seed, water, sunlight). The pot, soil, water, and sunlight before JPEGs are the original stills, kept beside the idle videos.
