@@ -179,14 +179,19 @@ abstract final class MorningRoutine {
 
 /// Next, replay, and finale decisions, independent of the player.
 class RoutineLessonProgress {
-  const RoutineLessonProgress({this.index = 0, this.phase = RoutinePhase.idle});
+  const RoutineLessonProgress({
+    this.index = 0,
+    this.phase = RoutinePhase.idle,
+    this.steps = MorningRoutine.steps,
+  });
 
   final int index;
   final RoutinePhase phase;
+  final List<RoutineStep> steps;
 
-  RoutineStep get step => MorningRoutine.steps[index];
+  RoutineStep get step => steps[index];
 
-  bool get isLast => index >= MorningRoutine.steps.length - 1;
+  bool get isLast => index >= steps.length - 1;
 
   bool get showsActionButton => phase == RoutinePhase.idle;
 
@@ -197,24 +202,36 @@ class RoutineLessonProgress {
 
   RoutineLessonProgress startAction() {
     if (phase != RoutinePhase.idle) return this;
-    return RoutineLessonProgress(index: index, phase: RoutinePhase.acting);
+    return RoutineLessonProgress(
+      index: index,
+      phase: RoutinePhase.acting,
+      steps: steps,
+    );
   }
 
   RoutineLessonProgress finishAction() {
     if (phase != RoutinePhase.acting) return this;
-    return RoutineLessonProgress(index: index, phase: RoutinePhase.rewarded);
+    return RoutineLessonProgress(
+      index: index,
+      phase: RoutinePhase.rewarded,
+      steps: steps,
+    );
   }
 
   /// After the step reward card closes. The last step opens the finale.
   RoutineLessonProgress acknowledgeReward() {
     if (phase != RoutinePhase.rewarded) return this;
     if (!isLast) return this;
-    return RoutineLessonProgress(index: index, phase: RoutinePhase.finale);
+    return RoutineLessonProgress(
+      index: index,
+      phase: RoutinePhase.finale,
+      steps: steps,
+    );
   }
 
   RoutineLessonProgress next() {
     if (!showsNextAndReplay) return this;
-    return RoutineLessonProgress(index: index + 1);
+    return RoutineLessonProgress(index: index + 1, steps: steps);
   }
 
   /// Replay from the reward buttons or from the finale, any number of times.
@@ -222,6 +239,6 @@ class RoutineLessonProgress {
     if (phase != RoutinePhase.rewarded && phase != RoutinePhase.finale) {
       return this;
     }
-    return RoutineLessonProgress(index: index);
+    return RoutineLessonProgress(index: index, steps: steps);
   }
 }

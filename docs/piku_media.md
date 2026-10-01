@@ -90,3 +90,57 @@ Nine placeholders (no mp4 yet):
 | 12 Hair dry | action | `piku-routine-12-hairdry-after.jpg` | `piku-routine-12-hairdry-action.mp4` |
 
 A missing action still stays on screen for 2.5 seconds, then the reward card. The other 15 clips are real mp4s.
+
+## Bed, toys, lunch, and pet
+
+These four School lessons use the same player as Morning Routine. Stills are 720×1280 JPEGs. A missing action stays up for 2.5 seconds, then the reward card. Flip one row in the lesson's `steps` list from `RoutineClip.image` to `RoutineClip.video` when an mp4 is added under `assets/videos/<lesson>-routine/`.
+
+`videos.tar` was not in the upload set, so every row below is a still for now. The clips that should become videos are marked in the last column.
+
+### Get Ready for Bed
+
+`/learn/get-ready-for-bed`. Stills in `assets/images/bed-routine/`.
+
+| Step | Idle now | Action now | Becomes a video |
+| --- | --- | --- | --- |
+| 1 Pajamas | `piku-bed-01-pajamas-before.jpg` | `piku-bed-01-pajamas-after.jpg` | |
+| 2 Brush teeth | `piku-bed-02-brush-teeth-before.jpg` | `piku-bed-02-brush-teeth-after.jpg` | |
+| 3 Wash face | `piku-bed-03-wash-face-before.jpg` | `piku-bed-03-wash-face-after.jpg` | |
+| 4 Get in bed | `piku-bed-04-get-in-bed-before.jpg` | `piku-bed-04-get-in-bed-after.jpg` | idle `piku-bed-04-get-in-bed-idle.mp4` and action `piku-bed-04-get-in-bed-action.mp4` |
+| 5 Lights off | `piku-bed-05-lights-off-before.jpg` | `piku-bed-05-lights-off-after.jpg` | |
+
+### Clean Up Toys
+
+`/learn/clean-up-toys`. Stills in `assets/images/toys-routine/`.
+
+| Step | Idle now | Action now | Becomes a video |
+| --- | --- | --- | --- |
+| 1 Pick up | `piku-toys-01-pick-up-before.jpg` | `piku-toys-01-pick-up-after.jpg` | idle `piku-toys-01-pick-up-idle.mp4` |
+| 2 Sort | `piku-toys-02-sort-before.jpg` | `piku-toys-02-sort-after.jpg` | idle `piku-toys-02-sort-idle.mp4` |
+| 3 Put in boxes | `piku-toys-03-put-in-boxes-before.jpg` | `piku-toys-03-put-in-boxes-after.jpg` | idle `piku-toys-03-put-in-boxes-idle.mp4` |
+| 4 Shelf | `piku-toys-04-shelf-before.jpg` | `piku-toys-04-shelf-after.jpg` | idle `piku-toys-04-shelf-idle.mp4` |
+| 5 Tidy room | `piku-toys-05-tidy-room-before.jpg` | `piku-toys-05-tidy-room-after.jpg` | idle `piku-toys-05-tidy-room-idle.mp4` |
+
+### Pack Lunch
+
+`/learn/pack-lunch`. Stills in `assets/images/lunch-routine/`.
+
+| Step | Idle now | Action now | Becomes a video |
+| --- | --- | --- | --- |
+| 1 Lunchbox | `piku-lunch-01-lunchbox-before.jpg` | `piku-lunch-01-lunchbox-after.jpg` | |
+| 2 Sandwich | `piku-lunch-02-sandwich-before.jpg` | `piku-lunch-02-sandwich-after.jpg` | idle `piku-lunch-02-sandwich-idle.mp4` |
+| 3 Fruit | `piku-lunch-03-fruit-before.jpg` | `piku-lunch-03-fruit-after.jpg` | idle `piku-lunch-03-fruit-idle.mp4` |
+| 4 Water | `piku-lunch-04-water-before.jpg` | `piku-lunch-04-water-after.jpg` | |
+| 5 Close pack | `piku-lunch-05-close-pack-before.jpg` | `piku-lunch-05-close-pack-after.jpg` | |
+
+### Feed a Pet
+
+`/learn/feed-a-pet`. Stills in `assets/images/pet-routine/`.
+
+| Step | Idle now | Action now | Becomes a video |
+| --- | --- | --- | --- |
+| 1 Bowl | `piku-pet-01-bowl-before.jpg` | `piku-pet-01-bowl-after.jpg` | idle `piku-pet-01-bowl-idle.mp4` |
+| 2 Scoop | `piku-pet-02-scoop-before.jpg` | `piku-pet-02-scoop-after.jpg` | |
+| 3 Place | `piku-pet-03-place-before.jpg` | `piku-pet-03-place-after.jpg` | |
+| 4 Water | `piku-pet-04-water-before.jpg` | `piku-pet-04-water-after.jpg` | |
+| 5 Clean up | `piku-pet-05-clean-up-before.jpg` | `piku-pet-05-clean-up-after.jpg` | |
