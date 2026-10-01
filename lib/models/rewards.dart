@@ -466,6 +466,24 @@ abstract final class MorningRoutineRules {
   }
 }
 
+/// Go to School rewards. Same star card as the numbers lesson and morning routine.
+abstract final class GoToSchoolRules {
+  static const stars = MorningRoutineRules.stars;
+  static const magicBeans = MorningRoutineRules.magicBeans;
+
+  static RewardResult rewardForStep(String message) {
+    return RewardResult(stars: stars, magicBeans: magicBeans, message: message);
+  }
+
+  static RewardResult rewardForComplete() {
+    return const RewardResult(
+      stars: MorningRoutineRules.stars,
+      magicBeans: MorningRoutineRules.magicBeans,
+      message: 'Amazing! Piku is ready for school!',
+    );
+  }
+}
+
 /// Brush Teeth reward math (same loop as Make Bed; reached from Chores).
 abstract final class BrushTeethRules {
   static const int maxSteps = 4;

@@ -46,6 +46,13 @@ abstract final class LearnTopics {
       route: '/learn/morning-routine',
     ),
     LearnTopicSpec(
+      id: 'go_to_school',
+      label: 'Go to School',
+      icon: Icons.school_rounded,
+      accent: Color(0xFF81C784),
+      route: '/learn/go-to-school',
+    ),
+    LearnTopicSpec(
       id: 'get_ready_for_bed',
       label: 'Get Ready for Bed',
       icon: Icons.bedtime_rounded,

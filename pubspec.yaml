@@ -198,6 +198,16 @@ flutter:
     - assets/images/routine/piku-routine-10-towel-after.jpg
     - assets/images/routine/piku-routine-11-dressed-before.jpg
     - assets/images/routine/piku-routine-12-hairdry-after.jpg
+    - assets/videos/school-routine/school-01-dress-idle.mp4
+    - assets/videos/school-routine/school-01-dress-action.mp4
+    - assets/videos/school-routine/school-02-tie-idle.mp4
+    - assets/videos/school-routine/school-02-tie-action.mp4
+    - assets/videos/school-routine/school-03-shoes-action.mp4
+    - assets/videos/school-routine/school-04-bag-idle.mp4
+    - assets/videos/school-routine/school-05-leave-idle.mp4
+    - assets/images/school-routine/piku-school-03-shoes-before.jpg
+    - assets/images/school-routine/piku-school-04-bag-after.jpg
+    - assets/images/school-routine/piku-school-05-leave-after.jpg
     - assets/images/bed-routine/piku-bed-01-pajamas-before.jpg
     - assets/images/bed-routine/piku-bed-01-pajamas-after.jpg
     - assets/images/bed-routine/piku-bed-02-brush-teeth-before.jpg

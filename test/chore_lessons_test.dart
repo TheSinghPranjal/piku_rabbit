@@ -341,14 +341,15 @@ void main() {
     await tester.pump();
 
     expect(find.text('Morning Routine'), findsOneWidget);
+    expect(find.text('Go to School'), findsOneWidget);
     expect(find.text('Get Ready for Bed'), findsOneWidget);
-    expect(find.text('Clean Up Toys'), findsOneWidget);
 
     await tester.tap(find.byIcon(Icons.chevron_right_rounded));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 200));
     await tester.pump(const Duration(milliseconds: 400));
 
+    expect(find.text('Clean Up Toys'), findsOneWidget);
     expect(find.text('Pack Lunch'), findsOneWidget);
     expect(find.text('Feed a Pet'), findsOneWidget);
     expect(find.text('Plant a Flower'), findsOneWidget);

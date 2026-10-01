@@ -30,7 +30,7 @@ class MorningRoutineScreen extends StatelessWidget {
   }
 }
 
-/// Shared idle → action → reward → Next/Replay player.
+/// Shared idle → action → reward → Next/Replay player for routine lessons.
 class RoutineLessonScreen extends StatefulWidget {
   const RoutineLessonScreen({
     super.key,

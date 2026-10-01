@@ -91,6 +91,22 @@ Nine placeholders (no mp4 yet):
 
 A missing action still stays on screen for 2.5 seconds, then the reward card. The other 15 clips are real mp4s.
 
+## Go to School
+
+School → Go to School plays 5 steps after the morning routine: school dress, tie, school shoes, school bag, then leave for school. The screen matches Morning Routine: idle, one action button, action once, the same reward card, Next, Replay, then a finale after the last reward.
+
+Clips live in `assets/videos/school-routine/`. Placeholder stills live in `assets/images/school-routine/`. Flip a row in `GoToSchool.steps` from image to video when a missing mp4 is added.
+
+| Step | Idle | Action |
+| --- | --- | --- |
+| 1 School dress | `school-01-dress-idle.mp4` | `school-01-dress-action.mp4` |
+| 2 Tie | `school-02-tie-idle.mp4` | `school-02-tie-action.mp4` |
+| 3 School shoes | `piku-school-03-shoes-before.jpg` | `school-03-shoes-action.mp4` |
+| 4 School bag | `school-04-bag-idle.mp4` | `piku-school-04-bag-after.jpg` for 2.5 seconds |
+| 5 Leave for school | `school-05-leave-idle.mp4` | `piku-school-05-leave-after.jpg` for 2.5 seconds |
+
+Three placeholders remain: shoes idle, bag action, and leave action.
+
 ## Bed, toys, lunch, pet, and flower
 
 These five School lessons use the same player as Morning Routine. Videos live in `assets/videos/<lesson>-routine/` and use the school-routine names (`lesson-NN-step-idle.mp4`, `lesson-NN-step-action.mp4`). The idle mp4s are seamless loops of about 10.3 seconds (forward, then reversed, so the first frame matches the last). The player loops an idle video until the action button, the same way Morning Routine does. An action video plays once. A still action stays up for 2.5 seconds, then the reward card. The other rows stay JPEG placeholders in `assets/images/<lesson>-routine/`.
