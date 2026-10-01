@@ -18,12 +18,8 @@ abstract final class ChoreLessonRules {
   }
 }
 
-/// Get Ready for Bed.
-///
-/// `videos.tar` was not in uploads, so every row is a still. Flip these two
-/// to [RoutineClip.video] when the clips arrive:
-/// `assets/videos/bed-routine/piku-bed-04-get-in-bed-idle.mp4`
-/// `assets/videos/bed-routine/piku-bed-04-get-in-bed-action.mp4`
+/// Get Ready for Bed. Get-in-bed idle and action are videos. The other rows
+/// stay stills.
 abstract final class BedLesson {
   static const videoFolder = 'assets/videos/bed-routine';
   static const imageFolder = 'assets/images/bed-routine';
@@ -73,10 +69,8 @@ abstract final class BedLesson {
       actionLabel: 'Get in bed',
       icon: Icons.bed_rounded,
       praise: 'Tucked in and cozy!',
-      idle: RoutineClip.image('$imageFolder/piku-bed-04-get-in-bed-before.jpg'),
-      action: RoutineClip.image(
-        '$imageFolder/piku-bed-04-get-in-bed-after.jpg',
-      ),
+      idle: RoutineClip.video('$videoFolder/bed-04-get-in-bed-idle.mp4'),
+      action: RoutineClip.video('$videoFolder/bed-04-get-in-bed-action.mp4'),
     ),
     RoutineStep(
       id: 'lights-off',
@@ -92,14 +86,7 @@ abstract final class BedLesson {
   ];
 }
 
-/// Clean Up Toys. Idles 1–5 are meant to be videos; no action clips exist yet.
-///
-/// Drop-in idle files, then flip that row to [RoutineClip.video]:
-/// `assets/videos/toys-routine/piku-toys-01-pick-up-idle.mp4`
-/// `assets/videos/toys-routine/piku-toys-02-sort-idle.mp4`
-/// `assets/videos/toys-routine/piku-toys-03-put-in-boxes-idle.mp4`
-/// `assets/videos/toys-routine/piku-toys-04-shelf-idle.mp4`
-/// `assets/videos/toys-routine/piku-toys-05-tidy-room-idle.mp4`
+/// Clean Up Toys. Each idle is a video. Every action stays a still.
 abstract final class ToysLesson {
   static const videoFolder = 'assets/videos/toys-routine';
   static const imageFolder = 'assets/images/toys-routine';
@@ -118,7 +105,7 @@ abstract final class ToysLesson {
       actionLabel: 'Pick up',
       icon: Icons.back_hand_rounded,
       praise: 'Toys picked up!',
-      idle: RoutineClip.image('$imageFolder/piku-toys-01-pick-up-before.jpg'),
+      idle: RoutineClip.video('$videoFolder/toys-01-pick-up-idle.mp4'),
       action: RoutineClip.image('$imageFolder/piku-toys-01-pick-up-after.jpg'),
     ),
     RoutineStep(
@@ -127,7 +114,7 @@ abstract final class ToysLesson {
       actionLabel: 'Sort',
       icon: Icons.category_rounded,
       praise: 'All sorted!',
-      idle: RoutineClip.image('$imageFolder/piku-toys-02-sort-before.jpg'),
+      idle: RoutineClip.video('$videoFolder/toys-02-sort-idle.mp4'),
       action: RoutineClip.image('$imageFolder/piku-toys-02-sort-after.jpg'),
     ),
     RoutineStep(
@@ -136,9 +123,7 @@ abstract final class ToysLesson {
       actionLabel: 'Boxes',
       icon: Icons.inventory_2_rounded,
       praise: 'In the boxes!',
-      idle: RoutineClip.image(
-        '$imageFolder/piku-toys-03-put-in-boxes-before.jpg',
-      ),
+      idle: RoutineClip.video('$videoFolder/toys-03-put-in-boxes-idle.mp4'),
       action: RoutineClip.image(
         '$imageFolder/piku-toys-03-put-in-boxes-after.jpg',
       ),
@@ -149,7 +134,7 @@ abstract final class ToysLesson {
       actionLabel: 'Shelf',
       icon: Icons.view_column_rounded,
       praise: 'Up on the shelf!',
-      idle: RoutineClip.image('$imageFolder/piku-toys-04-shelf-before.jpg'),
+      idle: RoutineClip.video('$videoFolder/toys-04-shelf-idle.mp4'),
       action: RoutineClip.image('$imageFolder/piku-toys-04-shelf-after.jpg'),
     ),
     RoutineStep(
@@ -158,7 +143,7 @@ abstract final class ToysLesson {
       actionLabel: 'Tidy up',
       icon: Icons.cleaning_services_rounded,
       praise: 'What a tidy room!',
-      idle: RoutineClip.image('$imageFolder/piku-toys-05-tidy-room-before.jpg'),
+      idle: RoutineClip.video('$videoFolder/toys-05-tidy-room-idle.mp4'),
       action: RoutineClip.image(
         '$imageFolder/piku-toys-05-tidy-room-after.jpg',
       ),
@@ -166,10 +151,7 @@ abstract final class ToysLesson {
   ];
 }
 
-/// Pack Lunch. Sandwich idle and fruit idle are meant to be videos.
-///
-/// `assets/videos/lunch-routine/piku-lunch-02-sandwich-idle.mp4`
-/// `assets/videos/lunch-routine/piku-lunch-03-fruit-idle.mp4`
+/// Pack Lunch. Sandwich idle and fruit idle are videos. Other rows stay stills.
 abstract final class LunchLesson {
   static const videoFolder = 'assets/videos/lunch-routine';
   static const imageFolder = 'assets/images/lunch-routine';
@@ -199,7 +181,7 @@ abstract final class LunchLesson {
       actionLabel: 'Sandwich',
       icon: Icons.bakery_dining_rounded,
       praise: 'Yummy sandwich!',
-      idle: RoutineClip.image('$imageFolder/piku-lunch-02-sandwich-before.jpg'),
+      idle: RoutineClip.video('$videoFolder/lunch-02-sandwich-idle.mp4'),
       action: RoutineClip.image(
         '$imageFolder/piku-lunch-02-sandwich-after.jpg',
       ),
@@ -210,7 +192,7 @@ abstract final class LunchLesson {
       actionLabel: 'Fruit',
       icon: Icons.eco_rounded,
       praise: 'Fruit packed!',
-      idle: RoutineClip.image('$imageFolder/piku-lunch-03-fruit-before.jpg'),
+      idle: RoutineClip.video('$videoFolder/lunch-03-fruit-idle.mp4'),
       action: RoutineClip.image('$imageFolder/piku-lunch-03-fruit-after.jpg'),
     ),
     RoutineStep(
@@ -238,9 +220,7 @@ abstract final class LunchLesson {
   ];
 }
 
-/// Feed a Pet. Bowl idle is meant to be a video.
-///
-/// `assets/videos/pet-routine/piku-pet-01-bowl-idle.mp4`
+/// Feed a Pet. Bowl idle is a video. The other rows stay stills.
 abstract final class PetLesson {
   static const videoFolder = 'assets/videos/pet-routine';
   static const imageFolder = 'assets/images/pet-routine';
@@ -259,7 +239,7 @@ abstract final class PetLesson {
       actionLabel: 'Bowl',
       icon: Icons.flatware_rounded,
       praise: 'Bowl is ready!',
-      idle: RoutineClip.image('$imageFolder/piku-pet-01-bowl-before.jpg'),
+      idle: RoutineClip.video('$videoFolder/pet-01-bowl-idle.mp4'),
       action: RoutineClip.image('$imageFolder/piku-pet-01-bowl-after.jpg'),
     ),
     RoutineStep(

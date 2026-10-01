@@ -25,22 +25,20 @@ void main() {
     expect(steps, hasLength(5));
     final pubspec = File('pubspec.yaml').readAsStringSync();
     for (final step in steps) {
-      expect(step.idle.isVideo, isFalse, reason: '${step.id} idle');
-      expect(step.action.isVideo, isFalse, reason: '${step.id} action');
-      expect(step.idle.asset, endsWith('-before.jpg'));
-      expect(step.action.asset, endsWith('-after.jpg'));
-      expect(
-        File(step.idle.asset).existsSync(),
-        isTrue,
-        reason: step.idle.asset,
-      );
-      expect(
-        File(step.action.asset).existsSync(),
-        isTrue,
-        reason: step.action.asset,
-      );
-      expect(pubspec.contains('    - ${step.idle.asset}'), isTrue);
-      expect(pubspec.contains('    - ${step.action.asset}'), isTrue);
+      for (final clip in [step.idle, step.action]) {
+        expect(File(clip.asset).existsSync(), isTrue, reason: clip.asset);
+        expect(pubspec.contains('    - ${clip.asset}'), isTrue);
+        if (clip.isVideo) {
+          expect(clip.asset, endsWith('.mp4'), reason: step.id);
+        } else {
+          expect(
+            clip.asset.endsWith('-before.jpg') ||
+                clip.asset.endsWith('-after.jpg'),
+            isTrue,
+            reason: clip.asset,
+          );
+        }
+      }
     }
 
     var progress = RoutineLessonProgress(steps: steps);
@@ -68,6 +66,100 @@ void main() {
     );
     expect(finale, isNotEmpty);
   }
+
+  test('only the delivered clips are videos', () {
+    String path(RoutineClip clip) => clip.asset;
+    expect(
+      {
+        for (final step in BedLesson.steps)
+          if (step.idle.isVideo || step.action.isVideo)
+            step.id: (
+              path(step.idle),
+              path(step.action),
+              step.idle.isVideo,
+              step.action.isVideo,
+            ),
+      },
+      {
+        'get-in-bed': (
+          'assets/videos/bed-routine/bed-04-get-in-bed-idle.mp4',
+          'assets/videos/bed-routine/bed-04-get-in-bed-action.mp4',
+          true,
+          true,
+        ),
+      },
+    );
+    expect(
+      [
+        for (final step in ToysLesson.steps)
+          (step.id, step.idle.isVideo, step.action.isVideo, path(step.idle)),
+      ],
+      [
+        (
+          'pick-up',
+          true,
+          false,
+          'assets/videos/toys-routine/toys-01-pick-up-idle.mp4',
+        ),
+        (
+          'sort',
+          true,
+          false,
+          'assets/videos/toys-routine/toys-02-sort-idle.mp4',
+        ),
+        (
+          'put-in-boxes',
+          true,
+          false,
+          'assets/videos/toys-routine/toys-03-put-in-boxes-idle.mp4',
+        ),
+        (
+          'shelf',
+          true,
+          false,
+          'assets/videos/toys-routine/toys-04-shelf-idle.mp4',
+        ),
+        (
+          'tidy-room',
+          true,
+          false,
+          'assets/videos/toys-routine/toys-05-tidy-room-idle.mp4',
+        ),
+      ],
+    );
+    expect(
+      [
+        for (final step in LunchLesson.steps)
+          if (step.idle.isVideo || step.action.isVideo)
+            (step.id, step.idle.isVideo, step.action.isVideo, path(step.idle)),
+      ],
+      [
+        (
+          'sandwich',
+          true,
+          false,
+          'assets/videos/lunch-routine/lunch-02-sandwich-idle.mp4',
+        ),
+        (
+          'fruit',
+          true,
+          false,
+          'assets/videos/lunch-routine/lunch-03-fruit-idle.mp4',
+        ),
+      ],
+    );
+    expect(
+      [
+        for (final step in PetLesson.steps)
+          if (step.idle.isVideo || step.action.isVideo)
+            (step.id, step.idle.isVideo, step.action.isVideo, path(step.idle)),
+      ],
+      [('bowl', true, false, 'assets/videos/pet-routine/pet-01-bowl-idle.mp4')],
+    );
+    for (final step in [...LunchLesson.steps, ...PetLesson.steps]) {
+      expect(step.action.isVideo, isFalse, reason: step.id);
+    }
+  });
 
   test('Get Ready for Bed walks pajamas through lights off', () {
     expectLesson(

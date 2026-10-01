@@ -204,31 +204,31 @@ flutter:
     - assets/images/bed-routine/piku-bed-02-brush-teeth-after.jpg
     - assets/images/bed-routine/piku-bed-03-wash-face-before.jpg
     - assets/images/bed-routine/piku-bed-03-wash-face-after.jpg
-    - assets/images/bed-routine/piku-bed-04-get-in-bed-before.jpg
-    - assets/images/bed-routine/piku-bed-04-get-in-bed-after.jpg
+    - assets/videos/bed-routine/bed-04-get-in-bed-idle.mp4
+    - assets/videos/bed-routine/bed-04-get-in-bed-action.mp4
     - assets/images/bed-routine/piku-bed-05-lights-off-before.jpg
     - assets/images/bed-routine/piku-bed-05-lights-off-after.jpg
-    - assets/images/toys-routine/piku-toys-01-pick-up-before.jpg
+    - assets/videos/toys-routine/toys-01-pick-up-idle.mp4
     - assets/images/toys-routine/piku-toys-01-pick-up-after.jpg
-    - assets/images/toys-routine/piku-toys-02-sort-before.jpg
+    - assets/videos/toys-routine/toys-02-sort-idle.mp4
     - assets/images/toys-routine/piku-toys-02-sort-after.jpg
-    - assets/images/toys-routine/piku-toys-03-put-in-boxes-before.jpg
+    - assets/videos/toys-routine/toys-03-put-in-boxes-idle.mp4
     - assets/images/toys-routine/piku-toys-03-put-in-boxes-after.jpg
-    - assets/images/toys-routine/piku-toys-04-shelf-before.jpg
+    - assets/videos/toys-routine/toys-04-shelf-idle.mp4
     - assets/images/toys-routine/piku-toys-04-shelf-after.jpg
-    - assets/images/toys-routine/piku-toys-05-tidy-room-before.jpg
+    - assets/videos/toys-routine/toys-05-tidy-room-idle.mp4
     - assets/images/toys-routine/piku-toys-05-tidy-room-after.jpg
     - assets/images/lunch-routine/piku-lunch-01-lunchbox-before.jpg
     - assets/images/lunch-routine/piku-lunch-01-lunchbox-after.jpg
-    - assets/images/lunch-routine/piku-lunch-02-sandwich-before.jpg
+    - assets/videos/lunch-routine/lunch-02-sandwich-idle.mp4
     - assets/images/lunch-routine/piku-lunch-02-sandwich-after.jpg
-    - assets/images/lunch-routine/piku-lunch-03-fruit-before.jpg
+    - assets/videos/lunch-routine/lunch-03-fruit-idle.mp4
     - assets/images/lunch-routine/piku-lunch-03-fruit-after.jpg
     - assets/images/lunch-routine/piku-lunch-04-water-before.jpg
     - assets/images/lunch-routine/piku-lunch-04-water-after.jpg
     - assets/images/lunch-routine/piku-lunch-05-close-pack-before.jpg
     - assets/images/lunch-routine/piku-lunch-05-close-pack-after.jpg
-    - assets/images/pet-routine/piku-pet-01-bowl-before.jpg
+    - assets/videos/pet-routine/pet-01-bowl-idle.mp4
     - assets/images/pet-routine/piku-pet-01-bowl-after.jpg
     - assets/images/pet-routine/piku-pet-02-scoop-before.jpg
     - assets/images/pet-routine/piku-pet-02-scoop-after.jpg
