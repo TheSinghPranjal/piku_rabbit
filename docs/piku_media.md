@@ -90,3 +90,19 @@ Nine placeholders (no mp4 yet):
 | 12 Hair dry | action | `piku-routine-12-hairdry-after.jpg` | `piku-routine-12-hairdry-action.mp4` |
 
 A missing action still stays on screen for 2.5 seconds, then the reward card. The other 15 clips are real mp4s.
+
+## Go to School
+
+School → Go to School plays 5 steps after the morning routine: school dress, tie, school shoes, school bag, then leave for school. The screen matches Morning Routine: idle, one action button, action once, the same reward card, Next, Replay, then a finale after the last reward.
+
+Clips live in `assets/videos/school-routine/`. Placeholder stills live in `assets/images/school-routine/`. Flip a row in `GoToSchool.steps` from image to video when a missing mp4 is added.
+
+| Step | Idle | Action |
+| --- | --- | --- |
+| 1 School dress | `school-01-dress-idle.mp4` | `school-01-dress-action.mp4` |
+| 2 Tie | `school-02-tie-idle.mp4` | `school-02-tie-action.mp4` |
+| 3 School shoes | `piku-school-03-shoes-before.jpg` | `school-03-shoes-action.mp4` |
+| 4 School bag | `school-04-bag-idle.mp4` | `piku-school-04-bag-after.jpg` for 2.5 seconds |
+| 5 Leave for school | `school-05-leave-idle.mp4` | `piku-school-05-leave-after.jpg` for 2.5 seconds |
+
+Three placeholders remain: shoes idle, bag action, and leave action.

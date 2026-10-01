@@ -16,18 +16,43 @@ import '../../widgets/status_bar.dart';
 import '../drink/drink_water_screen.dart' show RewardPopup;
 
 /// Morning routine — idle loop, one action, then the numbers reward card.
-///
-/// Next advances. Replay returns to the same idle. After the last step's
-/// reward, a full-screen celebration uses that same reward again.
-class MorningRoutineScreen extends StatefulWidget {
+class MorningRoutineScreen extends StatelessWidget {
   const MorningRoutineScreen({super.key});
 
   @override
-  State<MorningRoutineScreen> createState() => _MorningRoutineScreenState();
+  Widget build(BuildContext context) {
+    return RoutineLessonScreen(
+      title: 'Morning Routine!',
+      steps: MorningRoutine.steps,
+      rewardForStep: MorningRoutineRules.rewardForStep,
+      rewardForComplete: MorningRoutineRules.rewardForComplete,
+    );
+  }
 }
 
-class _MorningRoutineScreenState extends State<MorningRoutineScreen> {
-  RoutineLessonProgress _progress = const RoutineLessonProgress();
+/// Shared idle → action → reward → Next/Replay player for routine lessons.
+class RoutineLessonScreen extends StatefulWidget {
+  const RoutineLessonScreen({
+    super.key,
+    required this.title,
+    required this.steps,
+    required this.rewardForStep,
+    required this.rewardForComplete,
+    this.stillDuration = MorningRoutine.actionStillDuration,
+  });
+
+  final String title;
+  final List<RoutineStep> steps;
+  final RewardResult Function(String message) rewardForStep;
+  final RewardResult Function() rewardForComplete;
+  final Duration stillDuration;
+
+  @override
+  State<RoutineLessonScreen> createState() => _RoutineLessonScreenState();
+}
+
+class _RoutineLessonScreenState extends State<RoutineLessonScreen> {
+  late RoutineLessonProgress _progress;
   bool _disposed = false;
   bool _rewardOpen = false;
   int _loadGen = 0;
@@ -40,6 +65,7 @@ class _MorningRoutineScreenState extends State<MorningRoutineScreen> {
   @override
   void initState() {
     super.initState();
+    _progress = RoutineLessonProgress(steps: widget.steps);
     unawaited(_present());
   }
 
@@ -86,7 +112,7 @@ class _MorningRoutineScreenState extends State<MorningRoutineScreen> {
 
     if (!clip.isVideo) {
       if (phase == RoutinePhase.acting) {
-        _stillTimer = Timer(MorningRoutine.actionStillDuration, () {
+        _stillTimer = Timer(widget.stillDuration, () {
           if (gen != _loadGen || _disposed) return;
           unawaited(_onActionEnded());
         });
@@ -144,7 +170,10 @@ class _MorningRoutineScreenState extends State<MorningRoutineScreen> {
       if (!mounted || _disposed || gen != _loadGen) return;
       if (phase == RoutinePhase.acting) {
         setState(() {
-          _progress = RoutineLessonProgress(index: _progress.index);
+          _progress = RoutineLessonProgress(
+            index: _progress.index,
+            steps: _progress.steps,
+          );
         });
         unawaited(_present());
       }
@@ -166,7 +195,7 @@ class _MorningRoutineScreenState extends State<MorningRoutineScreen> {
     if (mounted) setState(() {});
 
     try {
-      final reward = MorningRoutineRules.rewardForStep(_progress.step.praise);
+      final reward = widget.rewardForStep(_progress.step.praise);
       await StarsStore.add(reward.stars);
       await Future<void>.delayed(const Duration(milliseconds: 500));
       if (!mounted || _disposed) return;
@@ -174,7 +203,7 @@ class _MorningRoutineScreenState extends State<MorningRoutineScreen> {
       if (!mounted || _disposed) return;
       setState(() => _progress = _progress.acknowledgeReward());
       if (_progress.showsFinale) {
-        await StarsStore.add(MorningRoutineRules.rewardForComplete().stars);
+        await StarsStore.add(widget.rewardForComplete().stars);
       }
     } finally {
       _rewardOpen = false;
@@ -300,7 +329,7 @@ class _MorningRoutineScreenState extends State<MorningRoutineScreen> {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Morning Routine!',
+                  widget.title,
                   style: TTTypography.headline(
                     color: TTColors.darkBrown,
                   ).copyWith(fontWeight: FontWeight.w900, fontSize: 30),
@@ -354,7 +383,10 @@ class _MorningRoutineScreenState extends State<MorningRoutineScreen> {
               ],
             ),
           if (_progress.showsFinale)
-            _Finale(onReplay: () => unawaited(_replay())),
+            _Finale(
+              reward: widget.rewardForComplete(),
+              onReplay: () => unawaited(_replay()),
+            ),
         ],
       ),
     );
@@ -362,13 +394,13 @@ class _MorningRoutineScreenState extends State<MorningRoutineScreen> {
 }
 
 class _Finale extends StatelessWidget {
-  const _Finale({required this.onReplay});
+  const _Finale({required this.reward, required this.onReplay});
 
+  final RewardResult reward;
   final VoidCallback onReplay;
 
   @override
   Widget build(BuildContext context) {
-    final reward = MorningRoutineRules.rewardForComplete();
     return DecoratedBox(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
