@@ -17,6 +17,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Warm shared prefs so UI starts in sync.
   await StarsStore.total();
+
   await PremiumStore.isPremiumUnlocked();
   await MusicStore.isEnabled();
   SystemChrome.setPreferredOrientations([
