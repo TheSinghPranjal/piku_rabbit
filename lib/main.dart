@@ -12,6 +12,7 @@ import 'services/premium_store.dart';
 import 'services/stars_store.dart';
 import 'theme/tt_typography.dart';
 
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Warm shared prefs so UI starts in sync.
