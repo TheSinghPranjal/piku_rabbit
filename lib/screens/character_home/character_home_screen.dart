@@ -60,6 +60,7 @@ class _CharacterHomeScreenState extends State<CharacterHomeScreen>
   Timer? _sleepCheckTimer;
   Map<String, ActivityTimerStatus> _timerByRoute = {};
 
+
   /// Tracks period or special clip key so we swap when a window starts/ends.
   String? _awakeClipKey;
 
