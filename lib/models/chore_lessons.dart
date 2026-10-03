@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'morning_routine.dart';
 import 'rewards.dart';
 
-/// Shared star card for the bed, toys, lunch, pet, flower, water, and
-/// drawing lessons.
+/// Shared star card for the bed, toys, lunch, pet, and flower lessons.
 abstract final class ChoreLessonRules {
   static RewardResult rewardForStep(String message) {
     return MorningRoutineRules.rewardForStep(message);
@@ -152,9 +151,9 @@ abstract final class ToysLesson {
   ];
 }
 
-/// Pack Lunch. Every row is a still. Idle is the before JPEG and the action
-/// is the after JPEG, shown for 2.5 seconds. There are no videos.
+/// Pack Lunch. Sandwich idle and fruit idle are videos. Other rows stay stills.
 abstract final class LunchLesson {
+  static const videoFolder = 'assets/videos/lunch-routine';
   static const imageFolder = 'assets/images/lunch-routine';
   static const actionStillDuration = MorningRoutine.actionStillDuration;
 
@@ -167,8 +166,8 @@ abstract final class LunchLesson {
   static const steps = <RoutineStep>[
     RoutineStep(
       id: 'lunchbox',
-      title: 'Get lunchbox',
-      actionLabel: 'Get lunchbox',
+      title: 'Lunchbox',
+      actionLabel: 'Lunchbox',
       icon: Icons.lunch_dining_rounded,
       praise: 'Lunchbox is out!',
       idle: RoutineClip.image('$imageFolder/piku-lunch-01-lunchbox-before.jpg'),
@@ -178,28 +177,28 @@ abstract final class LunchLesson {
     ),
     RoutineStep(
       id: 'sandwich',
-      title: 'Add sandwich',
-      actionLabel: 'Add sandwich',
+      title: 'Sandwich',
+      actionLabel: 'Sandwich',
       icon: Icons.bakery_dining_rounded,
       praise: 'Yummy sandwich!',
-      idle: RoutineClip.image('$imageFolder/piku-lunch-02-sandwich-before.jpg'),
+      idle: RoutineClip.video('$videoFolder/lunch-02-sandwich-idle.mp4'),
       action: RoutineClip.image(
         '$imageFolder/piku-lunch-02-sandwich-after.jpg',
       ),
     ),
     RoutineStep(
       id: 'fruit',
-      title: 'Add fruit',
-      actionLabel: 'Add fruit',
+      title: 'Fruit',
+      actionLabel: 'Fruit',
       icon: Icons.eco_rounded,
       praise: 'Fruit packed!',
-      idle: RoutineClip.image('$imageFolder/piku-lunch-03-fruit-before.jpg'),
+      idle: RoutineClip.video('$videoFolder/lunch-03-fruit-idle.mp4'),
       action: RoutineClip.image('$imageFolder/piku-lunch-03-fruit-after.jpg'),
     ),
     RoutineStep(
       id: 'water',
-      title: 'Add water bottle',
-      actionLabel: 'Add water bottle',
+      title: 'Water',
+      actionLabel: 'Water',
       icon: Icons.water_drop_rounded,
       praise: 'Water bottle ready!',
       idle: RoutineClip.image('$imageFolder/piku-lunch-04-water-before.jpg'),
@@ -208,7 +207,7 @@ abstract final class LunchLesson {
     RoutineStep(
       id: 'close-pack',
       title: 'Close pack',
-      actionLabel: 'Close pack',
+      actionLabel: 'Pack it',
       icon: Icons.inventory_2_rounded,
       praise: 'Lunch is packed!',
       idle: RoutineClip.image(
@@ -221,8 +220,8 @@ abstract final class LunchLesson {
   ];
 }
 
-/// Feed a Pet. Scoop and give-water idles are seamless loop videos.
-/// Every other idle, and every action, stays a still.
+/// Feed a Pet. Bowl, scoop, place, and water idles are videos.
+/// Clean-up idle and every action stay stills.
 abstract final class PetLesson {
   static const videoFolder = 'assets/videos/pet-routine';
   static const imageFolder = 'assets/images/pet-routine';
@@ -237,38 +236,38 @@ abstract final class PetLesson {
   static const steps = <RoutineStep>[
     RoutineStep(
       id: 'bowl',
-      title: 'Get bowl',
-      actionLabel: 'Get bowl',
+      title: 'Bowl',
+      actionLabel: 'Bowl',
       icon: Icons.flatware_rounded,
       praise: 'Bowl is ready!',
-      idle: RoutineClip.image('$imageFolder/piku-pet-01-bowl-before.jpg'),
+      idle: RoutineClip.video('$videoFolder/pet-01-bowl-idle.mp4'),
       action: RoutineClip.image('$imageFolder/piku-pet-01-bowl-after.jpg'),
     ),
     RoutineStep(
       id: 'scoop',
-      title: 'Scoop food',
-      actionLabel: 'Scoop food',
+      title: 'Scoop',
+      actionLabel: 'Scoop',
       icon: Icons.restaurant_rounded,
       praise: 'Nice scoop!',
-      idle: RoutineClip.video('$videoFolder/pet-02-idle-loop.mp4'),
+      idle: RoutineClip.video('$videoFolder/pet-02-scoop-idle.mp4'),
       action: RoutineClip.image('$imageFolder/piku-pet-02-scoop-after.jpg'),
     ),
     RoutineStep(
       id: 'place',
-      title: 'Place food',
-      actionLabel: 'Place food',
+      title: 'Place',
+      actionLabel: 'Place',
       icon: Icons.room_service_rounded,
       praise: 'Food is in the bowl!',
-      idle: RoutineClip.image('$imageFolder/piku-pet-03-place-before.jpg'),
+      idle: RoutineClip.video('$videoFolder/pet-03-place-idle.mp4'),
       action: RoutineClip.image('$imageFolder/piku-pet-03-place-after.jpg'),
     ),
     RoutineStep(
       id: 'water',
-      title: 'Give water',
-      actionLabel: 'Give water',
+      title: 'Water',
+      actionLabel: 'Water',
       icon: Icons.water_drop_rounded,
       praise: 'Fresh water!',
-      idle: RoutineClip.video('$videoFolder/pet-04-idle-loop.mp4'),
+      idle: RoutineClip.video('$videoFolder/pet-04-water-idle.mp4'),
       action: RoutineClip.image('$imageFolder/piku-pet-04-water-after.jpg'),
     ),
     RoutineStep(
@@ -283,8 +282,8 @@ abstract final class PetLesson {
   ];
 }
 
-/// Plant a Flower. Pot and soil idles are seamless loop videos.
-/// Every other idle, and every action, stays a still.
+/// Plant a Flower. Pot, soil, water, and sunlight idles are videos.
+/// Seed idle and every action stay stills.
 abstract final class FlowerLesson {
   static const videoFolder = 'assets/videos/flower-routine';
   static const imageFolder = 'assets/images/flower-routine';
@@ -299,26 +298,26 @@ abstract final class FlowerLesson {
   static const steps = <RoutineStep>[
     RoutineStep(
       id: 'pot',
-      title: 'Get pot',
-      actionLabel: 'Get pot',
+      title: 'Pot',
+      actionLabel: 'Pot',
       icon: Icons.yard_rounded,
       praise: 'Pot is ready!',
-      idle: RoutineClip.video('$videoFolder/flower-01-idle-loop.mp4'),
+      idle: RoutineClip.video('$videoFolder/flower-01-pot-idle.mp4'),
       action: RoutineClip.image('$imageFolder/piku-flower-01-pot-after.jpg'),
     ),
     RoutineStep(
       id: 'soil',
-      title: 'Add soil',
-      actionLabel: 'Add soil',
+      title: 'Soil',
+      actionLabel: 'Soil',
       icon: Icons.grass_rounded,
       praise: 'Soil is in the pot!',
-      idle: RoutineClip.video('$videoFolder/flower-02-idle-loop.mp4'),
+      idle: RoutineClip.video('$videoFolder/flower-02-soil-idle.mp4'),
       action: RoutineClip.image('$imageFolder/piku-flower-02-soil-after.jpg'),
     ),
     RoutineStep(
       id: 'seed',
-      title: 'Plant seed',
-      actionLabel: 'Plant seed',
+      title: 'Seed',
+      actionLabel: 'Seed',
       icon: Icons.spa_rounded,
       praise: 'Seed is planted!',
       idle: RoutineClip.image('$imageFolder/piku-flower-03-seed-before.jpg'),
@@ -326,11 +325,11 @@ abstract final class FlowerLesson {
     ),
     RoutineStep(
       id: 'water',
-      title: 'Water it',
-      actionLabel: 'Water it',
+      title: 'Water',
+      actionLabel: 'Water',
       icon: Icons.water_drop_rounded,
       praise: 'A little drink!',
-      idle: RoutineClip.image('$imageFolder/piku-flower-04-water-before.jpg'),
+      idle: RoutineClip.video('$videoFolder/flower-04-water-idle.mp4'),
       action: RoutineClip.image('$imageFolder/piku-flower-04-water-after.jpg'),
     ),
     RoutineStep(
@@ -339,11 +338,211 @@ abstract final class FlowerLesson {
       actionLabel: 'Sunlight',
       icon: Icons.wb_sunny_rounded,
       praise: 'Hello, sunshine!',
-      idle: RoutineClip.image(
-        '$imageFolder/piku-flower-05-sunlight-before.jpg',
-      ),
+      idle: RoutineClip.video('$videoFolder/flower-05-sunlight-idle.mp4'),
       action: RoutineClip.image(
         '$imageFolder/piku-flower-05-sunlight-after.jpg',
+      ),
+    ),
+  ];
+}
+
+/// Pack Lunch 2. Every row is a still. Idle is the before JPEG and the
+/// action is the after JPEG, shown for 2.5 seconds. There are no videos.
+abstract final class Lunch2Lesson {
+  static const imageFolder = 'assets/images/lunch2-routine';
+  static const actionStillDuration = MorningRoutine.actionStillDuration;
+
+  static RewardResult rewardForStep(String message) =>
+      ChoreLessonRules.rewardForStep(message);
+
+  static RewardResult rewardForComplete() =>
+      ChoreLessonRules.rewardForComplete('Amazing! Piku packed a new lunch!');
+
+  static const steps = <RoutineStep>[
+    RoutineStep(
+      id: 'lunchbox',
+      title: 'Get lunchbox',
+      actionLabel: 'Get lunchbox',
+      icon: Icons.lunch_dining_rounded,
+      praise: 'Lunchbox is out!',
+      idle: RoutineClip.image(
+        '$imageFolder/piku-lunch2-01-lunchbox-before.jpg',
+      ),
+      action: RoutineClip.image(
+        '$imageFolder/piku-lunch2-01-lunchbox-after.jpg',
+      ),
+    ),
+    RoutineStep(
+      id: 'sandwich',
+      title: 'Add sandwich',
+      actionLabel: 'Add sandwich',
+      icon: Icons.bakery_dining_rounded,
+      praise: 'Yummy sandwich!',
+      idle: RoutineClip.image(
+        '$imageFolder/piku-lunch2-02-sandwich-before.jpg',
+      ),
+      action: RoutineClip.image(
+        '$imageFolder/piku-lunch2-02-sandwich-after.jpg',
+      ),
+    ),
+    RoutineStep(
+      id: 'fruit',
+      title: 'Add fruit',
+      actionLabel: 'Add fruit',
+      icon: Icons.eco_rounded,
+      praise: 'Fruit packed!',
+      idle: RoutineClip.image('$imageFolder/piku-lunch2-03-fruit-before.jpg'),
+      action: RoutineClip.image('$imageFolder/piku-lunch2-03-fruit-after.jpg'),
+    ),
+    RoutineStep(
+      id: 'water',
+      title: 'Add water bottle',
+      actionLabel: 'Add water bottle',
+      icon: Icons.water_drop_rounded,
+      praise: 'Water bottle ready!',
+      idle: RoutineClip.image('$imageFolder/piku-lunch2-04-water-before.jpg'),
+      action: RoutineClip.image('$imageFolder/piku-lunch2-04-water-after.jpg'),
+    ),
+    RoutineStep(
+      id: 'close-pack',
+      title: 'Close pack',
+      actionLabel: 'Close pack',
+      icon: Icons.inventory_2_rounded,
+      praise: 'Lunch is packed!',
+      idle: RoutineClip.image(
+        '$imageFolder/piku-lunch2-05-close-pack-before.jpg',
+      ),
+      action: RoutineClip.image(
+        '$imageFolder/piku-lunch2-05-close-pack-after.jpg',
+      ),
+    ),
+  ];
+}
+
+/// Feed a Pet 2. Scoop and give-water idles are seamless loop videos.
+/// Every other idle, and every action, stays a still.
+abstract final class Pet2Lesson {
+  static const videoFolder = 'assets/videos/pet2-routine';
+  static const imageFolder = 'assets/images/pet2-routine';
+  static const actionStillDuration = MorningRoutine.actionStillDuration;
+
+  static RewardResult rewardForStep(String message) =>
+      ChoreLessonRules.rewardForStep(message);
+
+  static RewardResult rewardForComplete() =>
+      ChoreLessonRules.rewardForComplete('Amazing! Piku fed another pet!');
+
+  static const steps = <RoutineStep>[
+    RoutineStep(
+      id: 'bowl',
+      title: 'Get bowl',
+      actionLabel: 'Get bowl',
+      icon: Icons.flatware_rounded,
+      praise: 'Bowl is ready!',
+      idle: RoutineClip.image('$imageFolder/piku-pet2-01-bowl-before.jpg'),
+      action: RoutineClip.image('$imageFolder/piku-pet2-01-bowl-after.jpg'),
+    ),
+    RoutineStep(
+      id: 'scoop',
+      title: 'Scoop food',
+      actionLabel: 'Scoop food',
+      icon: Icons.restaurant_rounded,
+      praise: 'Nice scoop!',
+      idle: RoutineClip.video('$videoFolder/pet2-02-idle-loop.mp4'),
+      action: RoutineClip.image('$imageFolder/piku-pet2-02-scoop-after.jpg'),
+    ),
+    RoutineStep(
+      id: 'place',
+      title: 'Place food',
+      actionLabel: 'Place food',
+      icon: Icons.room_service_rounded,
+      praise: 'Food is in the bowl!',
+      idle: RoutineClip.image('$imageFolder/piku-pet2-03-place-before.jpg'),
+      action: RoutineClip.image('$imageFolder/piku-pet2-03-place-after.jpg'),
+    ),
+    RoutineStep(
+      id: 'water',
+      title: 'Give water',
+      actionLabel: 'Give water',
+      icon: Icons.water_drop_rounded,
+      praise: 'Fresh water!',
+      idle: RoutineClip.video('$videoFolder/pet2-04-idle-loop.mp4'),
+      action: RoutineClip.image('$imageFolder/piku-pet2-04-water-after.jpg'),
+    ),
+    RoutineStep(
+      id: 'clean-up',
+      title: 'Clean up',
+      actionLabel: 'Clean up',
+      icon: Icons.cleaning_services_rounded,
+      praise: 'All cleaned up!',
+      idle: RoutineClip.image('$imageFolder/piku-pet2-05-clean-up-before.jpg'),
+      action: RoutineClip.image('$imageFolder/piku-pet2-05-clean-up-after.jpg'),
+    ),
+  ];
+}
+
+/// Plant a Flower 2. Pot and soil idles are seamless loop videos.
+/// Every other idle, and every action, stays a still.
+abstract final class Flower2Lesson {
+  static const videoFolder = 'assets/videos/flower2-routine';
+  static const imageFolder = 'assets/images/flower2-routine';
+  static const actionStillDuration = MorningRoutine.actionStillDuration;
+
+  static RewardResult rewardForStep(String message) =>
+      ChoreLessonRules.rewardForStep(message);
+
+  static RewardResult rewardForComplete() => ChoreLessonRules.rewardForComplete(
+    'Amazing! Piku planted another flower!',
+  );
+
+  static const steps = <RoutineStep>[
+    RoutineStep(
+      id: 'pot',
+      title: 'Get pot',
+      actionLabel: 'Get pot',
+      icon: Icons.yard_rounded,
+      praise: 'Pot is ready!',
+      idle: RoutineClip.video('$videoFolder/flower2-01-idle-loop.mp4'),
+      action: RoutineClip.image('$imageFolder/piku-flower2-01-pot-after.jpg'),
+    ),
+    RoutineStep(
+      id: 'soil',
+      title: 'Add soil',
+      actionLabel: 'Add soil',
+      icon: Icons.grass_rounded,
+      praise: 'Soil is in the pot!',
+      idle: RoutineClip.video('$videoFolder/flower2-02-idle-loop.mp4'),
+      action: RoutineClip.image('$imageFolder/piku-flower2-02-soil-after.jpg'),
+    ),
+    RoutineStep(
+      id: 'seed',
+      title: 'Plant seed',
+      actionLabel: 'Plant seed',
+      icon: Icons.spa_rounded,
+      praise: 'Seed is planted!',
+      idle: RoutineClip.image('$imageFolder/piku-flower2-03-seed-before.jpg'),
+      action: RoutineClip.image('$imageFolder/piku-flower2-03-seed-after.jpg'),
+    ),
+    RoutineStep(
+      id: 'water',
+      title: 'Water it',
+      actionLabel: 'Water it',
+      icon: Icons.water_drop_rounded,
+      praise: 'A little drink!',
+      idle: RoutineClip.image('$imageFolder/piku-flower2-04-water-before.jpg'),
+      action: RoutineClip.image('$imageFolder/piku-flower2-04-water-after.jpg'),
+    ),
+    RoutineStep(
+      id: 'sunlight',
+      title: 'Sunlight',
+      actionLabel: 'Sunlight',
+      icon: Icons.wb_sunny_rounded,
+      praise: 'Hello, sunshine!',
+      idle: RoutineClip.image(
+        '$imageFolder/piku-flower2-05-sunlight-before.jpg',
+      ),
+      action: RoutineClip.image(
+        '$imageFolder/piku-flower2-05-sunlight-after.jpg',
       ),
     ),
   ];
@@ -481,7 +680,7 @@ abstract final class DrawLesson {
     RoutineStep(
       id: 'display',
       title: 'Display artwork on the fridge',
-      actionLabel: 'Display artwork on the fridge',
+      actionLabel: 'Display artwork',
       icon: Icons.kitchen_rounded,
       praise: 'On the fridge!',
       idle: RoutineClip.image('$imageFolder/piku-draw-05-display-before.jpg'),

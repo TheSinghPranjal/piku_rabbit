@@ -107,11 +107,9 @@ Clips live in `assets/videos/school-routine/`. Placeholder stills live in `asset
 
 Three placeholders remain: shoes idle, bag action, and leave action.
 
-## Bed, toys, lunch, pet, flower, water, and drawing
+## Bed, toys, lunch, pet, and flower
 
-These School lessons use the same player as Morning Routine. Bed and toys videos live in `assets/videos/<lesson>-routine/` and use the school-routine names (`lesson-NN-step-idle.mp4`, `lesson-NN-step-action.mp4`). Those idle mp4s are seamless loops of about 10.3 seconds (forward, then reversed, so the first frame matches the last). The player loops an idle video (`setLooping(true)`) until the action button, the same way Morning Routine does. An action video plays once. A still action stays up for 2.5 seconds, then the reward card. Placeholder rows stay JPEG stills in `assets/images/<lesson>-routine/`.
-
-Lunch, pet, flower, water, and drawing use a new still set. For a placeholder step, idle is the before JPEG (still N) and the action is the after JPEG (still N+1), held for 2.5 seconds. Step 5's after image is still 5, the same frame as its before image. Only four idles are real videos, each a seamless loop of about 10.3 seconds: flower steps 1 and 2, and pet steps 2 and 4. None of these five lessons has an action video.
+These five School lessons use the same player as Morning Routine. Videos live in `assets/videos/<lesson>-routine/` and use the school-routine names (`lesson-NN-step-idle.mp4`, `lesson-NN-step-action.mp4`). The idle mp4s are seamless loops of about 10.3 seconds (forward, then reversed, so the first frame matches the last). The player loops an idle video until the action button, the same way Morning Routine does. An action video plays once. A still action stays up for 2.5 seconds, then the reward card. The other rows stay JPEG placeholders in `assets/images/<lesson>-routine/`.
 
 ### Get Ready for Bed
 
@@ -143,60 +141,42 @@ Still placeholders: every action (pick up, sort, put in boxes, shelf, tidy room)
 
 ### Pack Lunch
 
-`/learn/pack-lunch`. Every step is a still placeholder.
+`/learn/pack-lunch`.
 
 | Step | Idle | Action |
 | --- | --- | --- |
-| 1 Get lunchbox | `piku-lunch-01-lunchbox-before.jpg` | `piku-lunch-01-lunchbox-after.jpg` |
-| 2 Add sandwich | `piku-lunch-02-sandwich-before.jpg` | `piku-lunch-02-sandwich-after.jpg` |
-| 3 Add fruit | `piku-lunch-03-fruit-before.jpg` | `piku-lunch-03-fruit-after.jpg` |
-| 4 Add water bottle | `piku-lunch-04-water-before.jpg` | `piku-lunch-04-water-after.jpg` |
+| 1 Lunchbox | `piku-lunch-01-lunchbox-before.jpg` | `piku-lunch-01-lunchbox-after.jpg` |
+| 2 Sandwich | `lunch-02-sandwich-idle.mp4` | `piku-lunch-02-sandwich-after.jpg` |
+| 3 Fruit | `lunch-03-fruit-idle.mp4` | `piku-lunch-03-fruit-after.jpg` |
+| 4 Water | `piku-lunch-04-water-before.jpg` | `piku-lunch-04-water-after.jpg` |
 | 5 Close pack | `piku-lunch-05-close-pack-before.jpg` | `piku-lunch-05-close-pack-after.jpg` |
+
+Still placeholders: lunchbox and water and close pack (idle and action), plus sandwich and fruit actions.
 
 ### Feed a Pet
 
-`/learn/feed-a-pet`. Scoop and give-water idles are real loops. Every other clip is a still placeholder.
+`/learn/feed-a-pet`.
 
 | Step | Idle | Action |
 | --- | --- | --- |
-| 1 Get bowl | `piku-pet-01-bowl-before.jpg` | `piku-pet-01-bowl-after.jpg` |
-| 2 Scoop food | `pet-02-idle-loop.mp4` | `piku-pet-02-scoop-after.jpg` |
-| 3 Place food | `piku-pet-03-place-before.jpg` | `piku-pet-03-place-after.jpg` |
-| 4 Give water | `pet-04-idle-loop.mp4` | `piku-pet-04-water-after.jpg` |
+| 1 Bowl | `pet-01-bowl-idle.mp4` | `piku-pet-01-bowl-after.jpg` |
+| 2 Scoop | `pet-02-scoop-idle.mp4` | `piku-pet-02-scoop-after.jpg` |
+| 3 Place | `pet-03-place-idle.mp4` | `piku-pet-03-place-after.jpg` |
+| 4 Water | `pet-04-water-idle.mp4` | `piku-pet-04-water-after.jpg` |
 | 5 Clean up | `piku-pet-05-clean-up-before.jpg` | `piku-pet-05-clean-up-after.jpg` |
+
+Still placeholders: every action, and the clean-up idle.
 
 ### Plant a Flower
 
-`/learn/plant-a-flower`. Pot and soil idles are real loops. Every other clip is a still placeholder.
+`/learn/plant-a-flower`.
 
 | Step | Idle | Action |
 | --- | --- | --- |
-| 1 Get pot | `flower-01-idle-loop.mp4` | `piku-flower-01-pot-after.jpg` |
-| 2 Add soil | `flower-02-idle-loop.mp4` | `piku-flower-02-soil-after.jpg` |
-| 3 Plant seed | `piku-flower-03-seed-before.jpg` | `piku-flower-03-seed-after.jpg` |
-| 4 Water it | `piku-flower-04-water-before.jpg` | `piku-flower-04-water-after.jpg` |
-| 5 Sunlight | `piku-flower-05-sunlight-before.jpg` | `piku-flower-05-sunlight-after.jpg` |
+| 1 Pot | `flower-01-pot-idle.mp4` | `piku-flower-01-pot-after.jpg` |
+| 2 Soil | `flower-02-soil-idle.mp4` | `piku-flower-02-soil-after.jpg` |
+| 3 Seed | `piku-flower-03-seed-before.jpg` | `piku-flower-03-seed-after.jpg` |
+| 4 Water | `flower-04-water-idle.mp4` | `piku-flower-04-water-after.jpg` |
+| 5 Sunlight | `flower-05-sunlight-idle.mp4` | `piku-flower-05-sunlight-after.jpg` |
 
-### Water the Plants
-
-`/learn/water-the-plants`. Every step is a still placeholder.
-
-| Step | Idle | Action |
-| --- | --- | --- |
-| 1 Get watering can | `piku-water-01-watering-can-before.jpg` | `piku-water-01-watering-can-after.jpg` |
-| 2 Fill watering can | `piku-water-02-fill-can-before.jpg` | `piku-water-02-fill-can-after.jpg` |
-| 3 Water flowers | `piku-water-03-water-flowers-before.jpg` | `piku-water-03-water-flowers-after.jpg` |
-| 4 Water small plant | `piku-water-04-small-plant-before.jpg` | `piku-water-04-small-plant-after.jpg` |
-| 5 Finish gardening | `piku-water-05-finish-before.jpg` | `piku-water-05-finish-after.jpg` |
-
-### Drawing Time
-
-`/learn/drawing-time`. Every step is a still placeholder.
-
-| Step | Idle | Action |
-| --- | --- | --- |
-| 1 Get supplies | `piku-draw-01-supplies-before.jpg` | `piku-draw-01-supplies-after.jpg` |
-| 2 Set up table | `piku-draw-02-table-before.jpg` | `piku-draw-02-table-after.jpg` |
-| 3 Draw picture | `piku-draw-03-draw-picture-before.jpg` | `piku-draw-03-draw-picture-after.jpg` |
-| 4 Add details | `piku-draw-04-details-before.jpg` | `piku-draw-04-details-after.jpg` |
-| 5 Display artwork on the fridge | `piku-draw-05-display-before.jpg` | `piku-draw-05-display-after.jpg` |
+Still placeholders: seed idle, and every action (pot, soil, seed, water, sunlight). The pot, soil, water, and sunlight before JPEGs are the original stills, kept beside the idle videos.

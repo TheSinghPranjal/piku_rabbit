@@ -83,6 +83,54 @@ class FeedAPetScreen extends StatelessWidget {
   }
 }
 
+/// Pack Lunch 2 — same player as Morning Routine.
+class PackLunch2Screen extends StatelessWidget {
+  const PackLunch2Screen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return RoutineLessonScreen(
+      title: 'Pack Lunch 2!',
+      steps: Lunch2Lesson.steps,
+      stillDuration: Lunch2Lesson.actionStillDuration,
+      rewardForStep: Lunch2Lesson.rewardForStep,
+      rewardForComplete: Lunch2Lesson.rewardForComplete,
+    );
+  }
+}
+
+/// Feed a Pet 2 — same player as Morning Routine.
+class FeedAPet2Screen extends StatelessWidget {
+  const FeedAPet2Screen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return RoutineLessonScreen(
+      title: 'Feed a Pet 2!',
+      steps: Pet2Lesson.steps,
+      stillDuration: Pet2Lesson.actionStillDuration,
+      rewardForStep: Pet2Lesson.rewardForStep,
+      rewardForComplete: Pet2Lesson.rewardForComplete,
+    );
+  }
+}
+
+/// Plant a Flower 2 — same player as Morning Routine.
+class PlantAFlower2Screen extends StatelessWidget {
+  const PlantAFlower2Screen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return RoutineLessonScreen(
+      title: 'Plant a Flower 2!',
+      steps: Flower2Lesson.steps,
+      stillDuration: Flower2Lesson.actionStillDuration,
+      rewardForStep: Flower2Lesson.rewardForStep,
+      rewardForComplete: Flower2Lesson.rewardForComplete,
+    );
+  }
+}
+
 /// Water the Plants — same player as Morning Routine.
 class WaterThePlantsScreen extends StatelessWidget {
   const WaterThePlantsScreen({super.key});
