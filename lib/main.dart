@@ -18,6 +18,7 @@ Future<void> main() async {
   // Warm shared prefs so UI starts in sync.
   await StarsStore.total();
 
+
   await PremiumStore.isPremiumUnlocked();
   await MusicStore.isEnabled();
   SystemChrome.setPreferredOrientations([
