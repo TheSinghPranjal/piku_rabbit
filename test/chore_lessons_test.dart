@@ -8,6 +8,7 @@ import 'package:piku_rabbit/models/morning_routine.dart';
 import 'package:piku_rabbit/models/rewards.dart';
 import 'package:piku_rabbit/screens/learn/chore_lesson_screens.dart';
 import 'package:piku_rabbit/screens/learn/learn_screen.dart';
+import 'package:piku_rabbit/screens/learn/morning_routine_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
@@ -130,22 +131,14 @@ void main() {
     expect(
       [
         for (final step in LunchLesson.steps)
-          if (step.idle.isVideo || step.action.isVideo)
-            (step.id, step.idle.isVideo, step.action.isVideo, path(step.idle)),
+          (step.id, step.idle.isVideo, step.action.isVideo),
       ],
       [
-        (
-          'sandwich',
-          true,
-          false,
-          'assets/videos/lunch-routine/lunch-02-sandwich-idle.mp4',
-        ),
-        (
-          'fruit',
-          true,
-          false,
-          'assets/videos/lunch-routine/lunch-03-fruit-idle.mp4',
-        ),
+        ('lunchbox', false, false),
+        ('sandwich', false, false),
+        ('fruit', false, false),
+        ('water', false, false),
+        ('close-pack', false, false),
       ],
     );
     expect(
@@ -155,24 +148,17 @@ void main() {
             (step.id, step.idle.isVideo, step.action.isVideo, path(step.idle)),
       ],
       [
-        ('bowl', true, false, 'assets/videos/pet-routine/pet-01-bowl-idle.mp4'),
         (
           'scoop',
           true,
           false,
-          'assets/videos/pet-routine/pet-02-scoop-idle.mp4',
-        ),
-        (
-          'place',
-          true,
-          false,
-          'assets/videos/pet-routine/pet-03-place-idle.mp4',
+          'assets/videos/pet-routine/pet-02-idle-loop.mp4',
         ),
         (
           'water',
           true,
           false,
-          'assets/videos/pet-routine/pet-04-water-idle.mp4',
+          'assets/videos/pet-routine/pet-04-idle-loop.mp4',
         ),
       ],
     );
@@ -187,40 +173,34 @@ void main() {
           'pot',
           true,
           false,
-          'assets/videos/flower-routine/flower-01-pot-idle.mp4',
+          'assets/videos/flower-routine/flower-01-idle-loop.mp4',
         ),
         (
           'soil',
           true,
           false,
-          'assets/videos/flower-routine/flower-02-soil-idle.mp4',
-        ),
-        (
-          'water',
-          true,
-          false,
-          'assets/videos/flower-routine/flower-04-water-idle.mp4',
-        ),
-        (
-          'sunlight',
-          true,
-          false,
-          'assets/videos/flower-routine/flower-05-sunlight-idle.mp4',
+          'assets/videos/flower-routine/flower-02-idle-loop.mp4',
         ),
       ],
     );
-    expect(FlowerLesson.steps[2].idle.isVideo, isFalse);
+    for (final steps in [WaterLesson.steps, DrawLesson.steps]) {
+      expect(
+        steps.any((step) => step.idle.isVideo || step.action.isVideo),
+        isFalse,
+      );
+    }
     for (final step in [
       ...LunchLesson.steps,
       ...PetLesson.steps,
       ...FlowerLesson.steps,
+      ...WaterLesson.steps,
+      ...DrawLesson.steps,
     ]) {
       expect(step.action.isVideo, isFalse, reason: step.id);
     }
 
-    final player = File(
-      'lib/screens/learn/morning_routine_screen.dart',
-    ).readAsStringSync();
+    final player = File('lib/screens/learn/morning_routine_screen.dart')
+        .readAsStringSync();
     expect(player, contains('final loop = phase == RoutinePhase.idle;'));
     expect(player, contains('await next.setLooping(loop);'));
   });
@@ -264,13 +244,13 @@ void main() {
     );
   });
 
-  test('Pack Lunch walks lunchbox through close pack', () {
+  test('Pack Lunch walks get lunchbox through close pack', () {
     expectLesson(
       steps: LunchLesson.steps,
       ids: ['lunchbox', 'sandwich', 'fruit', 'water', 'close-pack'],
-      firstLabel: 'Lunchbox',
+      firstLabel: 'Get lunchbox',
       lastId: 'close-pack',
-      lastLabel: 'Pack it',
+      lastLabel: 'Close pack',
       finale: LunchLesson.rewardForComplete().message,
       topicId: 'pack_lunch',
       route: '/learn/pack-lunch',
@@ -279,13 +259,20 @@ void main() {
       LunchLesson.rewardForComplete().message,
       'Amazing! Piku\'s lunch is packed!',
     );
+    expect(LunchLesson.steps.map((step) => step.title), [
+      'Get lunchbox',
+      'Add sandwich',
+      'Add fruit',
+      'Add water bottle',
+      'Close pack',
+    ]);
   });
 
-  test('Feed a Pet walks bowl through clean up', () {
+  test('Feed a Pet walks get bowl through clean up', () {
     expectLesson(
       steps: PetLesson.steps,
       ids: ['bowl', 'scoop', 'place', 'water', 'clean-up'],
-      firstLabel: 'Bowl',
+      firstLabel: 'Get bowl',
       lastId: 'clean-up',
       lastLabel: 'Clean up',
       finale: PetLesson.rewardForComplete().message,
@@ -293,13 +280,20 @@ void main() {
       route: '/learn/feed-a-pet',
     );
     expect(PetLesson.rewardForComplete().message, 'Amazing! Piku fed the pet!');
+    expect(PetLesson.steps.map((step) => step.title), [
+      'Get bowl',
+      'Scoop food',
+      'Place food',
+      'Give water',
+      'Clean up',
+    ]);
   });
 
-  test('Plant a Flower walks pot through sunlight', () {
+  test('Plant a Flower walks get pot through sunlight', () {
     expectLesson(
       steps: FlowerLesson.steps,
       ids: ['pot', 'soil', 'seed', 'water', 'sunlight'],
-      firstLabel: 'Pot',
+      firstLabel: 'Get pot',
       lastId: 'sunlight',
       lastLabel: 'Sunlight',
       finale: FlowerLesson.rewardForComplete().message,
@@ -314,6 +308,92 @@ void main() {
       FlowerLesson.actionStillDuration,
       MorningRoutine.actionStillDuration,
     );
+    expect(FlowerLesson.steps.map((step) => step.title), [
+      'Get pot',
+      'Add soil',
+      'Plant seed',
+      'Water it',
+      'Sunlight',
+    ]);
+  });
+
+  test('Water the Plants walks watering can through finish gardening', () {
+    expectLesson(
+      steps: WaterLesson.steps,
+      ids: [
+        'watering-can',
+        'fill-can',
+        'water-flowers',
+        'small-plant',
+        'finish',
+      ],
+      firstLabel: 'Get watering can',
+      lastId: 'finish',
+      lastLabel: 'Finish gardening',
+      finale: WaterLesson.rewardForComplete().message,
+      topicId: 'water_the_plants',
+      route: '/learn/water-the-plants',
+    );
+    expect(
+      WaterLesson.rewardForComplete().message,
+      'Amazing! Piku watered the plants!',
+    );
+    expect(WaterLesson.actionStillDuration, MorningRoutine.actionStillDuration);
+    expect(WaterLesson.steps.map((step) => step.title), [
+      'Get watering can',
+      'Fill watering can',
+      'Water flowers',
+      'Water small plant',
+      'Finish gardening',
+    ]);
+  });
+
+  test('Drawing Time walks supplies through the fridge', () {
+    expectLesson(
+      steps: DrawLesson.steps,
+      ids: ['supplies', 'table', 'draw-picture', 'details', 'display'],
+      firstLabel: 'Get supplies',
+      lastId: 'display',
+      lastLabel: 'Display artwork on the fridge',
+      finale: DrawLesson.rewardForComplete().message,
+      topicId: 'drawing_time',
+      route: '/learn/drawing-time',
+    );
+    expect(
+      DrawLesson.rewardForComplete().message,
+      'Amazing! Piku\'s artwork is on the fridge!',
+    );
+    expect(DrawLesson.actionStillDuration, MorningRoutine.actionStillDuration);
+    expect(DrawLesson.steps.map((step) => step.title), [
+      'Get supplies',
+      'Set up table',
+      'Draw picture',
+      'Add details',
+      'Display artwork on the fridge',
+    ]);
+  });
+
+  testWidgets('the fridge step label fits a phone width', (tester) async {
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    SharedPreferences.setMockInitialValues({});
+    await tester.pumpWidget(
+      MaterialApp(
+        home: RoutineLessonScreen(
+          title: 'Drawing Time!',
+          steps: [DrawLesson.steps.last],
+          rewardForStep: DrawLesson.rewardForStep,
+          rewardForComplete: DrawLesson.rewardForComplete,
+        ),
+      ),
+    );
+    await tester.pump();
+    expect(find.text('Display artwork on the fridge'), findsWidgets);
+    expect(tester.takeException(), isNull);
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pump();
   });
 
   testWidgets('each lesson opens on its first action', (tester) async {
@@ -321,9 +401,11 @@ void main() {
     final cases = <(Widget, String, String)>[
       (const GetReadyForBedScreen(), 'Get Ready for Bed!', 'Pajamas'),
       (const CleanUpToysScreen(), 'Clean Up Toys!', 'Pick up'),
-      (const PackLunchScreen(), 'Pack Lunch!', 'Lunchbox'),
-      (const FeedAPetScreen(), 'Feed a Pet!', 'Bowl'),
-      (const PlantAFlowerScreen(), 'Plant a Flower!', 'Pot'),
+      (const PackLunchScreen(), 'Pack Lunch!', 'Get lunchbox'),
+      (const FeedAPetScreen(), 'Feed a Pet!', 'Get bowl'),
+      (const PlantAFlowerScreen(), 'Plant a Flower!', 'Get pot'),
+      (const WaterThePlantsScreen(), 'Water the Plants!', 'Get watering can'),
+      (const DrawingTimeScreen(), 'Drawing Time!', 'Get supplies'),
     ];
     for (final entry in cases) {
       await tester.pumpWidget(MaterialApp(home: entry.$1));
@@ -353,6 +435,14 @@ void main() {
     expect(find.text('Pack Lunch'), findsOneWidget);
     expect(find.text('Feed a Pet'), findsOneWidget);
     expect(find.text('Plant a Flower'), findsOneWidget);
+    expect(find.text('Water the Plants'), findsOneWidget);
+
+    await tester.tap(find.byIcon(Icons.chevron_right_rounded));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pump(const Duration(milliseconds: 400));
+
+    expect(find.text('Drawing Time'), findsOneWidget);
 
     await tester.pumpWidget(const SizedBox.shrink());
     await tester.pump();

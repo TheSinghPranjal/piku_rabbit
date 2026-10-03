@@ -228,40 +228,67 @@ flutter:
     - assets/images/toys-routine/piku-toys-04-shelf-after.jpg
     - assets/videos/toys-routine/toys-05-tidy-room-idle.mp4
     - assets/images/toys-routine/piku-toys-05-tidy-room-after.jpg
+    - assets/images/lunch-routine/
+    - assets/images/pet-routine/
+    - assets/images/flower-routine/
+    - assets/images/water-routine/
+    - assets/images/draw-routine/
+    - assets/videos/pet-routine/
+    - assets/videos/flower-routine/
     - assets/images/lunch-routine/piku-lunch-01-lunchbox-before.jpg
     - assets/images/lunch-routine/piku-lunch-01-lunchbox-after.jpg
-    - assets/videos/lunch-routine/lunch-02-sandwich-idle.mp4
+    - assets/images/lunch-routine/piku-lunch-02-sandwich-before.jpg
     - assets/images/lunch-routine/piku-lunch-02-sandwich-after.jpg
-    - assets/videos/lunch-routine/lunch-03-fruit-idle.mp4
+    - assets/images/lunch-routine/piku-lunch-03-fruit-before.jpg
     - assets/images/lunch-routine/piku-lunch-03-fruit-after.jpg
     - assets/images/lunch-routine/piku-lunch-04-water-before.jpg
     - assets/images/lunch-routine/piku-lunch-04-water-after.jpg
     - assets/images/lunch-routine/piku-lunch-05-close-pack-before.jpg
     - assets/images/lunch-routine/piku-lunch-05-close-pack-after.jpg
-    - assets/videos/pet-routine/pet-01-bowl-idle.mp4
+    - assets/images/pet-routine/piku-pet-01-bowl-before.jpg
     - assets/images/pet-routine/piku-pet-01-bowl-after.jpg
-    - assets/videos/pet-routine/pet-02-scoop-idle.mp4
+    - assets/videos/pet-routine/pet-02-idle-loop.mp4
+    - assets/images/pet-routine/piku-pet-02-scoop-before.jpg
     - assets/images/pet-routine/piku-pet-02-scoop-after.jpg
-    - assets/videos/pet-routine/pet-03-place-idle.mp4
+    - assets/images/pet-routine/piku-pet-03-place-before.jpg
     - assets/images/pet-routine/piku-pet-03-place-after.jpg
-    - assets/videos/pet-routine/pet-04-water-idle.mp4
+    - assets/videos/pet-routine/pet-04-idle-loop.mp4
+    - assets/images/pet-routine/piku-pet-04-water-before.jpg
     - assets/images/pet-routine/piku-pet-04-water-after.jpg
     - assets/images/pet-routine/piku-pet-05-clean-up-before.jpg
     - assets/images/pet-routine/piku-pet-05-clean-up-after.jpg
-    - assets/videos/flower-routine/flower-01-pot-idle.mp4
+    - assets/videos/flower-routine/flower-01-idle-loop.mp4
     - assets/images/flower-routine/piku-flower-01-pot-before.jpg
     - assets/images/flower-routine/piku-flower-01-pot-after.jpg
-    - assets/videos/flower-routine/flower-02-soil-idle.mp4
+    - assets/videos/flower-routine/flower-02-idle-loop.mp4
     - assets/images/flower-routine/piku-flower-02-soil-before.jpg
     - assets/images/flower-routine/piku-flower-02-soil-after.jpg
     - assets/images/flower-routine/piku-flower-03-seed-before.jpg
     - assets/images/flower-routine/piku-flower-03-seed-after.jpg
-    - assets/videos/flower-routine/flower-04-water-idle.mp4
     - assets/images/flower-routine/piku-flower-04-water-before.jpg
     - assets/images/flower-routine/piku-flower-04-water-after.jpg
-    - assets/videos/flower-routine/flower-05-sunlight-idle.mp4
     - assets/images/flower-routine/piku-flower-05-sunlight-before.jpg
     - assets/images/flower-routine/piku-flower-05-sunlight-after.jpg
+    - assets/images/water-routine/piku-water-01-watering-can-before.jpg
+    - assets/images/water-routine/piku-water-01-watering-can-after.jpg
+    - assets/images/water-routine/piku-water-02-fill-can-before.jpg
+    - assets/images/water-routine/piku-water-02-fill-can-after.jpg
+    - assets/images/water-routine/piku-water-03-water-flowers-before.jpg
+    - assets/images/water-routine/piku-water-03-water-flowers-after.jpg
+    - assets/images/water-routine/piku-water-04-small-plant-before.jpg
+    - assets/images/water-routine/piku-water-04-small-plant-after.jpg
+    - assets/images/water-routine/piku-water-05-finish-before.jpg
+    - assets/images/water-routine/piku-water-05-finish-after.jpg
+    - assets/images/draw-routine/piku-draw-01-supplies-before.jpg
+    - assets/images/draw-routine/piku-draw-01-supplies-after.jpg
+    - assets/images/draw-routine/piku-draw-02-table-before.jpg
+    - assets/images/draw-routine/piku-draw-02-table-after.jpg
+    - assets/images/draw-routine/piku-draw-03-draw-picture-before.jpg
+    - assets/images/draw-routine/piku-draw-03-draw-picture-after.jpg
+    - assets/images/draw-routine/piku-draw-04-details-before.jpg
+    - assets/images/draw-routine/piku-draw-04-details-after.jpg
+    - assets/images/draw-routine/piku-draw-05-display-before.jpg
+    - assets/images/draw-routine/piku-draw-05-display-after.jpg
     - assets/videos/play/play_screen_video.mp4
     - assets/videos/play/football/bao_not_playing_football_video.mp4
     - assets/videos/play/football/bao_playing_football_video.mp4

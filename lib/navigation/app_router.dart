@@ -85,6 +85,14 @@ GoRouter createAppRouter({bool skipSplash = false}) {
         path: '/learn/plant-a-flower',
         builder: (context, state) => const PlantAFlowerScreen(),
       ),
+      GoRoute(
+        path: '/learn/water-the-plants',
+        builder: (context, state) => const WaterThePlantsScreen(),
+      ),
+      GoRoute(
+        path: '/learn/drawing-time',
+        builder: (context, state) => const DrawingTimeScreen(),
+      ),
       GoRoute(path: '/feed', builder: (context, state) => const FeedScreen()),
       GoRoute(
         path: '/eat-food/:foodId',

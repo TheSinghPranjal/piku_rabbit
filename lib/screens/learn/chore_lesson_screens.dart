@@ -82,3 +82,35 @@ class FeedAPetScreen extends StatelessWidget {
     );
   }
 }
+
+/// Water the Plants — same player as Morning Routine.
+class WaterThePlantsScreen extends StatelessWidget {
+  const WaterThePlantsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return RoutineLessonScreen(
+      title: 'Water the Plants!',
+      steps: WaterLesson.steps,
+      stillDuration: WaterLesson.actionStillDuration,
+      rewardForStep: WaterLesson.rewardForStep,
+      rewardForComplete: WaterLesson.rewardForComplete,
+    );
+  }
+}
+
+/// Drawing Time — same player as Morning Routine.
+class DrawingTimeScreen extends StatelessWidget {
+  const DrawingTimeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return RoutineLessonScreen(
+      title: 'Drawing Time!',
+      steps: DrawLesson.steps,
+      stillDuration: DrawLesson.actionStillDuration,
+      rewardForStep: DrawLesson.rewardForStep,
+      rewardForComplete: DrawLesson.rewardForComplete,
+    );
+  }
+}

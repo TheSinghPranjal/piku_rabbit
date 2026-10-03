@@ -519,11 +519,17 @@ class _RoutinePill extends StatelessWidget {
         children: [
           Icon(icon, size: 28, color: const Color(0xFFEF6C00)),
           const SizedBox(width: 8),
-          Text(
-            label,
-            style: TTTypography.body(
-              color: TTColors.darkBrown,
-            ).copyWith(fontWeight: FontWeight.w800),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 220),
+            child: Text(
+              label,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: TTTypography.body(
+                color: TTColors.darkBrown,
+              ).copyWith(fontWeight: FontWeight.w800),
+            ),
           ),
         ],
       ),
