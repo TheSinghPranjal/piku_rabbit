@@ -20,6 +20,7 @@ import '../screens/learn/go_to_school_screen.dart';
 import '../screens/learn/learn_screen.dart';
 import '../screens/learn/morning_routine_screen.dart';
 import '../screens/learn/numbers_screen.dart';
+import '../screens/learn/word_time_screen.dart';
 import '../screens/play/play_game_screen.dart';
 import '../screens/play/play_screen.dart';
 import '../screens/premium/premium_screen.dart';
@@ -84,6 +85,10 @@ GoRouter createAppRouter({bool skipSplash = false}) {
       GoRoute(
         path: '/learn/plant-a-flower',
         builder: (context, state) => const PlantAFlowerScreen(),
+      ),
+      GoRoute(
+        path: '/learn/word-time',
+        builder: (context, state) => const WordTimeScreen(),
       ),
       GoRoute(path: '/feed', builder: (context, state) => const FeedScreen()),
       GoRoute(

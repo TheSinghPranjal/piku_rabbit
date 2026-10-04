@@ -87,6 +87,13 @@ abstract final class LearnTopics {
       accent: Color(0xFFF48FB1),
       route: '/learn/plant-a-flower',
     ),
+    LearnTopicSpec(
+      id: 'word_time',
+      label: 'Word Time',
+      icon: Icons.spellcheck_rounded,
+      accent: Color(0xFF5C6BC0),
+      route: '/learn/word-time',
+    ),
     // LearnTopicSpec(
     //   id: 'words',
     //   label: 'Words',
