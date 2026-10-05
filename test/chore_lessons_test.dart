@@ -357,4 +357,253 @@ void main() {
     await tester.pumpWidget(const SizedBox.shrink());
     await tester.pump();
   });
+
+  test('added lessons use new clips and leave the originals in place', () {
+    String path(RoutineClip clip) => clip.asset;
+    expect(
+      [
+        for (final step in Lunch2Lesson.steps)
+          (step.id, step.idle.isVideo, step.action.isVideo),
+      ],
+      [
+        ('lunchbox', false, false),
+        ('sandwich', false, false),
+        ('fruit', false, false),
+        ('water', false, false),
+        ('close-pack', false, false),
+      ],
+    );
+    expect(
+      [
+        for (final step in Pet2Lesson.steps)
+          if (step.idle.isVideo || step.action.isVideo)
+            (step.id, step.idle.isVideo, step.action.isVideo, path(step.idle)),
+      ],
+      [
+        (
+          'scoop',
+          true,
+          false,
+          'assets/videos/pet2-routine/pet2-02-idle-loop.mp4',
+        ),
+        (
+          'water',
+          true,
+          false,
+          'assets/videos/pet2-routine/pet2-04-idle-loop.mp4',
+        ),
+      ],
+    );
+    expect(
+      [
+        for (final step in Flower2Lesson.steps)
+          if (step.idle.isVideo || step.action.isVideo)
+            (step.id, step.idle.isVideo, step.action.isVideo, path(step.idle)),
+      ],
+      [
+        (
+          'pot',
+          true,
+          false,
+          'assets/videos/flower2-routine/flower2-01-idle-loop.mp4',
+        ),
+        (
+          'soil',
+          true,
+          false,
+          'assets/videos/flower2-routine/flower2-02-idle-loop.mp4',
+        ),
+      ],
+    );
+    for (final steps in [WaterLesson.steps, DrawLesson.steps]) {
+      expect(
+        steps.any((step) => step.idle.isVideo || step.action.isVideo),
+        isFalse,
+      );
+    }
+    for (final step in [
+      ...Lunch2Lesson.steps,
+      ...Pet2Lesson.steps,
+      ...Flower2Lesson.steps,
+      ...WaterLesson.steps,
+      ...DrawLesson.steps,
+    ]) {
+      expect(step.action.isVideo, isFalse, reason: step.id);
+    }
+  });
+
+  test('Pack Lunch 2 walks get lunchbox through close pack', () {
+    expectLesson(
+      steps: Lunch2Lesson.steps,
+      ids: ['lunchbox', 'sandwich', 'fruit', 'water', 'close-pack'],
+      firstLabel: 'Get lunchbox',
+      lastId: 'close-pack',
+      lastLabel: 'Close pack',
+      finale: Lunch2Lesson.rewardForComplete().message,
+      topicId: 'pack_lunch_2',
+      route: '/learn/pack-lunch-2',
+    );
+    expect(
+      Lunch2Lesson.rewardForComplete().message,
+      'Amazing! Piku packed a new lunch!',
+    );
+    expect(Lunch2Lesson.steps.map((step) => step.title), [
+      'Get lunchbox',
+      'Add sandwich',
+      'Add fruit',
+      'Add water bottle',
+      'Close pack',
+    ]);
+  });
+
+  test('Feed a Pet 2 walks get bowl through clean up', () {
+    expectLesson(
+      steps: Pet2Lesson.steps,
+      ids: ['bowl', 'scoop', 'place', 'water', 'clean-up'],
+      firstLabel: 'Get bowl',
+      lastId: 'clean-up',
+      lastLabel: 'Clean up',
+      finale: Pet2Lesson.rewardForComplete().message,
+      topicId: 'feed_a_pet_2',
+      route: '/learn/feed-a-pet-2',
+    );
+    expect(
+      Pet2Lesson.rewardForComplete().message,
+      'Amazing! Piku fed another pet!',
+    );
+    expect(Pet2Lesson.steps.map((step) => step.title), [
+      'Get bowl',
+      'Scoop food',
+      'Place food',
+      'Give water',
+      'Clean up',
+    ]);
+  });
+
+  test('Plant a Flower 2 walks get pot through sunlight', () {
+    expectLesson(
+      steps: Flower2Lesson.steps,
+      ids: ['pot', 'soil', 'seed', 'water', 'sunlight'],
+      firstLabel: 'Get pot',
+      lastId: 'sunlight',
+      lastLabel: 'Sunlight',
+      finale: Flower2Lesson.rewardForComplete().message,
+      topicId: 'plant_a_flower_2',
+      route: '/learn/plant-a-flower-2',
+    );
+    expect(
+      Flower2Lesson.rewardForComplete().message,
+      'Amazing! Piku planted another flower!',
+    );
+    expect(
+      Flower2Lesson.actionStillDuration,
+      MorningRoutine.actionStillDuration,
+    );
+    expect(Flower2Lesson.steps.map((step) => step.title), [
+      'Get pot',
+      'Add soil',
+      'Plant seed',
+      'Water it',
+      'Sunlight',
+    ]);
+  });
+
+  test('Water the Plants walks watering can through finish gardening', () {
+    expectLesson(
+      steps: WaterLesson.steps,
+      ids: [
+        'watering-can',
+        'fill-can',
+        'water-flowers',
+        'small-plant',
+        'finish',
+      ],
+      firstLabel: 'Get watering can',
+      lastId: 'finish',
+      lastLabel: 'Finish gardening',
+      finale: WaterLesson.rewardForComplete().message,
+      topicId: 'water_the_plants',
+      route: '/learn/water-the-plants',
+    );
+    expect(
+      WaterLesson.rewardForComplete().message,
+      'Amazing! Piku watered the plants!',
+    );
+    expect(WaterLesson.steps.map((step) => step.title), [
+      'Get watering can',
+      'Fill watering can',
+      'Water flowers',
+      'Water small plant',
+      'Finish gardening',
+    ]);
+  });
+
+  test('Drawing Time walks supplies through the fridge', () {
+    expectLesson(
+      steps: DrawLesson.steps,
+      ids: ['supplies', 'table', 'draw-picture', 'details', 'display'],
+      firstLabel: 'Get supplies',
+      lastId: 'display',
+      lastLabel: 'Display artwork',
+      finale: DrawLesson.rewardForComplete().message,
+      topicId: 'drawing_time',
+      route: '/learn/drawing-time',
+    );
+    expect(
+      DrawLesson.rewardForComplete().message,
+      'Amazing! Piku\'s artwork is on the fridge!',
+    );
+    expect(DrawLesson.steps.last.title, 'Display artwork on the fridge');
+    expect(DrawLesson.steps.map((step) => step.title), [
+      'Get supplies',
+      'Set up table',
+      'Draw picture',
+      'Add details',
+      'Display artwork on the fridge',
+    ]);
+  });
+
+  testWidgets('each added lesson opens on its first action', (tester) async {
+    SharedPreferences.setMockInitialValues({});
+    final cases = <(Widget, String, String)>[
+      (const PackLunch2Screen(), 'Pack Lunch 2!', 'Get lunchbox'),
+      (const FeedAPet2Screen(), 'Feed a Pet 2!', 'Get bowl'),
+      (const PlantAFlower2Screen(), 'Plant a Flower 2!', 'Get pot'),
+      (const WaterThePlantsScreen(), 'Water the Plants!', 'Get watering can'),
+      (const DrawingTimeScreen(), 'Drawing Time!', 'Get supplies'),
+    ];
+    for (final entry in cases) {
+      await tester.pumpWidget(MaterialApp(home: entry.$1));
+      await tester.pump();
+      expect(find.text(entry.$2), findsOneWidget);
+      expect(find.text(entry.$3), findsWidgets);
+      await tester.pumpWidget(const SizedBox.shrink());
+      await tester.pump();
+    }
+  });
+
+  testWidgets('School tray lists the added lessons', (tester) async {
+    SharedPreferences.setMockInitialValues({});
+    await tester.pumpWidget(const MaterialApp(home: LearnScreen()));
+    await tester.pump();
+
+    await tester.tap(find.byIcon(Icons.chevron_right_rounded));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pump(const Duration(milliseconds: 400));
+    expect(find.text('Pack Lunch 2'), findsOneWidget);
+
+    await tester.tap(find.byIcon(Icons.chevron_right_rounded));
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 200));
+    await tester.pump(const Duration(milliseconds: 400));
+
+    expect(find.text('Feed a Pet 2'), findsOneWidget);
+    expect(find.text('Plant a Flower 2'), findsOneWidget);
+    expect(find.text('Water the Plants'), findsOneWidget);
+    expect(find.text('Drawing Time'), findsOneWidget);
+
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pump();
+  });
 }
