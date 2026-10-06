@@ -8,9 +8,28 @@ import '../../widgets/back_button_circle.dart';
 import '../../widgets/status_bar.dart';
 import '../../widgets/bounce_button.dart';
 
-/// Screen 2 — Character Selection (Family Carousel).
-/// Static background image (provided by you) + card carousel that
-/// visually matches the approved reference design exactly.
+/// Garden backdrop for this picker. Fills every screen with [BoxFit.cover].
+const characterSelectBackgroundAsset = 'assets/images/select-bg.png';
+
+/// Piku's picker illustration. Bundled via the `assets/images/characters/` entry.
+const pikuSelectionCardAsset = 'assets/images/characters/piku-card.png';
+
+/// Who this screen offers. The shared [familyCharacters] roster stays intact
+/// for home and lessons; the picker shows Piku alone.
+List<FamilyCharacter> selectionScreenCharacters() => [
+  for (final character in familyCharacters)
+    if (character.id == CharacterId.piku) character,
+];
+
+/// Card art for the picker. Piku uses the bunny illustration; other ids keep
+/// their previous files if a caller still builds a card for them.
+String selectionCardAsset(FamilyCharacter character) {
+  if (character.id == CharacterId.piku) return pikuSelectionCardAsset;
+  return 'assets/images/characters/${character.id.name}.png';
+}
+
+/// Screen 2 — Character Selection.
+/// One centered card for Piku on the garden background.
 class CharacterSelectionScreen extends StatefulWidget {
   const CharacterSelectionScreen({super.key});
 
@@ -21,15 +40,18 @@ class CharacterSelectionScreen extends StatefulWidget {
 
 class _CharacterSelectionScreenState extends State<CharacterSelectionScreen> {
   late final PageController _pageController;
+  late final List<FamilyCharacter> _characters;
   double _page = 0;
 
-  // Demo values — wire these to your real player-progress provider.
+  /// Arrows and page dots only exist when there is someone to flip to.
+  bool get _showsCarouselChrome => _characters.length > 1;
 
   @override
   void initState() {
     super.initState();
+    _characters = selectionScreenCharacters();
     // Open on the unlocked lead (Piku) without reordering the family roster.
-    final leadIndex = familyCharacters.indexWhere((c) => c.isUnlocked);
+    final leadIndex = _characters.indexWhere((c) => c.isUnlocked);
     final initial = leadIndex < 0 ? 0 : leadIndex;
     _page = initial.toDouble();
     _pageController = PageController(
@@ -37,7 +59,7 @@ class _CharacterSelectionScreenState extends State<CharacterSelectionScreen> {
       initialPage: initial,
     );
     _pageController.addListener(() {
-      setState(() => _page = _pageController.page ?? 0);
+      setState(() => _page = _pageController.page ?? _page);
     });
   }
 
@@ -48,10 +70,11 @@ class _CharacterSelectionScreenState extends State<CharacterSelectionScreen> {
   }
 
   FamilyCharacter get _current =>
-      familyCharacters[_page.round().clamp(0, familyCharacters.length - 1)];
+      _characters[_page.round().clamp(0, _characters.length - 1)];
 
   void _flip(int delta) {
-    final next = (_page.round() + delta).clamp(0, familyCharacters.length - 1);
+    if (!_showsCarouselChrome) return;
+    final next = (_page.round() + delta).clamp(0, _characters.length - 1);
     _pageController.animateToPage(
       next,
       duration: const Duration(milliseconds: 380),
@@ -123,11 +146,9 @@ class _CharacterSelectionScreenState extends State<CharacterSelectionScreen> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          // ================= BACKGROUND (STATIC IMAGE) =================
-          // TODO: replace with your final artwork. This path is a
-          // placeholder; add your file at this location or change the path.
+          // Garden meadow. BoxFit.cover fills every screen size.
           Image.asset(
-            'assets/images/character_select_bg.png',
+            characterSelectBackgroundAsset,
             fit: BoxFit.cover,
             errorBuilder: (context, error, stack) => const ColoredBox(
               color: Color(0xFF8FD3F4), // fallback sky-blue if image missing
@@ -143,19 +164,22 @@ class _CharacterSelectionScreenState extends State<CharacterSelectionScreen> {
                   onBack: () => context.pop(),
                   onSettings: _openParentGateSettings,
                 ),
-                // Clearance for the "Choose Your Family Member" banner that
-                // is baked into the background artwork.
-                const SizedBox(height: 56),
+                const SizedBox(height: 8),
+                const _FamilyMemberTitle(),
+                const SizedBox(height: 8),
                 Expanded(
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
                       PageView.builder(
                         controller: _pageController,
-                        itemCount: familyCharacters.length,
-                        physics: const BouncingScrollPhysics(),
+                        itemCount: _characters.length,
+                        padEnds: true,
+                        physics: _showsCarouselChrome
+                            ? const BouncingScrollPhysics()
+                            : const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
-                          final character = familyCharacters[index];
+                          final character = _characters[index];
                           final dist = (_page - index).abs();
                           final scale = (1 - (dist * 0.06)).clamp(0.94, 1.0);
                           final selected = dist < 0.5;
@@ -174,28 +198,33 @@ class _CharacterSelectionScreenState extends State<CharacterSelectionScreen> {
                           );
                         },
                       ),
-                      Align(
-                        alignment: const Alignment(-0.96, 0),
-                        child: _CarouselArrow(
-                          icon: Icons.chevron_left_rounded,
-                          onPressed: () => _flip(-1),
+                      if (_showsCarouselChrome) ...[
+                        Align(
+                          alignment: const Alignment(-0.96, 0),
+                          child: _CarouselArrow(
+                            icon: Icons.chevron_left_rounded,
+                            onPressed: () => _flip(-1),
+                          ),
                         ),
-                      ),
-                      Align(
-                        alignment: const Alignment(0.96, 0),
-                        child: _CarouselArrow(
-                          icon: Icons.chevron_right_rounded,
-                          onPressed: () => _flip(1),
+                        Align(
+                          alignment: const Alignment(0.96, 0),
+                          child: _CarouselArrow(
+                            icon: Icons.chevron_right_rounded,
+                            onPressed: () => _flip(1),
+                          ),
                         ),
-                      ),
+                      ],
                     ],
                   ),
                 ),
-                const SizedBox(height: 12),
-                _DotsIndicator(
-                  count: familyCharacters.length,
-                  activeIndex: _page.round(),
-                ),
+                if (_showsCarouselChrome) ...[
+                  const SizedBox(height: 12),
+                  _DotsIndicator(
+                    key: const Key('character-selection-dots'),
+                    count: _characters.length,
+                    activeIndex: _page.round(),
+                  ),
+                ],
                 const SizedBox(height: 18),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(24, 0, 24, 20),
@@ -238,124 +267,85 @@ class _TopBar extends StatelessWidget {
 }
 
 // =====================================================================
-// TITLE LOCKUP — layered purple pill + tan pill, exactly like reference
+// TITLE — purple banner. The previous artwork baked this into the
+// background; the garden image does not, so it is drawn here.
 // =====================================================================
-// class _TitleLockup extends StatelessWidget {
-//   const _TitleLockup();
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Stack(
-//       alignment: Alignment.topCenter,
-//       clipBehavior: Clip.none,
-//       children: [
-//         Padding(
-//           padding: const EdgeInsets.only(top: 34),
-//           child: _TanPill(),
-//         ),
-//         // _PurplePill(),
-//       ],
-//     );
-//   }
-// }
+class _FamilyMemberTitle extends StatelessWidget {
+  const _FamilyMemberTitle();
 
-// class _PurplePill extends StatelessWidget {
-//   const _PurplePill();
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       margin: const EdgeInsets.symmetric(horizontal: 28),
-//       padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
-//       decoration: BoxDecoration(
-//         gradient: const LinearGradient(
-//           begin: Alignment.topCenter,
-//           end: Alignment.bottomCenter,
-//           colors: [Color(0xFF7B5FC7), Color(0xFF5B3FA0)],
-//         ),
-//         borderRadius: BorderRadius.circular(30),
-//         border: Border.all(color: Colors.white, width: 3),
-//         boxShadow: const [
-//           BoxShadow(
-//             color: Color(0x33000000),
-//             blurRadius: 8,
-//             offset: Offset(0, 4),
-//           ),
-//         ],
-//       ),
-//       child: Row(
-//         mainAxisSize: MainAxisSize.min,
-//         children: [
-//           const Icon(Icons.star_rounded, color: Color(0xFFFFC93C), size: 22),
-//           const SizedBox(width: 10),
-//           Column(
-//             mainAxisSize: MainAxisSize.min,
-//             children: [
-//               const Text(
-//                 'Choose Your',
-//                 style: TextStyle(
-//                   color: Colors.white,
-//                   fontWeight: FontWeight.w600,
-//                   fontSize: 15,
-//                 ),
-//               ),
-//               const Text(
-//                 'Family Member',
-//                 style: TextStyle(
-//                   color: Colors.white,
-//                   fontWeight: FontWeight.w900,
-//                   fontSize: 22,
-//                 ),
-//               ),
-//             ],
-//           ),
-//           const SizedBox(width: 10),
-//           const Icon(Icons.star_rounded, color: Color(0xFFFFC93C), size: 22),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// class _TanPill extends StatelessWidget {
-//   const _TanPill();
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-//       decoration: BoxDecoration(
-//         color: const Color(0xFFE0B15C),
-//         borderRadius: BorderRadius.circular(20),
-//         border: Border.all(color: Colors.white, width: 2),
-//         boxShadow: const [
-//           BoxShadow(
-//             color: Color(0x22000000),
-//             blurRadius: 4,
-//             offset: Offset(0, 3),
-//           ),
-//         ],
-//       ),
-//       child: Row(
-//         mainAxisSize: MainAxisSize.min,
-//         children: const [
-//           Icon(Icons.favorite_rounded, color: Color(0xFFE0668C), size: 14),
-//           SizedBox(width: 8),
-//           Text(
-//             'Meet Piku & Family',
-//             style: TextStyle(
-//               color: Colors.white,
-//               fontWeight: FontWeight.w700,
-//               fontSize: 13,
-//             ),
-//           ),
-//           SizedBox(width: 8),
-//           Icon(Icons.favorite_rounded, color: Color(0xFFE0668C), size: 14),
-//         ],
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      header: true,
+      label: 'Choose Your Family Member',
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 24),
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xFF7B5FC7), Color(0xFF5B3FA0)],
+          ),
+          borderRadius: BorderRadius.circular(30),
+          border: Border.all(color: Colors.white, width: 3),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x33000000),
+              blurRadius: 8,
+              offset: Offset(0, 4),
+            ),
+          ],
+        ),
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const ExcludeSemantics(
+                child: Icon(
+                  Icons.star_rounded,
+                  color: Color(0xFFFFC93C),
+                  size: 22,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Choose Your',
+                    style: TTTypography.subtitle(color: Colors.white).copyWith(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 15,
+                      height: 1.05,
+                    ),
+                  ),
+                  Text(
+                    'Family Member',
+                    style: TTTypography.title(color: Colors.white).copyWith(
+                      fontWeight: FontWeight.w800,
+                      fontSize: 22,
+                      height: 1.05,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(width: 10),
+              const ExcludeSemantics(
+                child: Icon(
+                  Icons.star_rounded,
+                  color: Color(0xFFFFC93C),
+                  size: 22,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 // =====================================================================
 // CAROUSEL ARROW — chunky 3D gold circle with white chevron,
@@ -608,7 +598,7 @@ class _CharacterImageSlot extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final path = 'assets/images/characters/${character.id.name}.png';
+    final path = selectionCardAsset(character);
 
     return Stack(
       fit: StackFit.expand,
@@ -795,13 +785,18 @@ class _UnlockPill extends StatelessWidget {
 // DOTS INDICATOR — worm-style pagination
 // =====================================================================
 class _DotsIndicator extends StatelessWidget {
-  const _DotsIndicator({required this.count, required this.activeIndex});
+  const _DotsIndicator({
+    super.key,
+    required this.count,
+    required this.activeIndex,
+  });
 
   final int count;
   final int activeIndex;
 
   @override
   Widget build(BuildContext context) {
+    if (count < 2) return const SizedBox.shrink();
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(count, (i) {
