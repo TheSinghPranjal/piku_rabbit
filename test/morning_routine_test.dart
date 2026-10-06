@@ -10,7 +10,7 @@ import 'package:piku_rabbit/screens/learn/morning_routine_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  test('steps stay in order and five clips are still images', () {
+  test('steps stay in order and two clips are still images', () {
     const ids = [
       'waking',
       'brushing',
@@ -39,10 +39,7 @@ void main() {
     ];
     expect(placeholders, [
       'assets/images/routine/piku-routine-02-brushing-after.jpg',
-      'assets/images/routine/piku-routine-09-bathing-after.jpg',
-      'assets/images/routine/piku-routine-10-towel-after.jpg',
       'assets/images/routine/piku-routine-11-dressed-before.jpg',
-      'assets/images/routine/piku-routine-12-hairdry-after.jpg',
     ]);
 
     expect(
@@ -84,11 +81,41 @@ void main() {
       MorningRoutine.steps[7].action.asset,
       'assets/videos/routine/piku-routine-08-soap-action.mp4',
     );
+    expect(MorningRoutine.steps[8].id, 'bathing');
+    expect(MorningRoutine.steps[8].loopAction, isTrue);
+    expect(
+      MorningRoutine.steps[8].idle.asset,
+      'assets/videos/routine/piku-routine-09-bathing-idle.mp4',
+    );
+    expect(
+      MorningRoutine.steps[8].action.asset,
+      'assets/videos/routine/piku-routine-09-bathing-action.mp4',
+    );
+    expect(MorningRoutine.steps[9].id, 'towel');
+    expect(MorningRoutine.steps[9].loopAction, isTrue);
+    expect(
+      MorningRoutine.steps[9].idle.asset,
+      'assets/videos/routine/piku-routine-10-towel-idle.mp4',
+    );
+    expect(
+      MorningRoutine.steps[9].action.asset,
+      'assets/videos/routine/piku-routine-10-towel-action.mp4',
+    );
+    expect(MorningRoutine.steps[11].id, 'hairdry');
+    expect(MorningRoutine.steps[11].loopAction, isTrue);
+    expect(
+      MorningRoutine.steps[11].idle.asset,
+      'assets/videos/routine/piku-routine-12-hairdry-idle.mp4',
+    );
+    expect(
+      MorningRoutine.steps[11].action.asset,
+      'assets/videos/routine/piku-routine-12-hairdry-action.mp4',
+    );
     expect(
       MorningRoutine.steps
           .where((step) => step.loopAction)
           .map((step) => step.id),
-      ['soap'],
+      ['soap', 'bathing', 'towel', 'hairdry'],
     );
     expect(MorningRoutine.steps[10].idle.isVideo, isFalse);
     expect(MorningRoutine.steps[10].action.isVideo, isTrue);

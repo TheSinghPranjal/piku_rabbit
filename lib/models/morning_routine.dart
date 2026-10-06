@@ -164,9 +164,10 @@ abstract final class MorningRoutine {
       icon: Icons.bathtub_rounded,
       praise: 'Splash! Bath time done!',
       idle: RoutineClip.video('$videoFolder/piku-routine-09-bathing-idle.mp4'),
-      action: RoutineClip.image(
-        '$imageFolder/piku-routine-09-bathing-after.jpg',
+      action: RoutineClip.video(
+        '$videoFolder/piku-routine-09-bathing-action.mp4',
       ),
+      loopAction: true,
     ),
     RoutineStep(
       id: 'towel',
@@ -175,7 +176,10 @@ abstract final class MorningRoutine {
       icon: Icons.dry_rounded,
       praise: 'All dry and cozy!',
       idle: RoutineClip.video('$videoFolder/piku-routine-10-towel-idle.mp4'),
-      action: RoutineClip.image('$imageFolder/piku-routine-10-towel-after.jpg'),
+      action: RoutineClip.video(
+        '$videoFolder/piku-routine-10-towel-action.mp4',
+      ),
+      loopAction: true,
     ),
     RoutineStep(
       id: 'dressed',
@@ -197,9 +201,10 @@ abstract final class MorningRoutine {
       icon: Icons.air_rounded,
       praise: 'Hair dry and fluffy!',
       idle: RoutineClip.video('$videoFolder/piku-routine-12-hairdry-idle.mp4'),
-      action: RoutineClip.image(
-        '$imageFolder/piku-routine-12-hairdry-after.jpg',
+      action: RoutineClip.video(
+        '$videoFolder/piku-routine-12-hairdry-action.mp4',
       ),
+      loopAction: true,
     ),
   ];
 }

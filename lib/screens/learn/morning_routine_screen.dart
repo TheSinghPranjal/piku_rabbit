@@ -131,7 +131,7 @@ class _RoutineLessonScreenState extends State<RoutineLessonScreen> {
         await _disposeController(next);
         return;
       }
-      // Idle always loops. loopAction (Apply soap) loops the action too.
+      // Idle always loops. A step with loopAction loops its action too.
       // Every other action plays once.
       final loop =
           phase == RoutinePhase.idle ||
