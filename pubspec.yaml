@@ -179,6 +179,9 @@ flutter:
     - assets/videos/routine/piku-routine-01-waking-action.mp4
     - assets/videos/routine/piku-routine-02-brushing-idle.mp4
     - assets/videos/routine/piku-routine-03-flossing-idle.mp4
+    - assets/videos/routine/piku-routine-03-flossing-action.mp4
+    - assets/videos/routine/piku-routine-04-hands-idle.mp4
+    - assets/videos/routine/piku-routine-04-hands-action.mp4
     - assets/videos/routine/piku-routine-05-face-idle.mp4
     - assets/videos/routine/piku-routine-05-face-action.mp4
     - assets/videos/routine/piku-routine-06-hairwash-idle.mp4
