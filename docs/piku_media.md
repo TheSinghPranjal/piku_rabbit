@@ -27,14 +27,24 @@ The character card portrait is still Bao's image at `assets/images/characters/pi
 | `piku-sports-idle-loop` | `assets/videos/play/piku_play_screen_video.mp4` | Play hub |
 | `piku-sports-idle-loop` | `assets/videos/play/football/piku_not_playing_football_video.mp4` | Football idle |
 | `piku-sports-football-loop` | `assets/videos/play/football/piku_playing_football_video.mp4` | Football action |
-| `piku-sports-idle-loop` | `assets/videos/play/cricket/piku_not_playing_cricket_video.mp4` | Cricket idle |
-| `piku-sports-tennis-loop` | `assets/videos/play/cricket/piku_playing_cricket_video.mp4` | Cricket action (no tennis tray item) |
+| `piku-cricket-idle` | `assets/videos/play/cricket/piku_not_playing_cricket_video.mp4` | Cricket idle |
+| `piku-cricket-action` | `assets/videos/play/cricket/piku_playing_cricket_video.mp4` | Cricket action |
 | `piku-sports-idle-loop` | `assets/videos/play/badminton/piku_not_playing_badminton_video.mp4` | Badminton idle |
 | `piku-sports-badminton-loop` | `assets/videos/play/badminton/piku_playing_badminton_video.mp4` | Badminton action |
+| `piku-hockey-idle` | `assets/videos/play/hockey/piku_not_playing_hockey_video.mp4` | Hockey idle (no Bao clip) |
+| `piku-hockey-action` | `assets/videos/play/hockey/piku_playing_hockey_video.mp4` | Hockey action (no Bao clip) |
+| `piku-basketball-idle` | `assets/videos/play/basketball/piku_not_playing_basketball_video.mp4` | Basketball idle (no Bao clip) |
+| `piku-basketball-action` | `assets/videos/play/basketball/piku_playing_basketball_video.mp4` | Basketball action (no Bao clip) |
 | `piku-idle-loop` | `assets/videos/play/dance/piku_not_doing_dance_video.mp4` | Dance idle |
 | `piku-clap-loop` | `assets/videos/play/dance/piku_doing_dance_video.mp4` | Dance action |
 | `piku-idle-loop` | `assets/videos/play/skipping/piku_not_doing_skipping_video.mp4` | Skipping idle |
 | `piku-jump-loop` | `assets/videos/play/skipping/piku_doing_skipping_video.mp4` | Skipping action |
+| `piku-yoga-idle` | `assets/videos/play/yoga/piku_not_doing_yoga_video.mp4` | Yoga idle |
+| `piku-yoga-action` | `assets/videos/play/yoga/piku_doing_yoga_video.mp4` | Yoga action |
+| `piku-coloring-idle` | `assets/videos/play/coloring/piku_not_doing_coloring_video.mp4` | Coloring idle (no Bao clip) |
+| `piku-coloring-action` | `assets/videos/play/coloring/piku_doing_coloring_video.mp4` | Coloring action (no Bao clip) |
+| `piku-puzzle-idle` | `assets/videos/play/puzzle/piku_not_doing_puzzle_video.mp4` | Puzzle idle (no Bao clip) |
+| `piku-puzzle-action` | `assets/videos/play/puzzle/piku_doing_puzzle_video.mp4` | Puzzle action (no Bao clip) |
 
 ## Still Bao
 
@@ -45,7 +55,6 @@ These slots have no Piku clip. They keep Bao's file.
 - Wake-up sit-up: `assets/videos/wake/bao_waking_up_video.mp4`
 - Water and milk, idle and action
 - Banana and sandwich, idle and action
-- Yoga idle and action
 - Chores: make bed, brush teeth, wash face, bath, comb hair, get dressed (including tie beats), wear shoes (including the bag beat)
 - Splash background: `assets/videos/splash_screen_bg_video.mp4`
 

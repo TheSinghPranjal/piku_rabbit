@@ -129,19 +129,23 @@ abstract final class PlayGames {
   }
 
   /// Same tray item, with Piku clips swapped in where a match exists.
-  /// Badminton has no Bao videos. Piku fills that pair once her clips are bundled.
+  ///
+  /// Badminton, hockey, basketball, coloring, and puzzle have no Bao videos.
+  /// Piku fills those pairs once her clips are bundled. Games that already
+  /// list a Bao clip swap through [CharacterMedia.clip].
   static PlayGameSpec resolve(PlayGameSpec game, CharacterId id) {
-    if (id == CharacterId.piku &&
-        game.id == 'badminton' &&
-        CharacterMedia.pikuClipsBundled) {
-      return PlayGameSpec(
-        id: game.id,
-        label: game.label,
-        icon: game.icon,
-        accent: game.accent,
-        idleVideoAsset: CharacterMedia.badmintonIdle,
-        actionVideoAsset: CharacterMedia.badmintonAction,
-      );
+    if (id == CharacterId.piku && CharacterMedia.pikuClipsBundled) {
+      final onlyPiku = _pikuOnlyClips[game.id];
+      if (onlyPiku != null) {
+        return PlayGameSpec(
+          id: game.id,
+          label: game.label,
+          icon: game.icon,
+          accent: game.accent,
+          idleVideoAsset: onlyPiku.$1,
+          actionVideoAsset: onlyPiku.$2,
+        );
+      }
     }
     return PlayGameSpec(
       id: game.id,
@@ -156,4 +160,16 @@ abstract final class PlayGames {
           : CharacterMedia.clip(id, game.actionVideoAsset!),
     );
   }
+
+  /// Idle and action clips for games Bao never had a video for.
+  static const _pikuOnlyClips = <String, (String, String)>{
+    'badminton': (CharacterMedia.badmintonIdle, CharacterMedia.badmintonAction),
+    'hockey': (CharacterMedia.hockeyIdle, CharacterMedia.hockeyAction),
+    'basketball': (
+      CharacterMedia.basketballIdle,
+      CharacterMedia.basketballAction,
+    ),
+    'coloring': (CharacterMedia.coloringIdle, CharacterMedia.coloringAction),
+    'puzzle': (CharacterMedia.puzzleIdle, CharacterMedia.puzzleAction),
+  };
 }
