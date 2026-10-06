@@ -42,6 +42,7 @@ dependencies:
   firebase_remote_config: ^6.6.0
   package_info_plus: ^10.2.1
   url_launcher: ^6.3.2
+  flutter_tts: ^4.2.5
 
 dev_dependencies:
   flutter_test:
@@ -357,6 +358,16 @@ flutter:
     - assets/images/character_select_bg.png
     - assets/images/bao_reward_celebrate.png
     - assets/images/characters/
+    - assets/images/word-lesson/piku-word-cat.jpg
+    - assets/images/word-lesson/piku-word-dog.jpg
+    - assets/images/word-lesson/piku-word-mat.jpg
+    - assets/images/word-lesson/piku-word-bat.jpg
+    - assets/images/word-lesson/piku-word-rat.jpg
+    - assets/images/word-lesson/piku-word-hat.jpg
+    - assets/images/word-lesson/piku-word-sun.jpg
+    - assets/images/word-lesson/piku-word-cup.jpg
+    - assets/images/word-lesson/piku-word-bus.jpg
+    - assets/images/word-lesson/piku-word-pen.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

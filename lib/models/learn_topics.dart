@@ -122,6 +122,13 @@ abstract final class LearnTopics {
       accent: Color(0xFFCE93D8),
       route: '/learn/drawing-time',
     ),
+    LearnTopicSpec(
+      id: 'word_time',
+      label: 'Word Time',
+      icon: Icons.spellcheck_rounded,
+      accent: Color(0xFF5C6BC0),
+      route: '/learn/word-time',
+    ),
     // LearnTopicSpec(
     //   id: 'words',
     //   label: 'Words',
