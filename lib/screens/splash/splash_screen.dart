@@ -157,7 +157,7 @@ class _SplashScreenState extends State<SplashScreen>
                                 child: Opacity(
                                   opacity: (1 - bloom).clamp(0.0, 1.0),
                                   child: Semantics(
-                                    label: 'Tiny Think – Learning Together',
+                                    label: 'Piku Rabbit – Learning Together',
                                     image: true,
                                     child: ConstrainedBox(
                                       constraints: BoxConstraints(

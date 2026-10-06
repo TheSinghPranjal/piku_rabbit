@@ -6,7 +6,7 @@ void main() {
     await tester.pumpWidget(const TinyThinkApp());
     await tester.pump();
     expect(
-      find.bySemanticsLabel('Tiny Think – Learning Together'),
+      find.bySemanticsLabel('Piku Rabbit – Learning Together'),
       findsOneWidget,
     );
     // Flush splash navigation timer so no pending timers remain.
