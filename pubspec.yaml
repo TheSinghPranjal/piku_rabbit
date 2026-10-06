@@ -359,6 +359,7 @@ flutter:
     - assets/videos/play/skipping/piku_doing_skipping_video.mp4
     - assets/images/logo_splash_screen.png
     - assets/images/character_select_bg.png
+    - assets/images/select-bg.png
     - assets/images/bao_reward_celebrate.png
     - assets/images/characters/
     - assets/images/word-lesson/piku-word-cat.jpg
