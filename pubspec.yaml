@@ -189,10 +189,14 @@ flutter:
     - assets/videos/routine/piku-routine-07-scrub-idle.mp4
     - assets/videos/routine/piku-routine-07-scrub-action.mp4
     - assets/videos/routine/piku-routine-08-soap-idle.mp4
+    - assets/videos/routine/piku-routine-08-soap-action.mp4
     - assets/videos/routine/piku-routine-09-bathing-idle.mp4
+    - assets/videos/routine/piku-routine-09-bathing-action.mp4
     - assets/videos/routine/piku-routine-10-towel-idle.mp4
+    - assets/videos/routine/piku-routine-10-towel-action.mp4
     - assets/videos/routine/piku-routine-11-dressed-action.mp4
     - assets/videos/routine/piku-routine-12-hairdry-idle.mp4
+    - assets/videos/routine/piku-routine-12-hairdry-action.mp4
     - assets/images/routine/piku-routine-02-brushing-after.jpg
     - assets/images/routine/piku-routine-03-flossing-after.jpg
     - assets/images/routine/piku-routine-04-hands-before.jpg

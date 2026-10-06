@@ -71,22 +71,18 @@ School → Numbers plays five voiced clips in order. Each file is 720×1280, H.2
 
 ## Morning routine
 
-School → Morning Routine plays 12 steps. Each step shows an idle loop (or a still, when the clip is not ready) and one action button. The action plays once, then the same reward card as Numbers (3 stars and 1 magic bean). Next moves on. Replay returns to that step's idle. After step 12's reward, a full-screen celebration uses that same reward again. Back leaves without marking the lesson done.
+School → Morning Routine plays 12 steps. Each step shows an idle loop (or a still, when the clip is not ready) and one action button. The action plays once, then the same reward card as Numbers (3 stars and 1 magic bean). Next moves on. Replay returns to that step's idle. Apply soap, Bathing, Drying with towel, and Hair dry loop their action videos (`RoutineStep.loopAction`) from the tap until Next. The reward card still opens after the first play-through, with Next and Replay on top of the loop. Next moves on and stops that video. After step 12's reward, a full-screen celebration uses that same reward again. Back leaves without marking the lesson done.
 
 Videos live in `assets/videos/routine/`. Placeholder stills live in `assets/images/routine/`. To swap a still for a finished clip, add the mp4 and flip that row's kind and path in `MorningRoutine.steps`.
 
-Six placeholders (no mp4 yet):
+Two placeholders (no mp4 yet):
 
 | Step | Missing clip | Stand-in shown now | Drop-in filename |
 | --- | --- | --- | --- |
 | 2 Brushing | action | `piku-routine-02-brushing-after.jpg` | `piku-routine-02-brushing-action.mp4` |
-| 8 Apply soap | action | `piku-routine-08-soap-after.jpg` | `piku-routine-08-soap-action.mp4` |
-| 9 Bathing | action | `piku-routine-09-bathing-after.jpg` | `piku-routine-09-bathing-action.mp4` |
-| 10 Drying with towel | action | `piku-routine-10-towel-after.jpg` | `piku-routine-10-towel-action.mp4` |
 | 11 Getting dressed | idle | `piku-routine-11-dressed-before.jpg` | `piku-routine-11-dressed-idle.mp4` |
-| 12 Hair dry | action | `piku-routine-12-hairdry-after.jpg` | `piku-routine-12-hairdry-action.mp4` |
 
-Flossing and cleaning hands use idle and action mp4s, the same way waking, face, and hair wash do. A missing action still stays on screen for 2.5 seconds, then the reward card. The other 18 clips are real mp4s.
+Apply soap, Bathing, Drying with towel, and Hair dry keep looping their action mp4s after the first play. Flossing and cleaning hands use idle and action mp4s, the same way waking, face, and hair wash do. A missing action still stays on screen for 2.5 seconds, then the reward card. The other 22 clips are real mp4s.
 
 ## Go to School
 

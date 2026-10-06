@@ -61,6 +61,8 @@ class _RoutineLessonScreenState extends State<RoutineLessonScreen> {
   bool _ready = false;
   VoidCallback? _listener;
   Timer? _stillTimer;
+  bool _loopActionSignaled = false;
+  Duration _maxActionPosition = Duration.zero;
 
   @override
   void initState() {
@@ -81,6 +83,8 @@ class _RoutineLessonScreenState extends State<RoutineLessonScreen> {
     final gen = ++_loadGen;
     _stillTimer?.cancel();
     _stillTimer = null;
+    _loopActionSignaled = false;
+    _maxActionPosition = Duration.zero;
     final prev = _video;
     final prevListener = _listener;
     if (prevListener != null) {
@@ -127,7 +131,11 @@ class _RoutineLessonScreenState extends State<RoutineLessonScreen> {
         await _disposeController(next);
         return;
       }
-      final loop = phase == RoutinePhase.idle;
+      // Idle always loops. A step with loopAction loops its action too.
+      // Every other action plays once.
+      final loop =
+          phase == RoutinePhase.idle ||
+          (phase == RoutinePhase.acting && step.loopAction);
       await next.setLooping(loop);
       await next.setVolume(1);
       if (!mounted || _disposed || gen != _loadGen) {
@@ -140,7 +148,42 @@ class _RoutineLessonScreenState extends State<RoutineLessonScreen> {
         return;
       }
 
-      if (!loop) {
+      if (phase == RoutinePhase.acting && step.loopAction) {
+        _listener = () {
+          final v = _video;
+          if (v == null ||
+              !identical(v, next) ||
+              _disposed ||
+              _rewardOpen ||
+              _loopActionSignaled ||
+              !v.value.isInitialized) {
+            return;
+          }
+          final duration = v.value.duration;
+          if (duration <= Duration.zero) return;
+          final position = v.value.position;
+          if (loopingActionReachedEnd(
+            position: position,
+            duration: duration,
+            furthest: _maxActionPosition,
+          )) {
+            _loopActionSignaled = true;
+            unawaited(_onActionEnded());
+          }
+          if (position > _maxActionPosition) {
+            _maxActionPosition = position;
+          }
+        };
+        next.addListener(_listener!);
+        final length = next.value.duration;
+        if (length > Duration.zero) {
+          _stillTimer = Timer(length, () {
+            if (gen != _loadGen || _disposed || _loopActionSignaled) return;
+            _loopActionSignaled = true;
+            unawaited(_onActionEnded());
+          });
+        }
+      } else if (!loop) {
         _listener = () {
           final v = _video;
           if (v == null ||
@@ -330,9 +373,8 @@ class _RoutineLessonScreenState extends State<RoutineLessonScreen> {
                 const SizedBox(height: 8),
                 Text(
                   widget.title,
-                  style: TTTypography.headline(
-                    color: TTColors.darkBrown,
-                  ).copyWith(fontWeight: FontWeight.w900, fontSize: 30),
+                  style: TTTypography.headline(color: TTColors.darkBrown)
+                      .copyWith(fontWeight: FontWeight.w900, fontSize: 30),
                 ),
                 Text(
                   step.title,
@@ -521,9 +563,8 @@ class _RoutinePill extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             label,
-            style: TTTypography.body(
-              color: TTColors.darkBrown,
-            ).copyWith(fontWeight: FontWeight.w800),
+            style: TTTypography.body(color: TTColors.darkBrown)
+                .copyWith(fontWeight: FontWeight.w800),
           ),
         ],
       ),

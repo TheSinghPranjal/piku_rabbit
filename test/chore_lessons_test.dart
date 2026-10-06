@@ -218,11 +218,20 @@ void main() {
       expect(step.action.isVideo, isFalse, reason: step.id);
     }
 
-    final player = File(
-      'lib/screens/learn/morning_routine_screen.dart',
-    ).readAsStringSync();
-    expect(player, contains('final loop = phase == RoutinePhase.idle;'));
+    final player = File('lib/screens/learn/morning_routine_screen.dart')
+        .readAsStringSync();
+    expect(player, contains('phase == RoutinePhase.idle ||'));
+    expect(player, contains('step.loopAction'));
     expect(player, contains('await next.setLooping(loop);'));
+    for (final step in [
+      ...BedLesson.steps,
+      ...ToysLesson.steps,
+      ...LunchLesson.steps,
+      ...PetLesson.steps,
+      ...FlowerLesson.steps,
+    ]) {
+      expect(step.loopAction, isFalse, reason: step.id);
+    }
   });
 
   test('Get Ready for Bed walks pajamas through lights off', () {

@@ -16,6 +16,10 @@ class RoutineClip {
 }
 
 /// One morning-routine step: looping idle, then a single action.
+///
+/// [loopAction] keeps the action video looping after the child taps the
+/// button. The reward still opens after the first play-through. Default
+/// is one play, then a hold on the last frame.
 class RoutineStep {
   const RoutineStep({
     required this.id,
@@ -25,6 +29,7 @@ class RoutineStep {
     required this.praise,
     required this.idle,
     required this.action,
+    this.loopAction = false,
   });
 
   final String id;
@@ -34,6 +39,25 @@ class RoutineStep {
   final String praise;
   final RoutineClip idle;
   final RoutineClip action;
+  final bool loopAction;
+}
+
+/// First pass of a looping action clip.
+///
+/// True when [position] is within 120ms of [duration] (the same window a
+/// one-shot action uses) or the playhead jumped back after passing the
+/// midpoint, which is how a seamless loop reports the seam.
+bool loopingActionReachedEnd({
+  required Duration position,
+  required Duration duration,
+  required Duration furthest,
+}) {
+  if (duration <= Duration.zero) return false;
+  final nearEnd = position >= duration - const Duration(milliseconds: 120);
+  final wrapped =
+      furthest > duration ~/ 2 &&
+      position + const Duration(milliseconds: 400) < furthest;
+  return nearEnd || wrapped;
 }
 
 enum RoutinePhase { idle, acting, rewarded, finale }
@@ -130,7 +154,8 @@ abstract final class MorningRoutine {
       icon: Icons.soap_rounded,
       praise: 'Soapy and sparkling!',
       idle: RoutineClip.video('$videoFolder/piku-routine-08-soap-idle.mp4'),
-      action: RoutineClip.image('$imageFolder/piku-routine-08-soap-after.jpg'),
+      action: RoutineClip.video('$videoFolder/piku-routine-08-soap-action.mp4'),
+      loopAction: true,
     ),
     RoutineStep(
       id: 'bathing',
@@ -139,9 +164,10 @@ abstract final class MorningRoutine {
       icon: Icons.bathtub_rounded,
       praise: 'Splash! Bath time done!',
       idle: RoutineClip.video('$videoFolder/piku-routine-09-bathing-idle.mp4'),
-      action: RoutineClip.image(
-        '$imageFolder/piku-routine-09-bathing-after.jpg',
+      action: RoutineClip.video(
+        '$videoFolder/piku-routine-09-bathing-action.mp4',
       ),
+      loopAction: true,
     ),
     RoutineStep(
       id: 'towel',
@@ -150,7 +176,10 @@ abstract final class MorningRoutine {
       icon: Icons.dry_rounded,
       praise: 'All dry and cozy!',
       idle: RoutineClip.video('$videoFolder/piku-routine-10-towel-idle.mp4'),
-      action: RoutineClip.image('$imageFolder/piku-routine-10-towel-after.jpg'),
+      action: RoutineClip.video(
+        '$videoFolder/piku-routine-10-towel-action.mp4',
+      ),
+      loopAction: true,
     ),
     RoutineStep(
       id: 'dressed',
@@ -172,9 +201,10 @@ abstract final class MorningRoutine {
       icon: Icons.air_rounded,
       praise: 'Hair dry and fluffy!',
       idle: RoutineClip.video('$videoFolder/piku-routine-12-hairdry-idle.mp4'),
-      action: RoutineClip.image(
-        '$imageFolder/piku-routine-12-hairdry-after.jpg',
+      action: RoutineClip.video(
+        '$videoFolder/piku-routine-12-hairdry-action.mp4',
       ),
+      loopAction: true,
     ),
   ];
 }
