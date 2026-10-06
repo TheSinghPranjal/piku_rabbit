@@ -77,8 +77,8 @@ abstract final class MorningRoutine {
       icon: Icons.straighten_rounded,
       praise: 'Piku flossed so well!',
       idle: RoutineClip.video('$videoFolder/piku-routine-03-flossing-idle.mp4'),
-      action: RoutineClip.image(
-        '$imageFolder/piku-routine-03-flossing-after.jpg',
+      action: RoutineClip.video(
+        '$videoFolder/piku-routine-03-flossing-action.mp4',
       ),
     ),
     RoutineStep(
@@ -87,8 +87,10 @@ abstract final class MorningRoutine {
       actionLabel: 'Wash hands',
       icon: Icons.back_hand_rounded,
       praise: 'Clean hands! Nice work!',
-      idle: RoutineClip.image('$imageFolder/piku-routine-04-hands-before.jpg'),
-      action: RoutineClip.image('$imageFolder/piku-routine-04-hands-after.jpg'),
+      idle: RoutineClip.video('$videoFolder/piku-routine-04-hands-idle.mp4'),
+      action: RoutineClip.video(
+        '$videoFolder/piku-routine-04-hands-action.mp4',
+      ),
     ),
     RoutineStep(
       id: 'face',

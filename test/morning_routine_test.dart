@@ -10,7 +10,7 @@ import 'package:piku_rabbit/screens/learn/morning_routine_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  test('steps stay in order and nine clips are still images', () {
+  test('steps stay in order and six clips are still images', () {
     const ids = [
       'waking',
       'brushing',
@@ -39,9 +39,6 @@ void main() {
     ];
     expect(placeholders, [
       'assets/images/routine/piku-routine-02-brushing-after.jpg',
-      'assets/images/routine/piku-routine-03-flossing-after.jpg',
-      'assets/images/routine/piku-routine-04-hands-before.jpg',
-      'assets/images/routine/piku-routine-04-hands-after.jpg',
       'assets/images/routine/piku-routine-08-soap-after.jpg',
       'assets/images/routine/piku-routine-09-bathing-after.jpg',
       'assets/images/routine/piku-routine-10-towel-after.jpg',
@@ -54,7 +51,28 @@ void main() {
       'assets/videos/routine/piku-routine-01-waking-idle.mp4',
     );
     expect(MorningRoutine.steps.first.action.isVideo, isTrue);
-    expect(MorningRoutine.steps[3].idle.isVideo, isFalse);
+    expect(MorningRoutine.steps[2].id, 'flossing');
+    expect(MorningRoutine.steps[2].idle.isVideo, isTrue);
+    expect(MorningRoutine.steps[2].action.isVideo, isTrue);
+    expect(
+      MorningRoutine.steps[2].idle.asset,
+      'assets/videos/routine/piku-routine-03-flossing-idle.mp4',
+    );
+    expect(
+      MorningRoutine.steps[2].action.asset,
+      'assets/videos/routine/piku-routine-03-flossing-action.mp4',
+    );
+    expect(MorningRoutine.steps[3].id, 'hands');
+    expect(MorningRoutine.steps[3].idle.isVideo, isTrue);
+    expect(MorningRoutine.steps[3].action.isVideo, isTrue);
+    expect(
+      MorningRoutine.steps[3].idle.asset,
+      'assets/videos/routine/piku-routine-04-hands-idle.mp4',
+    );
+    expect(
+      MorningRoutine.steps[3].action.asset,
+      'assets/videos/routine/piku-routine-04-hands-action.mp4',
+    );
     expect(MorningRoutine.steps[10].idle.isVideo, isFalse);
     expect(MorningRoutine.steps[10].action.isVideo, isTrue);
   });
