@@ -50,6 +50,14 @@ abstract final class CharacterMedia {
       'assets/videos/play/badminton/piku_not_playing_badminton_video.mp4';
   static const badmintonAction =
       'assets/videos/play/badminton/piku_playing_badminton_video.mp4';
+  static const hockeyIdle =
+      'assets/videos/play/hockey/piku_not_playing_hockey_video.mp4';
+  static const hockeyAction =
+      'assets/videos/play/hockey/piku_playing_hockey_video.mp4';
+  static const basketballIdle =
+      'assets/videos/play/basketball/piku_not_playing_basketball_video.mp4';
+  static const basketballAction =
+      'assets/videos/play/basketball/piku_playing_basketball_video.mp4';
   static const danceIdle =
       'assets/videos/play/dance/piku_not_doing_dance_video.mp4';
   static const danceAction =
@@ -58,6 +66,17 @@ abstract final class CharacterMedia {
       'assets/videos/play/skipping/piku_not_doing_skipping_video.mp4';
   static const skippingAction =
       'assets/videos/play/skipping/piku_doing_skipping_video.mp4';
+  static const yogaIdle =
+      'assets/videos/play/yoga/piku_not_doing_yoga_video.mp4';
+  static const yogaAction = 'assets/videos/play/yoga/piku_doing_yoga_video.mp4';
+  static const coloringIdle =
+      'assets/videos/play/coloring/piku_not_doing_coloring_video.mp4';
+  static const coloringAction =
+      'assets/videos/play/coloring/piku_doing_coloring_video.mp4';
+  static const puzzleIdle =
+      'assets/videos/play/puzzle/piku_not_doing_puzzle_video.mp4';
+  static const puzzleAction =
+      'assets/videos/play/puzzle/piku_doing_puzzle_video.mp4';
 
   /// Future reward loop. Not bundled yet; Bao's slot stays the still
   /// `bao_reward_celebrate.png`.
@@ -85,8 +104,6 @@ abstract final class CharacterMedia {
         footballIdle,
     'assets/videos/play/football/bao_playing_football_video.mp4':
         footballAction,
-    // No tennis activity exists. The tennis swing fills Cricket's action
-    // slot; the tray label stays Cricket until a real cricket clip exists.
     'assets/videos/play/cricket/bao_not_playing_cricket_video.mp4': cricketIdle,
     'assets/videos/play/cricket/bao_playing_cricket_video.mp4': cricketAction,
     // Clap is the closest rhythmic action; the hop is the closest skip.
@@ -95,6 +112,8 @@ abstract final class CharacterMedia {
     'assets/videos/play/skipping/bao_not_doing_skipping_video.mp4':
         skippingIdle,
     'assets/videos/play/skipping/bao_doing_skipping_video.mp4': skippingAction,
+    'assets/videos/play/yoga/bao_not_doing_yoga_video.mp4': yogaIdle,
+    'assets/videos/play/yoga/bao_doing_yoga_video.mp4': yogaAction,
   };
 
   /// Piku files to drop in, including slots Bao never had a clip for.
@@ -120,10 +139,20 @@ abstract final class CharacterMedia {
     cricketAction,
     badmintonIdle,
     badmintonAction,
+    hockeyIdle,
+    hockeyAction,
+    basketballIdle,
+    basketballAction,
     danceIdle,
     danceAction,
     skippingIdle,
     skippingAction,
+    yogaIdle,
+    yogaAction,
+    coloringIdle,
+    coloringAction,
+    puzzleIdle,
+    puzzleAction,
   ];
 
   /// Bao clips that stay even after Piku's set lands (no Piku match yet).
@@ -159,8 +188,6 @@ abstract final class CharacterMedia {
     'assets/videos/chore/wear_shoe/bao_taking_bag_after_wearing_shoe.mp4',
     'assets/videos/chore/comb_hair/bao_not_coming_hair.mp4',
     'assets/videos/chore/comb_hair/bao_combing_hair.mp4',
-    'assets/videos/play/yoga/bao_not_doing_yoga_video.mp4',
-    'assets/videos/play/yoga/bao_doing_yoga_video.mp4',
   ];
 
   /// Active character from `?character=`, defaulting to the unlocked lead.

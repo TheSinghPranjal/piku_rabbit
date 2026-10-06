@@ -361,6 +361,16 @@ flutter:
     - assets/videos/play/dance/piku_doing_dance_video.mp4
     - assets/videos/play/skipping/piku_not_doing_skipping_video.mp4
     - assets/videos/play/skipping/piku_doing_skipping_video.mp4
+    - assets/videos/play/hockey/piku_not_playing_hockey_video.mp4
+    - assets/videos/play/hockey/piku_playing_hockey_video.mp4
+    - assets/videos/play/basketball/piku_not_playing_basketball_video.mp4
+    - assets/videos/play/basketball/piku_playing_basketball_video.mp4
+    - assets/videos/play/yoga/piku_not_doing_yoga_video.mp4
+    - assets/videos/play/yoga/piku_doing_yoga_video.mp4
+    - assets/videos/play/coloring/piku_not_doing_coloring_video.mp4
+    - assets/videos/play/coloring/piku_doing_coloring_video.mp4
+    - assets/videos/play/puzzle/piku_not_doing_puzzle_video.mp4
+    - assets/videos/play/puzzle/piku_doing_puzzle_video.mp4
     - assets/images/logo_splash_screen.png
     - assets/images/character_select_bg.png
     - assets/images/select-bg.png

@@ -96,4 +96,60 @@ void main() {
     expect(CharacterMedia.celebrationVideo(CharacterId.piku), isNull);
     expect(CharacterMedia.celebrationVideo(CharacterId.bao), isNull);
   });
+
+  test('Piku play games resolve to bundled piku clips', () {
+    final pubspec = File('pubspec.yaml').readAsStringSync();
+    const expected = <String, (String, String)>{
+      'football': (CharacterMedia.footballIdle, CharacterMedia.footballAction),
+      'cricket': (CharacterMedia.cricketIdle, CharacterMedia.cricketAction),
+      'hockey': (CharacterMedia.hockeyIdle, CharacterMedia.hockeyAction),
+      'basketball': (
+        CharacterMedia.basketballIdle,
+        CharacterMedia.basketballAction,
+      ),
+      'yoga': (CharacterMedia.yogaIdle, CharacterMedia.yogaAction),
+      'coloring': (CharacterMedia.coloringIdle, CharacterMedia.coloringAction),
+      'puzzle': (CharacterMedia.puzzleIdle, CharacterMedia.puzzleAction),
+    };
+
+    for (final entry in expected.entries) {
+      final resolved = PlayGames.resolve(
+        PlayGames.byId(entry.key)!,
+        CharacterId.piku,
+      );
+      expect(resolved.hasVideos, isTrue, reason: entry.key);
+      expect(resolved.idleVideoAsset, entry.value.$1, reason: entry.key);
+      expect(resolved.actionVideoAsset, entry.value.$2, reason: entry.key);
+      for (final path in [entry.value.$1, entry.value.$2]) {
+        expect(path.split('/').last.startsWith('piku_'), isTrue, reason: path);
+        expect(path.contains('bao_'), isFalse, reason: path);
+        expect(File(path).existsSync(), isTrue, reason: path);
+        expect(pubspec.contains('    - $path'), isTrue, reason: path);
+      }
+    }
+
+    final cricketIdle = File(CharacterMedia.cricketIdle).readAsBytesSync();
+    final footballIdle = File(CharacterMedia.footballIdle).readAsBytesSync();
+    expect(cricketIdle, isNot(equals(footballIdle)));
+
+    for (final id in [
+      'hockey',
+      'basketball',
+      'coloring',
+      'puzzle',
+      'badminton',
+    ]) {
+      final game = PlayGames.byId(id)!;
+      expect(game.hasVideos, isFalse, reason: id);
+      expect(PlayGames.resolve(game, CharacterId.bao).hasVideos, isFalse);
+    }
+
+    final yoga = PlayGames.byId('yoga')!;
+    final baoYoga = PlayGames.resolve(yoga, CharacterId.bao);
+    expect(baoYoga.idleVideoAsset, yoga.idleVideoAsset);
+    expect(baoYoga.actionVideoAsset, contains('bao_doing_yoga'));
+    final pikuYogaBytes = File(CharacterMedia.yogaAction).readAsBytesSync();
+    final baoYogaBytes = File(yoga.actionVideoAsset!).readAsBytesSync();
+    expect(pikuYogaBytes, isNot(equals(baoYogaBytes)));
+  });
 }
